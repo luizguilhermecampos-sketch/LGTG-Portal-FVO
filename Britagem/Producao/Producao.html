@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produção — Britagem FVO</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="Producao.css">
+</head>
+<body class="pagina-portal britagem-ativa pagina-producao-britagem">
+
+    <header class="header-portal-fvo">
+        <div class="logo logo-portal">
+            <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+        </div>
+        <div class="titulo-portal-geral">PORTAL FVO</div>
+        <div class="seletor-portais">
+            <a href="../index.html" class="portal-opcao portal-opcao-ativa">
+                <span class="portal-icone">◈</span>
+                <span>PORTAL BRITAGEM FVO</span>
+            </a>
+            <a href="../../Usina/index.html" class="portal-opcao">
+                <span class="portal-icone">◫</span>
+                <span>PORTAL USINA FVO</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="menu-portal menu-britagem">
+        <ul>
+            <li><a href="../index.html">Início</a></li>
+        </ul>
+    </nav>
+
+    <main class="container-producao">
+        <section class="cabecalho-producao">
+            <div>
+                <span class="eyebrow-producao">ACOMPANHAMENTO OPERACIONAL • HORA - HORA</span>
+                <h1>Produção — Britagem</h1>
+                <p>Consolidação da produção diária, mensal e anual, com comparação de produtividade entre as turmas.</p>
+            </div>
+
+            <div class="acoes-producao no-print">
+                <button type="button" id="btnGerarPDFProducao" class="btn-producao btn-pdf-producao" disabled>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v5h5M10 14h6M10 18h4"/></svg>
+                    <span>Gerar PDF</span>
+                </button>
+                <div class="atualizacao-producao">
+                    <span>Última atualização</span>
+                    <strong id="ultimaAtualizacaoProducao">-</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="painel-controles-producao no-print">
+            <div class="campo-arquivo-producao">
+                <label for="arquivoProducao">Planilha Hora - Hora</label>
+                <input type="file" id="arquivoProducao" accept=".xlsx,.xls,.xlsm">
+            </div>
+
+            <div class="campo-filtro-producao">
+                <label for="dataReferenciaProducao">Data de referência</label>
+                <input type="date" id="dataReferenciaProducao" disabled>
+            </div>
+
+            <div class="campo-periodo-producao">
+                <label>Produtividade por turma</label>
+                <div class="seletor-periodo-producao" role="group" aria-label="Período da produtividade">
+                    <button type="button" class="periodo-producao" data-periodo="dia" disabled>Dia</button>
+                    <button type="button" class="periodo-producao ativo" data-periodo="mes" disabled>Mês</button>
+                    <button type="button" class="periodo-producao" data-periodo="ano" disabled>Ano</button>
+                </div>
+            </div>
+
+            <button type="button" id="btnAtualizarProducao" class="btn-producao btn-atualizar-producao" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+                <span>Atualizar</span>
+            </button>
+
+            <div class="status-base-producao">
+                <span>BASE</span>
+                <strong id="statusBaseProducao">Aguardando planilha</strong>
+            </div>
+        </section>
+
+        <section class="cabecalho-pdf-producao print-only">
+            <div class="pdf-marca-producao">
+                <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+                <div>
+                    <span>PORTAL FVO • BRITAGEM</span>
+                    <strong>Produção</strong>
+                </div>
+            </div>
+            <div class="pdf-meta-producao">
+                <span>VISÃO EXECUTIVA • 1/2</span>
+                <span id="periodoPDFProducao">Referência: -</span>
+                <span id="geradoPDFProducao">Gerado em: -</span>
+            </div>
+        </section>
+
+        <section class="titulo-secao-producao">
+            <div>
+                <span>VISÃO EXECUTIVA</span>
+                <h2>Consolidação da produção</h2>
+                <p id="subtituloReferenciaProducao">Carregue a planilha para iniciar a análise.</p>
+            </div>
+            <div class="selo-base-producao">
+                <span>BASE DE ANÁLISE</span>
+                <strong>Produção Horária • Hora - Hora</strong>
+            </div>
+        </section>
+
+        <section class="cards-producao">
+            <article class="card-producao card-dia">
+                <div class="icone-card-producao">
+                    <svg viewBox="0 0 24 24"><path d="M4 5h16v15H4z"/><path d="M8 3v4M16 3v4M4 9h16"/></svg>
+                </div>
+                <div>
+                    <span>PRODUÇÃO DO DIA</span>
+                    <strong id="producaoDia">-</strong>
+                    <small id="labelProducaoDia">toneladas</small>
+                </div>
+            </article>
+
+            <article class="card-producao card-mes">
+                <div class="icone-card-producao">
+                    <svg viewBox="0 0 24 24"><path d="M4 20V8M10 20V4M16 20v-9M22 20H2"/></svg>
+                </div>
+                <div>
+                    <span>PRODUÇÃO DO MÊS</span>
+                    <strong id="producaoMes">-</strong>
+                    <small id="labelProducaoMes">toneladas</small>
+                </div>
+            </article>
+
+            <article class="card-producao card-ano">
+                <div class="icone-card-producao">
+                    <svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="m7 15 4-5 3 2 5-7"/></svg>
+                </div>
+                <div>
+                    <span>PRODUÇÃO DO ANO</span>
+                    <strong id="producaoAno">-</strong>
+                    <small id="labelProducaoAno">toneladas</small>
+                </div>
+            </article>
+
+            <article class="card-producao card-turma">
+                <div class="icone-card-producao">
+                    <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2"/><path d="M3 20c0-4 2.5-7 6-7s6 3 6 7M14 14c3 0 5 2 5 5"/></svg>
+                </div>
+                <div>
+                    <span>MAIOR PRODUTIVIDADE</span>
+                    <strong id="melhorProdutividade">-</strong>
+                    <small id="melhorTurma">Aguardando dados</small>
+                </div>
+            </article>
+        </section>
+
+        <section class="grid-graficos-producao bloco-pdf-pagina-1">
+            <article class="grafico-card-producao">
+                <div class="cabecalho-grafico-producao">
+                    <div>
+                        <span class="tag-grafico-producao">DIA</span>
+                        <h2>Produção Diária do Mês</h2>
+                        <p id="descricaoGraficoDiario">Evolução da produção por dia no mês selecionado.</p>
+                    </div>
+                </div>
+                <div class="canvas-producao canvas-diario">
+                    <canvas id="graficoProducaoDiaria"></canvas>
+                </div>
+            </article>
+
+            <article class="grafico-card-producao">
+                <div class="cabecalho-grafico-producao">
+                    <div>
+                        <span class="tag-grafico-producao">MÊS</span>
+                        <h2>Produção Mensal do Ano</h2>
+                        <p id="descricaoGraficoMensal">Consolidação mensal do ano selecionado.</p>
+                    </div>
+                </div>
+                <div class="canvas-producao canvas-mensal">
+                    <canvas id="graficoProducaoMensal"></canvas>
+                </div>
+            </article>
+        </section>
+
+        <section class="cabecalho-pdf-producao cabecalho-pdf-pagina-2 print-only">
+            <div class="pdf-marca-producao">
+                <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+                <div>
+                    <span>PORTAL FVO • BRITAGEM</span>
+                    <strong>Produção por Turma</strong>
+                </div>
+            </div>
+            <div class="pdf-meta-producao">
+                <span>PRODUTIVIDADE • 2/2</span>
+                <span id="periodoPDFProdutividade">Período: -</span>
+                <span id="geradoPDFProducao2">Gerado em: -</span>
+            </div>
+        </section>
+
+        <section class="secao-produtividade-producao bloco-pdf-pagina-2">
+            <article class="grafico-card-producao grafico-produtividade-card">
+                <div class="cabecalho-grafico-producao">
+                    <div>
+                        <span class="tag-grafico-producao tag-verde">TURMAS</span>
+                        <h2>Produtividade por Turma</h2>
+                        <p id="descricaoProdutividade">Produção total ÷ horas com registro no período selecionado.</p>
+                    </div>
+                    <div class="selo-periodo-produtividade">
+                        <span>PERÍODO</span>
+                        <strong id="periodoProdutividadeLabel">Mês</strong>
+                    </div>
+                </div>
+                <div class="canvas-producao canvas-produtividade">
+                    <canvas id="graficoProdutividadeTurma"></canvas>
+                </div>
+            </article>
+
+            <article class="tabela-card-producao">
+                <div class="cabecalho-tabela-producao">
+                    <div>
+                        <span>DETALHAMENTO</span>
+                        <h2>Resumo das Turmas</h2>
+                    </div>
+                    <div class="mini-resumo-producao">
+                        <span>Horas registradas</span>
+                        <strong id="horasRegistradasTotal">-</strong>
+                    </div>
+                </div>
+                <div class="tabela-wrap-producao">
+                    <table class="tabela-producao-turmas">
+                        <thead>
+                            <tr>
+                                <th>Turma</th>
+                                <th>Produção (t)</th>
+                                <th>Horas registradas</th>
+                                <th>Produtividade (t/h)</th>
+                                <th>Participação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaTurmasBody">
+                            <tr class="linha-vazia-producao"><td colspan="5">Carregue a planilha para visualizar as turmas.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../Britagem.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="Producao.js"></script>
+</body>
+</html>

@@ -1,0 +1,654 @@
+/* Portal FVO — estilos isolados: producao.
+   Gerado a partir somente dos seletores realmente usados nesta área. */
+
+.btn-upload-producao:hover{
+    background:#4B0875;
+    transform:translateY(-1px);
+}
+
+.campo-filtro-producao{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.campo-filtro-producao input:focus{
+    border-color:#92D050;
+    box-shadow:0 0 0 3px rgba(146,208,80,.15);
+}
+
+.campo-filtro-producao select:focus{
+    border-color:#92D050;
+    box-shadow:0 0 0 3px rgba(146,208,80,.15);
+}
+
+.btn-atualizar-producao:hover{
+    background:#4B0875;
+}
+
+.card-producao-usina:hover{
+    transform:translateY(-2px);
+    box-shadow:0 7px 18px rgba(45,1,77,.11);
+}
+
+.grid-graficos-producao{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+}
+
+.tabela-resumo-producao tbody tr:hover{
+    background:#F8F5FA;
+}
+
+.input-arquivo-producao{
+    position:absolute;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+}
+
+.pagina-producao-usina{
+    background:#F2F2F4;
+    min-height:100vh;
+}
+
+.container-producao-usina{
+    width:100%;
+    max-width:1800px;
+    margin:auto;
+    padding:25px 28px 45px;
+}
+
+.cabecalho-producao-usina{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:18px;
+}
+
+.cabecalho-producao-usina h1{
+    margin:0;
+    color:#2D014D;
+    font-size:30px;
+    line-height:1.2;
+}
+
+.cabecalho-producao-usina p{
+    margin-top:6px;
+    color:#68606C;
+    font-size:14px;
+}
+
+.rotulo-producao-usina{
+    display:block;
+    margin-bottom:5px;
+    color:#68A724;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+
+.btn-upload-producao{
+    min-height:40px;
+    padding:0 17px;
+    border:none;
+    border-radius:8px;
+    background:#2D014D;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+}
+
+.btn-acao-producao{
+    min-height:40px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:0 17px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    border:1px solid #D7CFDC;
+    background:#FFFFFF;
+    color:#2D014D;
+}
+
+.btn-email-producao{
+    background:#92D050;
+    border-color:#92D050;
+    color:#1C3608;
+}
+
+.nome-arquivo-producao{
+    max-width:230px;
+    color:#746C78;
+    font-size:10px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.aviso-producao{
+    display:block;
+    margin-bottom:15px;
+    padding:12px 15px;
+    border:1px solid #DCD5E0;
+    border-radius:8px;
+    background:#FFFFFF;
+    color:#655D69;
+    font-size:12px;
+}
+
+.painel-filtros-producao{
+    display:grid;
+    grid-template-columns:
+        repeat(4,minmax(150px,1fr))
+        auto;
+    gap:14px;
+    align-items:end;
+    margin-bottom:17px;
+    padding:17px;
+    border:1px solid #E2DDE5;
+    border-radius:11px;
+    background:#FFFFFF;
+    box-shadow:0 3px 12px rgba(45,1,77,.07);
+}
+
+.campo-filtro-producao label{
+    color:#403947;
+    font-size:11px;
+    font-weight:800;
+}
+
+.campo-filtro-producao input{
+    width:100%;
+    height:40px;
+    padding:0 11px;
+    border:1px solid #D8D2DB;
+    border-radius:7px;
+    background:#FFFFFF;
+    color:#2F2933;
+    font-size:12px;
+    outline:none;
+}
+
+.campo-filtro-producao select{
+    width:100%;
+    height:40px;
+    padding:0 11px;
+    border:1px solid #D8D2DB;
+    border-radius:7px;
+    background:#FFFFFF;
+    color:#2F2933;
+    font-size:12px;
+    outline:none;
+}
+
+.btn-atualizar-producao{
+    height:40px;
+    padding:0 19px;
+    border:0;
+    border-radius:7px;
+    background:#2D014D;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.cards-producao-usina{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(205px,1fr));
+    gap:13px;
+    margin-bottom:17px;
+}
+
+.card-producao-usina > b{
+    width:45px;
+    height:45px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#390460;
+    color:#FFFFFF;
+}
+
+.card-producao-usina.verde > b{
+    background:#62A427;
+}
+
+.card-producao-usina.laranja > b{
+    background:#E49227;
+}
+
+.card-producao-usina span{
+    display:block;
+    margin-bottom:7px;
+    color:#5C5360;
+    font-size:11px;
+}
+
+.positivo{
+    color:#4E991E !important;
+    font-weight:800;
+}
+
+.negativo{
+    color:#D92F3F !important;
+    font-weight:800;
+}
+
+.grid-inferior-producao{
+    display:grid;
+    grid-template-columns:1.12fr .88fr;
+    gap:16px;
+    margin-bottom:16px;
+}
+
+.tabela-producao-container{
+    width:100%;
+    max-height:350px;
+    overflow:auto;
+    border:1px solid #E3DDE6;
+    border-radius:8px;
+}
+
+.tabela-resumo-producao{
+    width:100%;
+    min-width:760px;
+    border-collapse:collapse;
+    background:#FFFFFF;
+}
+
+.tabela-resumo-producao th{
+    position:sticky;
+    top:0;
+    z-index:2;
+    padding:13px 11px;
+    border-bottom:1px solid #DED8E2;
+    background:#F0EAF4;
+    color:#2D014D;
+    font-size:11px;
+    font-weight:800;
+    text-align:center;
+    white-space:nowrap;
+}
+
+.tabela-resumo-producao td{
+    padding:13px 11px;
+    border-bottom:1px solid #E9E4EC;
+    color:#47404B;
+    font-size:12px;
+    text-align:center;
+    white-space:nowrap;
+}
+
+.tabela-resumo-producao tr:nth-child(even){
+    background:#F8F5FA;
+}
+
+.rodape-dashboard-producao{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:15px;
+    padding:10px 13px;
+    border-radius:8px;
+    background:#E9E4EC;
+    color:#726A77;
+    font-size:10px;
+}
+
+.overlay-carregamento-producao{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:grid;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:rgba(24,0,41,.74);
+    backdrop-filter:blur(3px);
+    place-items:center;
+}
+
+.caixa-carregamento-producao{
+    width:360px;
+    max-width:360px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:16px;
+    background:#FFFFFF;
+    box-shadow:0 18px 50px rgba(0,0,0,.28);
+    text-align:center;
+}
+
+.spinner-producao{
+    width:55px;
+    height:55px;
+    border:6px solid #E7E0EB;
+    border-top-color:#92D050;
+    border-right-color:#2D014D;
+    border-radius:50%;
+    animation:girar-spinner-producao .8s linear infinite;
+}
+
+.caixa-carregamento-producao strong{
+    margin-top:18px;
+    color:#2D014D;
+    font-size:18px;
+}
+
+.caixa-carregamento-producao span{
+    margin-top:8px;
+    color:#746C78;
+    font-size:12px;
+    line-height:1.5;
+}
+
+.gerando-pdf-producao
+#relatorioProducaoPdf{
+    width:1500px !important;
+    max-width:none !important;
+    margin:auto !important;
+    padding:16px !important;
+    background:#FFFFFF !important;
+}
+
+.gerando-pdf-producao
+.cards-producao-usina{
+    grid-template-columns:
+        repeat(4,1fr) !important;
+}
+
+.gerando-pdf-producao
+.card-producao-usina{
+    box-shadow:none !important;
+}
+
+.gerando-pdf-producao
+.bloco-producao{
+    box-shadow:none !important;
+}
+
+.gerando-pdf-producao
+.grid-graficos-producao{
+    grid-template-columns:
+        1fr 1fr !important;
+}
+
+.gerando-pdf-producao
+.grid-inferior-producao{
+    grid-template-columns:
+        1.05fr .95fr !important;
+}
+
+.gerando-pdf-producao
+.tabela-producao-container{
+    max-height:none !important;
+    overflow:visible !important;
+}
+
+.gerando-pdf-producao
+.area-canvas-producao{
+    height:350px !important;
+}
+
+.gerando-pdf-producao
+.ano-resumo-producao{
+    width:100% !important;
+    min-height:108px !important;
+    break-inside:avoid;
+    page-break-inside:avoid;
+}
+
+.gerando-pdf-producao
+.cabecalho-ano-resumo-producao{
+    min-height:108px !important;
+    height:auto !important;
+    overflow:visible !important;
+}
+
+.gerando-pdf-producao
+.ano-resumo-producao section{
+    min-height:108px !important;
+    height:auto !important;
+    overflow:visible !important;
+}
+
+@media (max-width:1200px) {
+  
+  .btn-atualizar-producao{
+          width:100%;
+      }
+  
+  .grid-graficos-producao{
+          grid-template-columns:1fr;
+      }
+  
+  .grid-inferior-producao{
+          grid-template-columns:1fr;
+      }
+  
+  .painel-filtros-producao{
+          grid-template-columns:
+              repeat(2,1fr);
+      }
+  
+  .ano-resumo-producao{
+          grid-template-columns:1fr;
+      }
+  
+  .metricas-ano-resumo-producao{
+          grid-template-columns:
+              repeat(2,1fr);
+      }
+}
+
+@media (max-width:760px) {
+  
+  .painel-filtros-producao{
+          grid-template-columns:1fr;
+      }
+  
+  .cards-producao-usina{
+          grid-template-columns:1fr;
+      }
+  
+  .area-canvas-producao{
+          height:280px;
+      }
+  
+  .rodape-dashboard-producao{
+          flex-direction:column;
+          align-items:flex-start;
+      }
+  
+  .container-producao-usina{
+          padding:18px 12px;
+      }
+  
+  .cabecalho-producao-usina{
+          flex-direction:column;
+          align-items:flex-start;
+      }
+}
+
+/* Correção definitiva do resumo anual e destaque dos resultados */
+.acoes-topo-producao {
+    display:flex; align-items: center;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:9px; }
+
+.bloco-producao {
+  min-width: 0;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid var(--fvo-cinza-200);
+  border-radius: var(--fvo-raio);
+  box-shadow: var(--fvo-sombra-card);
+}
+
+.bloco-producao h2 {
+    margin:0;
+  color: var(--fvo-roxo-900);
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.bloco-producao > p {
+    margin:4px 0 13px;
+  color: var(--fvo-cinza-500);
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.card-producao-usina {
+  min-height: 112px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:16px;
+    border:1px solid #E3DEE6;
+  border-radius: var(--fvo-raio);
+    background:#FFFFFF;
+    box-shadow:0 3px 11px rgba(45,1,77,.07);
+    transition:.2s;
+  border-top: 4px solid var(--fvo-roxo-900);
+}
+
+.card-producao-usina.verde { border-top-color: var(--fvo-verde-500); }
+.card-producao-usina.laranja { border-top-color: var(--fvo-laranja-500); }
+.card-producao-usina strong {
+    display:block;
+    color:#2D014D; font-size: clamp(25px, 2vw, 34px);
+    line-height:1.1; font-variant-numeric: tabular-nums; }
+.area-canvas-producao {
+    position:relative;
+    width:100%;
+    height:350px; min-height: 330px; }
+.bloco-resumo-anual-producao {
+    margin-bottom:16px; margin-top: 16px; overflow: visible; }
+
+.ano-resumo-producao {
+  display: grid;
+  grid-template-columns: 124px minmax(0, 1fr);
+    align-items:stretch;
+  border: 1px solid #ddd4e2;
+  border-radius: 11px;
+  overflow: hidden;
+  width: 100%;
+  min-height: 108px;
+  background: #fff;
+}
+
+.cabecalho-ano-resumo-producao {
+  width: auto;
+    height:auto;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    align-items:flex-start;
+    gap:3px;
+  padding: 14px 18px;
+  background: var(--fvo-roxo-900);
+  color: #fff;
+  position: static;
+    box-shadow:none;
+    overflow:visible;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.cabecalho-ano-resumo-producao small {
+    display:block;
+    font-size:9px;
+    font-weight:700;
+    line-height:1.2;
+    letter-spacing:.8px; color: rgba(255, 255, 255, 0.72); }
+.cabecalho-ano-resumo-producao strong {
+    display:block; font-size: 28px; line-height: 1.1; color: #fff; }
+.cabecalho-ano-resumo-producao span {
+    display:block;
+    font-size:11px; line-height: 1.25; color: #fff; }
+
+.metricas-ano-resumo-producao {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(112px, 1fr));
+    gap:1px;
+    background:#E8E1EB;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.ano-resumo-producao section {
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 12px;
+  background: #fff;
+  border-top: 3px solid var(--fvo-roxo-900);
+  min-width: 0;
+  gap: 8px;
+  border-left: 1px solid var(--fvo-cinza-200);
+}
+
+.ano-resumo-producao section span {
+  font-size: 10px;
+  overflow: hidden;
+  color: var(--fvo-cinza-500);
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ano-resumo-producao section strong {
+    margin-top:7px;
+  font-size: 16px;
+  color: var(--fvo-roxo-900);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ano-resumo-producao .metrica-verde { border-top-color: var(--fvo-verde-500); }
+.ano-resumo-producao .metrica-laranja { border-top-color: var(--fvo-laranja-500); }
+.ano-resumo-producao .metrica-vermelho { border-top-color: var(--fvo-vermelho-500); }
+
+@media (max-width: 1150px) {
+  .metricas-ano-resumo-producao { grid-template-columns: repeat(4, minmax(130px, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .ano-resumo-producao { display: block; }
+  .cabecalho-ano-resumo-producao { min-height: 84px; }
+  .metricas-ano-resumo-producao { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ano-resumo-producao section { min-height: 90px; }
+}
+
+@media print {
+  .ano-resumo-producao { grid-template-columns: 115px minmax(0, 1fr) !important; }
+  .metricas-ano-resumo-producao { grid-template-columns: repeat(7, minmax(0, 1fr)) !important; }
+  .ano-resumo-producao section { min-height: 95px; padding: 10px 8px; }
+  .ano-resumo-producao section strong { font-size: 13px; }
+}

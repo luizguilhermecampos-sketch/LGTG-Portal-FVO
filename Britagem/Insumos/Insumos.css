@@ -1,0 +1,793 @@
+:root{
+    --ins-roxo:#3B005F;
+    --ins-roxo-2:#65118F;
+    --ins-roxo-3:#8B4AAD;
+    --ins-verde:#7AC943;
+    --ins-verde-esc:#4D9118;
+    --ins-laranja:#F08A18;
+    --ins-azul:#2F7EBB;
+    --ins-turquesa:#07969A;
+    --ins-vermelho:#D83A54;
+    --ins-fundo:#F5F2F7;
+    --ins-borda:#E3DCE7;
+    --ins-texto:#2C2530;
+    --ins-muted:#7D7183;
+    --ins-sombra:0 10px 30px rgba(54,20,72,.08);
+}
+
+*{box-sizing:border-box}
+
+body.pagina-insumos{
+    background:
+        radial-gradient(circle at 96% 4%,rgba(122,201,67,.08),transparent 24%),
+        linear-gradient(180deg,#F8F6F9 0%,#F2EFF4 100%);
+    color:var(--ins-texto);
+}
+
+.container-insumos{
+    width:min(1540px,calc(100% - 44px));
+    margin:0 auto;
+    padding:28px 0 46px;
+}
+
+.cabecalho-insumos{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:28px;
+    margin-bottom:20px;
+}
+
+.eyebrow-insumos{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    color:#5A9E1A;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1.45px;
+    text-transform:uppercase;
+}
+
+.eyebrow-insumos::before{
+    content:"";
+    width:24px;
+    height:3px;
+    border-radius:99px;
+    background:var(--ins-verde);
+}
+
+.cabecalho-insumos h1{
+    margin:6px 0 5px;
+    color:var(--ins-roxo);
+    font-size:34px;
+    line-height:1.05;
+    letter-spacing:-.7px;
+}
+
+.cabecalho-insumos p{
+    max-width:840px;
+    margin:0;
+    color:#695D70;
+    font-size:14px;
+    line-height:1.55;
+}
+
+.acoes-insumos{
+    display:flex;
+    align-items:center;
+    gap:16px;
+}
+
+.btn-insumos{
+    min-height:45px;
+    border:0;
+    border-radius:12px;
+    padding:0 19px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    color:#fff;
+    font-weight:850;
+    cursor:pointer;
+    transition:.2s ease;
+    box-shadow:0 9px 22px rgba(59,0,95,.16);
+}
+
+.btn-insumos svg{
+    width:18px;
+    height:18px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.9;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.btn-insumos:hover{
+    transform:translateY(-1px);
+    box-shadow:0 12px 26px rgba(59,0,95,.20);
+}
+
+.btn-pdf-insumos,
+.btn-carregar-insumos,
+.btn-atualizar-insumos{background:linear-gradient(135deg,var(--ins-roxo),var(--ins-roxo-2))}
+
+.atualizacao-insumos{
+    min-width:135px;
+    padding-left:15px;
+    border-left:1px solid var(--ins-borda);
+}
+
+.atualizacao-insumos span,
+.status-base-insumos span,
+.referencia-meta-insumos span{
+    display:block;
+    color:#918698;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.atualizacao-insumos strong,
+.status-base-insumos strong,
+.referencia-meta-insumos strong{
+    display:block;
+    margin-top:4px;
+    color:var(--ins-roxo);
+    font-size:12px;
+}
+
+.painel-base-insumos,
+.painel-filtros-insumos{
+    display:grid;
+    align-items:end;
+    gap:14px;
+    padding:16px 18px;
+    margin-bottom:15px;
+    background:#fff;
+    border:1px solid var(--ins-borda);
+    border-left:4px solid var(--ins-verde);
+    border-radius:16px;
+    box-shadow:var(--ins-sombra);
+}
+
+.painel-base-insumos{grid-template-columns:minmax(320px,1.35fr) auto minmax(170px,.55fr)}
+.painel-filtros-insumos{grid-template-columns:minmax(190px,.72fr) minmax(240px,.9fr) auto minmax(160px,.55fr);max-width:1020px}
+
+.campo-arquivo-insumos label,
+.campo-filtro-insumos label{
+    display:block;
+    margin:0 0 7px;
+    color:var(--ins-roxo);
+    font-size:12px;
+    font-weight:900;
+}
+
+.campo-arquivo-insumos input[type="file"]{
+    width:100%;
+    min-height:45px;
+    padding:6px;
+    border:1px solid #D4BEE1;
+    border-radius:11px;
+    background:linear-gradient(180deg,#FCF9FD,#F1E7F7);
+    color:#543A61;
+    font-size:12px;
+}
+
+.campo-arquivo-insumos input[type="file"]::file-selector-button{
+    border:0;
+    border-radius:8px;
+    padding:9px 13px;
+    margin-right:10px;
+    background:linear-gradient(135deg,#6B2495,#8C50B0);
+    color:#fff;
+    font-weight:850;
+    cursor:pointer;
+}
+
+.campo-filtro-insumos select{
+    width:100%;
+    height:45px;
+    border:1px solid #D7CDDB;
+    border-radius:11px;
+    background:#fff;
+    color:var(--ins-roxo);
+    padding:0 12px;
+    font-size:13px;
+    font-weight:800;
+    outline:none;
+}
+
+.campo-filtro-insumos select:focus{
+    border-color:#8E56AA;
+    box-shadow:0 0 0 3px rgba(91,16,133,.10);
+}
+
+.status-base-insumos,
+.referencia-meta-insumos{
+    min-height:45px;
+    padding:6px 0 5px 15px;
+    border-left:1px solid var(--ins-borda);
+}
+
+.status-base-insumos strong[data-estado="ok"]{color:var(--ins-verde-esc)}
+.status-base-insumos strong[data-estado="erro"]{color:var(--ins-vermelho)}
+.status-base-insumos strong[data-estado="carregando"]{color:var(--ins-laranja)}
+
+.abas-insumos{
+    display:inline-flex;
+    gap:5px;
+    padding:5px;
+    margin:3px 0 18px;
+    background:#EBE4EF;
+    border:1px solid #DDD1E3;
+    border-radius:13px;
+}
+
+.aba-insumos{
+    border:0;
+    border-radius:9px;
+    padding:10px 18px;
+    background:transparent;
+    color:#685D6D;
+    font-size:12px;
+    font-weight:850;
+    cursor:pointer;
+    transition:.18s ease;
+}
+
+.aba-insumos:hover{background:rgba(255,255,255,.65);color:var(--ins-roxo)}
+.aba-insumos.ativa{background:var(--ins-roxo);color:#fff;box-shadow:0 6px 14px rgba(59,0,95,.17)}
+
+.conteudo-aba-insumos{display:none}
+.conteudo-aba-insumos.ativa{display:block}
+
+.cards-kpi-insumos{
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:13px;
+    margin-bottom:15px;
+}
+
+.card-kpi-insumos{
+    position:relative;
+    min-height:126px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:17px 16px;
+    overflow:hidden;
+    background:#fff;
+    border:1px solid var(--ins-borda);
+    border-radius:15px;
+    box-shadow:var(--ins-sombra);
+}
+
+.card-kpi-insumos::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:4px;
+    background:var(--accent,var(--ins-roxo));
+}
+
+.card-kpi-roxo{--accent:var(--ins-roxo)}
+.card-kpi-verde{--accent:var(--ins-verde)}
+.card-kpi-laranja{--accent:var(--ins-laranja)}
+.card-kpi-azul{--accent:var(--ins-azul)}
+.card-kpi-turquesa{--accent:var(--ins-turquesa)}
+.card-kpi-meta{--accent:#B692C9}
+
+.icone-kpi-insumos{
+    width:44px;height:44px;flex:0 0 44px;
+    display:grid;place-items:center;
+    border-radius:12px;
+    color:var(--accent,var(--ins-roxo));
+    background:color-mix(in srgb,var(--accent,var(--ins-roxo)) 12%,white);
+}
+
+.icone-kpi-insumos svg{
+    width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+
+.card-kpi-insumos span{
+    display:block;
+    color:#756A7A;
+    font-size:9.5px;
+    font-weight:900;
+    letter-spacing:.6px;
+}
+
+.card-kpi-insumos strong{
+    display:block;
+    margin-top:6px;
+    color:var(--ins-roxo);
+    font-size:23px;
+    line-height:1;
+    letter-spacing:-.4px;
+}
+
+.card-kpi-insumos small{
+    display:block;
+    margin-top:6px;
+    color:#928795;
+    font-size:9.5px;
+    line-height:1.3;
+}
+
+.situacao-atual-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.painel-situacao-insumos{
+    padding:17px 18px 18px;
+    background:#fff;
+    border:1px solid var(--ins-borda);
+    border-radius:16px;
+    box-shadow:var(--ins-sombra);
+}
+
+.painel-situacao-insumos.britador-a{border-top:4px solid var(--ins-roxo)}
+.painel-situacao-insumos.britador-b{border-top:4px solid var(--ins-verde)}
+
+.cabecalho-situacao-insumos{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:center;
+    gap:12px;
+    padding-bottom:13px;
+    border-bottom:1px solid #EEE8F0;
+}
+
+.medalhao-britador{
+    width:46px;height:46px;
+    display:grid;place-items:center;
+    border-radius:13px;
+    color:#fff;
+    background:var(--ins-roxo);
+    font-size:20px;
+    font-weight:950;
+    box-shadow:0 7px 15px rgba(59,0,95,.16);
+}
+
+.britador-b .medalhao-britador{background:var(--ins-verde-esc)}
+
+.cabecalho-situacao-insumos span:first-of-type{
+    color:#887B8F;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.8px;
+}
+
+.cabecalho-situacao-insumos h2{
+    margin:3px 0 0;
+    color:var(--ins-roxo);
+    font-size:18px;
+}
+
+.status-barra-insumos{
+    padding:7px 10px;
+    border-radius:999px;
+    background:#F0EBF2;
+    color:#776C7C;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.4px;
+    white-space:nowrap;
+}
+
+.status-barra-insumos.status-ok{background:#EAF6DF;color:#4D8D19}
+.status-barra-insumos.status-atencao{background:#FFF1DD;color:#B45B00}
+.status-barra-insumos.status-critico{background:#FCE7EB;color:#B6223C}
+.status-barra-insumos.status-neutro{background:#F0EBF2;color:#6C6171}
+
+.dados-situacao-insumos{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:12px;
+    padding-top:14px;
+}
+
+.dados-situacao-insumos div{
+    min-height:64px;
+    padding:11px 12px;
+    border-radius:11px;
+    background:#F9F7FA;
+    border:1px solid #EEE8F0;
+}
+
+.dados-situacao-insumos span{
+    display:block;
+    color:#8D8192;
+    font-size:9px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.45px;
+}
+
+.dados-situacao-insumos strong{
+    display:block;
+    margin-top:5px;
+    color:var(--ins-roxo);
+    font-size:13px;
+    line-height:1.25;
+}
+
+.grid-graficos-insumos{
+    display:grid;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.grid-graficos-visao{grid-template-columns:1.25fr .75fr}
+.grid-desgaste-insumos{grid-template-columns:1fr 300px}
+.grid-consumo-insumos{grid-template-columns:1fr 1fr}
+.grid-requisicoes-insumos{grid-template-columns:1fr 360px}
+
+.painel-grafico-insumos,
+.painel-tabela-insumos,
+.painel-criterios-insumos,
+.painel-destaques-requisicoes{
+    background:#fff;
+    border:1px solid var(--ins-borda);
+    border-radius:16px;
+    box-shadow:var(--ins-sombra);
+    overflow:hidden;
+}
+
+.painel-grafico-insumos,
+.painel-criterios-insumos,
+.painel-destaques-requisicoes{padding:17px 18px}
+
+.painel-grafico-insumos{border-left:4px solid var(--ins-roxo)}
+
+.titulo-painel-insumos{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    margin-bottom:12px;
+}
+
+.titulo-painel-insumos span{
+    color:#5C9F19;
+    font-size:9px;
+    font-weight:950;
+    letter-spacing:1px;
+}
+
+.titulo-painel-insumos h2{
+    margin:4px 0 2px;
+    color:var(--ins-roxo);
+    font-size:17px;
+}
+
+.titulo-painel-insumos p{
+    margin:0;
+    color:#877A8D;
+    font-size:10px;
+    line-height:1.4;
+}
+
+.badge-meta-insumos{
+    flex:0 0 auto;
+    padding:7px 10px;
+    border-radius:999px;
+    background:#FFF0DE;
+    color:#B35A00;
+    font-size:9px;
+    font-weight:900;
+}
+
+.canvas-insumos{
+    position:relative;
+    width:100%;
+    min-height:300px;
+}
+
+.canvas-alto{height:340px}
+.canvas-desgaste{height:440px}
+
+.painel-tabela-insumos{margin-bottom:15px}
+.painel-tabela-insumos .titulo-painel-insumos{padding:16px 18px 0;margin-bottom:10px}
+
+.tabela-scroll-insumos{overflow:auto}
+
+.tabela-insumos{
+    width:100%;
+    border-collapse:collapse;
+    min-width:780px;
+}
+
+.tabela-insumos th{
+    padding:11px 12px;
+    background:#F3EDF6;
+    color:var(--ins-roxo);
+    border-bottom:1px solid #DED4E4;
+    text-align:left;
+    font-size:9px;
+    font-weight:950;
+    letter-spacing:.45px;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.tabela-insumos td{
+    padding:10px 12px;
+    border-bottom:1px solid #EEE9F0;
+    color:#554A5A;
+    font-size:10.5px;
+    vertical-align:middle;
+}
+
+.tabela-insumos tbody tr:nth-child(even){background:#FCFAFD}
+.tabela-insumos tbody tr:hover{background:#F6F0F9}
+.tabela-insumos td strong{color:var(--ins-roxo)}
+
+.tag-britador{
+    display:inline-grid;
+    place-items:center;
+    width:26px;height:26px;
+    border-radius:8px;
+    color:#fff;
+    background:var(--ins-roxo);
+    font-weight:950;
+}
+
+.tag-britador.b{background:var(--ins-verde-esc)}
+
+.tag-status-tabela{
+    display:inline-flex;
+    padding:5px 8px;
+    border-radius:999px;
+    font-size:8.5px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.tag-status-tabela.ok{background:#EAF6DF;color:#4D8D19}
+.tag-status-tabela.atencao{background:#FFF1DD;color:#B45B00}
+.tag-status-tabela.critico{background:#FCE7EB;color:#B6223C}
+.tag-status-tabela.neutro{background:#F0EBF2;color:#716477}
+
+.titulo-secao-insumos{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    margin:0 0 14px;
+}
+
+.titulo-secao-insumos > span{
+    width:36px;height:36px;
+    display:grid;place-items:center;
+    border-radius:10px;
+    background:var(--ins-roxo);
+    color:#fff;
+    font-weight:950;
+    font-size:11px;
+}
+
+.titulo-secao-insumos strong{
+    display:block;
+    color:var(--ins-roxo);
+    font-size:19px;
+}
+
+.titulo-secao-insumos small{
+    display:block;
+    margin-top:2px;
+    color:#8A7D8F;
+    font-size:10px;
+}
+
+.criterio-desgaste{
+    margin-top:10px;
+    padding:13px 14px;
+    border-radius:11px;
+    border-left:4px solid currentColor;
+}
+
+.criterio-desgaste strong{display:block;font-size:17px}
+.criterio-desgaste span{display:block;margin-top:3px;font-size:10px;font-weight:800}
+.criterio-vermelho{color:#B82840;background:#FDECEF}
+.criterio-laranja{color:#B66200;background:#FFF2DE}
+.criterio-verde{color:#4B8B18;background:#EDF7E5}
+
+.nota-criterios-insumos{
+    margin:12px 2px 0;
+    color:#8C8191;
+    font-size:9.5px;
+    line-height:1.45;
+}
+
+.cards-resumo-consumo-insumos,
+.cards-requisicoes-insumos{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:13px;
+    margin-bottom:15px;
+}
+
+.cards-resumo-consumo-insumos article,
+.card-requisicao-insumos{
+    padding:15px 16px;
+    background:#fff;
+    border:1px solid var(--ins-borda);
+    border-radius:14px;
+    box-shadow:var(--ins-sombra);
+}
+
+.cards-resumo-consumo-insumos span,
+.card-requisicao-insumos span{
+    display:block;
+    color:#8A7E90;
+    font-size:9px;
+    font-weight:900;
+    text-transform:uppercase;
+    letter-spacing:.55px;
+}
+
+.cards-resumo-consumo-insumos strong,
+.card-requisicao-insumos strong{
+    display:block;
+    margin-top:6px;
+    color:var(--ins-roxo);
+    font-size:20px;
+}
+
+.cards-resumo-consumo-insumos small,
+.card-requisicao-insumos small{
+    display:block;
+    margin-top:4px;
+    color:#948999;
+    font-size:9.5px;
+}
+
+.painel-destaques-requisicoes{border-top:4px solid var(--ins-verde)}
+
+.destaque-requisicao{
+    padding:12px 0;
+    border-top:1px solid #EEE8F0;
+}
+.destaque-requisicao:first-of-type{border-top:0}
+.destaque-requisicao span{display:block;color:#8B7E90;font-size:9px;font-weight:900;text-transform:uppercase}
+.destaque-requisicao strong{display:block;margin-top:5px;color:var(--ins-roxo);font-size:16px}
+.destaque-requisicao small{display:block;margin-top:3px;color:#938798;font-size:9.5px}
+
+.faixa-identificacao-insumos,
+.rodape-insumos{display:none}
+
+.print-only{display:none}
+
+@media (max-width:1280px){
+    .cards-kpi-insumos{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-graficos-visao,.grid-consumo-insumos{grid-template-columns:1fr}
+    .grid-desgaste-insumos{grid-template-columns:1fr}
+    .painel-filtros-insumos{max-width:none}
+}
+
+@media (max-width:980px){
+    .container-insumos{width:min(100% - 24px,1540px)}
+    .cabecalho-insumos{flex-direction:column}
+    .painel-base-insumos,.painel-filtros-insumos{grid-template-columns:1fr}
+    .status-base-insumos,.referencia-meta-insumos{border-left:0;border-top:1px solid var(--ins-borda);padding:10px 0 0}
+    .situacao-atual-grid{grid-template-columns:1fr}
+    .dados-situacao-insumos{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-requisicoes-insumos{grid-template-columns:1fr}
+    .cards-resumo-consumo-insumos,.cards-requisicoes-insumos{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media (max-width:680px){
+    .cabecalho-insumos h1{font-size:28px}
+    .cards-kpi-insumos{grid-template-columns:1fr}
+    .dados-situacao-insumos{grid-template-columns:1fr}
+    .cards-resumo-consumo-insumos,.cards-requisicoes-insumos{grid-template-columns:1fr}
+    .abas-insumos{display:grid;grid-template-columns:repeat(2,1fr);width:100%}
+    .aba-insumos{padding:10px 8px}
+    .acoes-insumos{width:100%;justify-content:space-between}
+}
+
+@page{size:A4 landscape;margin:8mm}
+
+@media print{
+    body.pagina-insumos{background:#fff!important;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    .header-portal-fvo,.menu-portal,.no-print,.abas-insumos,.acoes-insumos{display:none!important}
+    .container-insumos{width:100%;padding:0;margin:0}
+    .cabecalho-insumos{display:none!important}
+    .print-only{display:flex!important}
+
+    .faixa-identificacao-insumos{
+        align-items:center;
+        justify-content:space-between;
+        gap:20px;
+        padding:9px 12px;
+        margin:0 0 7px;
+        border:1px solid #DCCFE3;
+        border-left:4px solid var(--ins-verde);
+        border-radius:8px;
+        background:#F7F3F9;
+    }
+
+    .faixa-identificacao-insumos div{display:flex;flex-direction:column;gap:2px}
+    .faixa-identificacao-insumos span{font-size:7px;color:#7D7183;font-weight:800}
+    .faixa-identificacao-insumos strong{font-size:13px;color:var(--ins-roxo)}
+    .faixa-identificacao-insumos div:last-child{text-align:right}
+
+    .conteudo-aba-insumos{display:block!important;break-after:page;page-break-after:always}
+    .conteudo-aba-insumos:last-of-type{break-after:auto;page-break-after:auto}
+    .titulo-secao-insumos{display:flex!important;margin:0 0 6px}
+    .titulo-secao-insumos > span{width:27px;height:27px;font-size:8px;border-radius:7px}
+    .titulo-secao-insumos strong{font-size:13px}
+    .titulo-secao-insumos small{font-size:7px}
+
+    .cards-kpi-insumos{grid-template-columns:repeat(6,1fr);gap:5px;margin-bottom:6px}
+    .card-kpi-insumos{min-height:68px;padding:8px 7px;gap:6px;border-radius:8px;box-shadow:none}
+    .icone-kpi-insumos{width:28px;height:28px;flex-basis:28px;border-radius:7px}
+    .icone-kpi-insumos svg{width:16px;height:16px}
+    .card-kpi-insumos span{font-size:6px}
+    .card-kpi-insumos strong{font-size:13px;margin-top:3px}
+    .card-kpi-insumos small{font-size:6px;margin-top:3px}
+
+    .situacao-atual-grid{gap:6px;margin-bottom:6px}
+    .painel-situacao-insumos{padding:8px;border-radius:8px;box-shadow:none}
+    .cabecalho-situacao-insumos{gap:6px;padding-bottom:5px}
+    .medalhao-britador{width:27px;height:27px;font-size:12px;border-radius:7px;box-shadow:none}
+    .cabecalho-situacao-insumos h2{font-size:11px}
+    .status-barra-insumos{font-size:5.8px;padding:4px 6px}
+    .dados-situacao-insumos{grid-template-columns:repeat(3,1fr);gap:4px;padding-top:5px}
+    .dados-situacao-insumos div{min-height:36px;padding:5px;border-radius:6px}
+    .dados-situacao-insumos span{font-size:5.5px}
+    .dados-situacao-insumos strong{font-size:7.5px;margin-top:2px}
+
+    .grid-graficos-insumos{gap:6px;margin-bottom:6px}
+    .grid-graficos-visao,.grid-consumo-insumos{grid-template-columns:1fr 1fr}
+    .grid-desgaste-insumos{grid-template-columns:1fr 220px}
+    .grid-requisicoes-insumos{grid-template-columns:1fr 260px}
+    .painel-grafico-insumos,.painel-criterios-insumos,.painel-destaques-requisicoes{padding:7px 8px;border-radius:8px;box-shadow:none}
+    .titulo-painel-insumos{margin-bottom:4px}
+    .titulo-painel-insumos span{font-size:5.7px}
+    .titulo-painel-insumos h2{font-size:10px;margin:2px 0}
+    .titulo-painel-insumos p{font-size:5.8px}
+    .badge-meta-insumos{font-size:5.5px;padding:3px 5px}
+    .canvas-alto{height:205px!important;min-height:205px!important}
+    .canvas-desgaste{height:270px!important;min-height:270px!important}
+
+    .painel-tabela-insumos{border-radius:8px;box-shadow:none;margin-bottom:5px}
+    .painel-tabela-insumos .titulo-painel-insumos{padding:7px 8px 0}
+    .tabela-insumos{min-width:0}
+    .tabela-insumos th{padding:4px 5px;font-size:5.5px}
+    .tabela-insumos td{padding:4px 5px;font-size:6px}
+    .tag-britador{width:18px;height:18px;border-radius:5px;font-size:7px}
+    .tag-status-tabela{font-size:5.5px;padding:3px 5px}
+
+    .criterio-desgaste{margin-top:5px;padding:7px;border-radius:6px}
+    .criterio-desgaste strong{font-size:9px}
+    .criterio-desgaste span{font-size:6px}
+    .nota-criterios-insumos{font-size:5.7px;margin-top:6px}
+
+    .cards-resumo-consumo-insumos,.cards-requisicoes-insumos{gap:5px;margin-bottom:6px}
+    .cards-resumo-consumo-insumos article,.card-requisicao-insumos{padding:7px 8px;border-radius:7px;box-shadow:none}
+    .cards-resumo-consumo-insumos span,.card-requisicao-insumos span{font-size:5.5px}
+    .cards-resumo-consumo-insumos strong,.card-requisicao-insumos strong{font-size:11px;margin-top:3px}
+    .cards-resumo-consumo-insumos small,.card-requisicao-insumos small{font-size:5.5px}
+    .destaque-requisicao{padding:7px 0}
+    .destaque-requisicao span{font-size:5.5px}
+    .destaque-requisicao strong{font-size:9px;margin-top:2px}
+    .destaque-requisicao small{font-size:5.5px}
+
+    .rodape-insumos{
+        align-items:center;
+        justify-content:space-between;
+        margin-top:5px;
+        padding-top:4px;
+        border-top:1px solid #DCCFE3;
+        color:#877A8C;
+        font-size:5.8px;
+    }
+}

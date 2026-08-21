@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pareto - Portal Britagem FVO</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="Pareto.css">
+</head>
+
+<body class="pagina-pareto">
+
+    <div id="overlayCarregamentoPareto" class="overlay-carregamento-pareto" aria-hidden="true">
+        <div class="caixa-carregamento-pareto" role="status" aria-live="polite">
+            <div class="spinner-pareto"></div>
+            <strong>Carregando dados...</strong>
+            <span id="textoCarregamentoPareto">Preparando planilha</span>
+        </div>
+    </div>
+
+    <header class="header-dashboard-fvo">
+        <div class="logo">
+            <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+        </div>
+        <div class="titulo">PORTAL BRITAGEM - FVO CMOC</div>
+    </header>
+
+    <nav class="menu-dashboard-fvo" aria-label="Navegação do Pareto">
+        <ul>
+            <li><a href="../index.html">Início</a></li>
+        </ul>
+    </nav>
+
+    <main class="container-pareto">
+
+        <section class="cabecalho-pareto">
+            <div class="titulo-pagina-pareto">
+                <span class="subtitulo-pareto">ACOMPANHAMENTO OPERACIONAL</span>
+                <h1>Pareto de Perdas - Britagem</h1>
+                <p class="descricao-pareto">Identificação rápida dos principais ofensores da produção e concentração das perdas.</p>
+            </div>
+
+            <div class="acoes-pareto">
+                <button type="button" id="btnGerarPDFPareto" class="btn-pdf-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v5h5M9 13h6M9 17h6"/></svg>
+                    Gerar PDF
+                </button>
+                <button type="button" id="btnEnviarEmailPareto" class="btn-email-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3z"/><path d="m4 7 8 6 8-6"/></svg>
+                    Enviar por E-mail
+                </button>
+            </div>
+        </section>
+
+        <section class="painel-pareto" aria-label="Filtros do Pareto">
+            <div class="controle-pareto controle-arquivo">
+                <label for="arquivoExcel">Planilha Base</label>
+                <input type="file" id="arquivoExcel" accept=".xlsx,.xls,.xlsm">
+            </div>
+
+            <div class="controle-pareto controle-analise">
+                <label>Análise</label>
+                <div class="abas-pareto" role="group" aria-label="Tipo de análise">
+                    <button type="button" class="aba ativa" data-filtro="dia" onclick="mostrarFiltro('dia', this)">Dia</button>
+                    <button type="button" class="aba" data-filtro="mes" onclick="mostrarFiltro('mes', this)">Mês</button>
+                    <button type="button" class="aba" data-filtro="pilha" onclick="mostrarFiltro('pilha', this)">Pilha</button>
+                </div>
+            </div>
+
+            <div id="filtro-dia" class="controle-pareto filtro-pareto">
+                <label for="dataFiltro">Data</label>
+                <input type="date" id="dataFiltro">
+            </div>
+
+            <div id="filtro-mes" class="controle-pareto filtro-pareto oculto">
+                <label for="mesFiltro">Mês</label>
+                <select id="mesFiltro">
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+
+            <div id="filtro-pilha" class="controle-pareto filtro-pareto oculto">
+                <label for="pilhaFiltro">Pilha</label>
+                <input type="text" id="pilhaFiltro" inputmode="numeric" placeholder="Ex.: 41">
+            </div>
+
+            <div class="controle-pareto controle-botao">
+                <label class="label-invisivel" aria-hidden="true">Ação</label>
+                <button type="button" id="btnGerarPareto" class="btn-gerar-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+                    Gerar Pareto
+                </button>
+            </div>
+
+            <div class="status-base-pareto">
+                <span>BASE</span>
+                <strong id="statusBasePareto">Aguardando planilha</strong>
+            </div>
+        </section>
+
+        <section class="cabecalho-pdf-pareto" aria-hidden="true">
+            <div class="pdf-marca-pareto">
+                <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+                <div>
+                    <span>PORTAL FVO - BRITAGEM</span>
+                    <strong>Pareto de Perdas</strong>
+                </div>
+            </div>
+            <div class="pdf-meta-pareto">
+                <span class="pdf-secao-pareto">VISÃO EXECUTIVA • 1/2</span>
+                <span id="periodoParetoPDF">Período: -</span>
+                <span id="geradoParetoPDF">Gerado em: -</span>
+            </div>
+        </section>
+
+        <section class="secao-titulo-pareto">
+            <div>
+                <span class="subtitulo-pareto">VISÃO EXECUTIVA</span>
+                <h2>Principais impactos do período</h2>
+                <p>Resumo dos ofensores e da concentração das perdas na base filtrada.</p>
+            </div>
+            <div class="selo-base-pareto">
+                <span>BASE DE ANÁLISE</span>
+                <strong>Perda (t) - Hora - Hora</strong>
+            </div>
+        </section>
+
+        <section class="cards-resumo-pareto">
+            <article class="card-resumo-pareto card-perda-total">
+                <div class="icone-card-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5v14h16"/><path d="m6 8 5 5 4-4 4 4"/></svg>
+                </div>
+                <div class="conteudo-card-pareto">
+                    <span>Perda Total</span>
+                    <strong id="perdaTotal">-</strong>
+                    <small>toneladas</small>
+                </div>
+            </article>
+
+            <article class="card-resumo-pareto card-principal">
+                <div class="icone-card-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4z"/><path d="M12 9v5M12 17h.01"/></svg>
+                </div>
+                <div class="conteudo-card-pareto">
+                    <span>Principal Ofensor</span>
+                    <strong id="principalOfensor" class="texto-card">-</strong>
+                    <small>maior impacto</small>
+                </div>
+            </article>
+
+            <article class="card-resumo-pareto card-impacto">
+                <div class="icone-card-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9h-9z"/><path d="M14 3.2A9 9 0 0 1 20.8 10H14z"/></svg>
+                </div>
+                <div class="conteudo-card-pareto">
+                    <span>Impacto do Principal</span>
+                    <strong id="impactoPrincipal">-</strong>
+                    <small>da perda total</small>
+                </div>
+            </article>
+
+            <article class="card-resumo-pareto card-top3">
+                <div class="icone-card-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h4V9H4zM10 18h4V5h-4zM16 18h4v-6h-4z"/></svg>
+                </div>
+                <div class="conteudo-card-pareto">
+                    <span>Concentração Top 3</span>
+                    <strong id="impactoTop3">-</strong>
+                    <small>da perda total</small>
+                </div>
+            </article>
+
+            <article class="card-resumo-pareto card-ocorrencias">
+                <div class="icone-card-pareto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+                </div>
+                <div class="conteudo-card-pareto">
+                    <span>Ocorrências</span>
+                    <strong id="totalOcorrencias">-</strong>
+                    <small>registros com perda</small>
+                </div>
+            </article>
+        </section>
+
+        <section class="grafico-card-pareto bloco-pdf-pagina-1">
+            <div class="grafico-titulo-pareto">
+                <div>
+                    <span class="tag-grafico-pareto">PARETO</span>
+                    <h2>Principais Ofensores</h2>
+                    <p id="periodoPareto">Selecione um período para gerar a análise.</p>
+                </div>
+                <div class="legenda-pareto" aria-label="Legenda do gráfico">
+                    <span><i class="legenda-barra"></i>Perda (t)</span>
+                    <span><i class="legenda-linha"></i>% Acumulado</span>
+                </div>
+            </div>
+            <div class="grafico-area">
+                <canvas id="graficoPareto"></canvas>
+            </div>
+            <div class="rodape-grafico-pareto">
+                <span>Exibição: até 10 maiores ofensores</span>
+                <strong id="leituraParetoGrafico">Aguardando análise</strong>
+            </div>
+        </section>
+
+        <section class="cabecalho-pdf-pareto cabecalho-pdf-pagina-2" aria-hidden="true">
+            <div class="pdf-marca-pareto">
+                <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+                <div>
+                    <span>PORTAL FVO - BRITAGEM</span>
+                    <strong>Pareto de Perdas</strong>
+                </div>
+            </div>
+            <div class="pdf-meta-pareto">
+                <span class="pdf-secao-pareto">DETALHAMENTO • 2/2</span>
+                <span id="periodoParetoPDF2">Período: -</span>
+                <span id="geradoParetoPDF2">Gerado em: -</span>
+            </div>
+        </section>
+
+        <section class="detalhamento-pareto bloco-pdf-pagina-2">
+            <div class="ranking-card-pareto">
+                <div class="cabecalho-card-detalhe">
+                    <div>
+                        <span class="tag-grafico-pareto">DETALHAMENTO</span>
+                        <h2>Ranking dos Ofensores</h2>
+                        <p>Top 10 modos de falha do filtro selecionado.</p>
+                    </div>
+                </div>
+
+                <div class="tabela-wrap-pareto">
+                    <table class="tabela-ranking-pareto">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Modo de Falha</th>
+                                <th>Perda (t)</th>
+                                <th>Participação</th>
+                                <th>Acumulado</th>
+                                <th>Ocorrências</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingParetoBody">
+                            <tr class="linha-vazia-pareto">
+                                <td colspan="6">Carregue a planilha e gere uma análise.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <aside class="resumo-executivo-pareto">
+                <div class="cabecalho-resumo-pareto">
+                    <div class="icone-resumo-pareto">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="m7 15 4-4 3 2 5-6"/></svg>
+                    </div>
+                    <div>
+                        <span>LEITURA EXECUTIVA</span>
+                        <h2 id="tituloResumoPareto">Aguardando análise</h2>
+                    </div>
+                </div>
+
+                <p id="textoResumoPareto">Após gerar o Pareto, este quadro destacará automaticamente a concentração e os principais ofensores.</p>
+
+                <div class="mini-indicadores-pareto">
+                    <div>
+                        <span>Perda média / ocorrência</span>
+                        <strong id="perdaMediaOcorrencia">-</strong>
+                    </div>
+                    <div>
+                        <span>Ofensores identificados</span>
+                        <strong id="quantidadeOfensores">-</strong>
+                    </div>
+                    <div>
+                        <span>3º ofensor acumulado</span>
+                        <strong id="acumuladoTerceiro">-</strong>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+    </main>
+
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../Britagem.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="Pareto.js"></script>
+</body>
+</html>

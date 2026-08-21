@@ -1,0 +1,75 @@
+PORTAL FVO — VERSÃO REORGANIZADA
+================================
+
+COMO ABRIR
+----------
+1. Abra a pasta Portal no VS Code.
+2. Inicie o Live Server pelo arquivo index.html da pasta Portal.
+3. A primeira tela permite escolher Britagem ou Usina.
+
+ESTRUTURA
+---------
+Portal/
+  index.html                 Seletor dos portais
+  Portal.css                 Visual do seletor
+  Compartilhado/
+    Base.css                 Cabeçalho, menus, tokens, impressão e componentes comuns
+    Core.js                  Menus, vídeo, página ativa e carregamento comum
+    ChartTheme.js            Padrão visual dos gráficos Chart.js
+  Britagem/
+    index.html
+    Britagem.css
+    Britagem.js
+    Equipamentos/
+    Indicadores/
+    Pilhas/
+    Relatorio_de_pilhas/
+    Imagens/
+  Flash/
+    Flash.html
+    Flash.css
+    Flash.js
+  Usina/
+    index.html
+    Usina.css
+    Usina.js
+    Producao.html
+    Producao.css
+    Producao.js
+    Reagentes.html
+    Reagentes.css
+    Reagentes.js
+
+O QUE NÃO DEVE MAIS SER USADO
+-----------------------------
+- style.css antigo da raiz;
+- script.js antigo da raiz;
+- chart-thime.js com o nome incorreto;
+- caminhos para a antiga pasta Portal_Britagem_Cmoc.
+
+CORREÇÕES PRINCIPAIS
+--------------------
+- CSS da Usina e da Britagem totalmente separados;
+- JavaScript indevidamente colado dentro do CSS removido;
+- seletores CSS não utilizados descartados;
+- seletores repetidos consolidados;
+- nenhuma duplicação de IDs nos HTMLs;
+- todos os caminhos locais conferidos;
+- tema compartilhado dos gráficos corrigido para ChartTheme.js;
+- cards e gráficos com mais contraste, espaço e destaque;
+- carregamento padronizado nas páginas que leem planilhas;
+- impressão e PDF com proteção contra cortes;
+- resumo anual da Produção corrigido sem usar seletor global de header;
+- KPIs mantidos com MTD/YTD e mensal em base seca conforme o mapeamento validado;
+- codificação UTF-8 normalizada.
+
+CONSUMO DE REAGENTES
+--------------------
+A página e a estrutura visual foram preparadas, mas os cálculos não foram inventados.
+Para concluir o dashboard, será necessário informar a planilha real, a aba usada e as
+colunas de data, reagente, consumo realizado, produção, meta e unidade.
+
+OBSERVAÇÃO
+----------
+Os links para páginas que não existiam no ZIP original continuam identificados como
+"Página em preparação" e não quebram a navegação.

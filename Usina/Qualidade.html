@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qualidade e Rastreabilidade — Portal FVO</title>
+  <link rel="stylesheet" href="../Compartilhado/Base.css">
+  <link rel="stylesheet" href="Usina.css">
+  <link rel="stylesheet" href="Qualidade.css">
+</head>
+<body class="pagina-portal pagina-qualidade-usina usina-ativa">
+  <header class="header-portal-fvo">
+    <div class="logo logo-portal"><img src="../Britagem/Imagens/Logo_CMOC.png" alt="CMOC"></div>
+    <div class="titulo-portal-geral">PORTAL FVO</div>
+    <div class="seletor-portais">
+      <a href="../Britagem/index.html" class="portal-opcao"><span class="portal-icone">◈</span><span>PORTAL BRITAGEM FVO</span></a>
+      <a href="index.html" class="portal-opcao portal-opcao-ativa"><span class="portal-icone">◫</span><span>PORTAL USINA FVO</span></a>
+    </div>
+  </header>
+
+  <nav class="menu-portal menu-usina">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="Producao.html">Produção</a></li>
+      <li class="dropdown menu-secao-ativa">
+        <a href="#" class="dropdown-toggle">Indicadores ▼</a>
+        <ul class="submenu">
+          <li><a href="#">OEE</a></li>
+          <li><a href="#">KPIs Operacionais</a></li>
+          <li><a href="#">Recuperação Metalúrgica</a></li>
+          <li><a href="#">Rendimento Mássico</a></li>
+          <li class="menu-secao-ativa"><a href="Qualidade.html">Qualidade</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Reagentes ▼</a>
+        <ul class="submenu"><li><a href="Reagentes.html">Consumo de Reagentes</a></li></ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container-qualidade-usina">
+    <section class="cabecalho-qualidade">
+      <div>
+        <span class="rotulo-qualidade">BENEFICIAMENTO</span>
+        <h1>Qualidade e Rastreabilidade</h1>
+        <p>AMG, CF e RF das Usinas 47 e 76, consolidado e rastreabilidade por pilha.</p>
+      </div>
+      <div id="periodoAnalisadoQualidade" class="periodo-analisado-qualidade">Período analisado: aguardando planilha</div>
+    </section>
+
+    <section class="barra-controles-qualidade" aria-label="Arquivos e filtros">
+      <div class="grupo-upload-qualidade">
+        <input id="arquivoAnalisePilha" type="file" accept=".xlsx,.xls,.xlsm" class="input-arquivo-qualidade">
+        <label for="arquivoAnalisePilha" class="cartao-upload-qualidade">
+          <span class="icone-upload-qualidade">⇧</span>
+          <span><strong>Análise de Pilha</strong><small id="nomeArquivoAnalisePilha">Carregar arquivo</small></span>
+        </label>
+      </div>
+
+      <div class="grupo-upload-qualidade">
+        <input id="arquivoIndicadoresQualidade" type="file" accept=".xlsx,.xls,.xlsm" class="input-arquivo-qualidade">
+        <label for="arquivoIndicadoresQualidade" class="cartao-upload-qualidade">
+          <span class="icone-upload-qualidade">⇧</span>
+          <span><strong>Indicadores 2026</strong><small id="nomeArquivoIndicadoresQualidade">Carregar arquivo</small></span>
+        </label>
+      </div>
+
+      <div class="campo-controle-qualidade">
+        <label for="dataInicialQualidade">Data inicial</label>
+        <input id="dataInicialQualidade" type="date">
+      </div>
+      <div class="campo-controle-qualidade">
+        <label for="dataFinalQualidade">Data final</label>
+        <input id="dataFinalQualidade" type="date">
+      </div>
+      <div class="campo-controle-qualidade campo-pilha-controle">
+        <label for="filtroPilhaQualidade">Pilha</label>
+        <select id="filtroPilhaQualidade"><option value="">Todas as pilhas</option></select>
+      </div>
+      <button type="button" id="btnAplicarFiltroQualidade" class="btn-qualidade btn-aplicar-qualidade">Aplicar filtro</button>
+      <button type="button" id="btnLimparFiltroQualidade" class="btn-qualidade btn-limpar-qualidade">Limpar</button>
+      <button type="button" id="btnGerarPdfQualidade" class="btn-qualidade btn-pdf-qualidade">Gerar PDF</button>
+    </section>
+
+    <section id="avisoQualidade" class="aviso-qualidade aviso-info" aria-live="polite">
+      Carregue a planilha Indicadores 2026. A Análise de Pilha é necessária para completar massa, metragem e datas de formação.
+    </section>
+
+    <nav class="abas-qualidade" aria-label="Seções da análise">
+      <button type="button" class="aba-qualidade ativa" data-painel="visaoGeral">Visão Geral</button>
+      <button type="button" class="aba-qualidade" data-painel="pilhas">Pilhas</button>
+      <button type="button" class="aba-qualidade" data-painel="usina47">Usina 47</button>
+      <button type="button" class="aba-qualidade" data-painel="usina76">Usina 76</button>
+      <button type="button" class="aba-qualidade" data-painel="comparacao">47 × 76</button>
+      <button type="button" class="aba-qualidade" data-painel="rastreabilidade">Rastreabilidade</button>
+      <button type="button" class="aba-qualidade" data-painel="teores">Teores</button>
+      <button type="button" class="aba-qualidade" data-painel="dados">Dados</button>
+    </nav>
+
+    <section id="painel-visaoGeral" class="painel-aba-qualidade ativo">
+      <section class="cards-kpi-qualidade">
+        <article><span>Registros no período</span><strong id="kpiRegistrosQualidade">0</strong><small>dias com resultados</small></article>
+        <article><span>Pilhas identificadas</span><strong id="kpiPilhasIndicadores">0</strong><small>Indicadores 2026</small></article>
+        <article><span>Elementos disponíveis</span><strong id="kpiElementosQualidade">0/9</strong><small>AMG, CF e RF</small></article>
+        <article><span>Cobertura dos dados</span><strong id="kpiCoberturaQualidade">0%</strong><small>valores encontrados</small></article>
+      </section>
+
+      <div class="cabecalho-grade-elementos">
+        <div><h2>Qualidade por elemento</h2><p>Todos os elementos são apresentados simultaneamente.</p></div>
+        <div class="legenda-series-qualidade" aria-label="Legenda dos minigráficos">
+          <span><i class="cor-amg47"></i>AMG U47</span>
+          <span><i class="cor-cf47"></i>CF U47</span>
+          <span><i class="cor-amg76"></i>AMG U76</span>
+          <span><i class="cor-cf76"></i>CF U76</span>
+        </div>
+      </div>
+      <section id="cardsElementosQualidade" class="grade-elementos-qualidade" aria-label="Cards de qualidade por elemento"></section>
+    </section>
+
+    <section id="painel-pilhas" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Pilhas</h2><p>Massa, metragem e período conforme a planilha Análise de Pilha.</p></div></div>
+      <section class="cards-kpi-qualidade cards-pilhas-qualidade">
+        <article><span>Total de pilhas</span><strong id="kpiTotalPilhas">0</strong><small>no período</small></article>
+        <article><span>Massa total</span><strong id="kpiMassaTotalPilhas">—</strong><small>t</small></article>
+        <article><span>Massa média</span><strong id="kpiMassaMediaPilhas">—</strong><small>t/pilha</small></article>
+        <article><span>Metragem média</span><strong id="kpiMetragemMediaPilhas">—</strong><small>m</small></article>
+      </section>
+      <div class="grid-pilhas-qualidade">
+        <article class="bloco-qualidade bloco-grafico-massa"><h3>Massa das pilhas no período</h3><div class="area-grafico-massa"><canvas id="graficoMassaPilhasQualidade"></canvas></div></article>
+        <article class="bloco-qualidade bloco-resumo-pilha"><h3>Pilha em destaque</h3><div id="resumoPilhaDestaque" class="resumo-pilha-destaque">Selecione uma pilha no filtro global.</div></article>
+      </div>
+      <article class="bloco-qualidade"><h3>Dados das pilhas</h3><div class="tabela-qualidade-container"><table class="tabela-qualidade tabela-pilhas"><thead><tr><th>Pilha</th><th>Massa</th><th>Metragem</th><th>Início</th><th>Fim</th><th>P2O5</th><th>MgO</th><th>Fe2O3</th><th>SiO2</th><th>BaO</th><th>Nb2O5</th><th>CaO</th><th>CaO/P2O5</th></tr></thead><tbody id="corpoTabelaPilhasQualidade"></tbody></table></div></article>
+    </section>
+
+    <section id="painel-usina47" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Usina 47</h2><p>AMG, CF e RF de todos os elementos no período filtrado.</p></div></div>
+      <article class="bloco-qualidade"><div class="tabela-qualidade-container"><table class="tabela-qualidade"><thead><tr><th>Elemento</th><th>AMG</th><th>CF</th><th>RF</th></tr></thead><tbody id="corpoTabelaUsina47"></tbody></table></div></article>
+    </section>
+
+    <section id="painel-usina76" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Usina 76</h2><p>AMG, CF e RF de todos os elementos no período filtrado.</p></div></div>
+      <article class="bloco-qualidade"><div class="tabela-qualidade-container"><table class="tabela-qualidade"><thead><tr><th>Elemento</th><th>AMG</th><th>CF</th><th>RF</th></tr></thead><tbody id="corpoTabelaUsina76"></tbody></table></div></article>
+    </section>
+
+    <section id="painel-comparacao" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Usina 47 × Usina 76</h2><p>Comparação AMG × CF dentro de cada usina.</p></div></div>
+      <article class="bloco-qualidade"><div class="tabela-qualidade-container"><table class="tabela-qualidade"><thead><tr><th>Elemento</th><th>AMG U47</th><th>CF U47</th><th>AMG U76</th><th>CF U76</th><th>AMG consolidado</th><th>CF consolidado</th><th>RF consolidado</th></tr></thead><tbody id="corpoTabelaComparacaoQualidade"></tbody></table></div></article>
+    </section>
+
+    <section id="painel-rastreabilidade" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Rastreabilidade</h2><p>Relação da pilha selecionada com os resultados oficiais existentes na planilha Indicadores 2026.</p></div></div>
+      <section id="statusRastreabilidadeQualidade" class="status-rastreabilidade-qualidade">Selecione uma pilha no filtro global.</section>
+      <section class="cards-rastreabilidade-qualidade">
+        <article><span>Pilha selecionada</span><strong id="rastroPilhaNumero">—</strong></article>
+        <article><span>Massa</span><strong id="rastroPilhaMassa">—</strong><small>t</small></article>
+        <article><span>Metragem</span><strong id="rastroPilhaMetragem">—</strong><small>m</small></article>
+        <article><span>Período da formação</span><strong id="rastroPilhaPeriodo">—</strong></article>
+      </section>
+      <article class="bloco-qualidade"><h3>AMG, CF e RF relacionados à pilha</h3><div class="tabela-qualidade-container"><table class="tabela-qualidade"><thead><tr><th>Elemento</th><th>AMG U47</th><th>CF U47</th><th>RF U47</th><th>AMG U76</th><th>CF U76</th><th>RF U76</th><th>AMG consolidado</th><th>CF consolidado</th><th>RF consolidado</th></tr></thead><tbody id="corpoTabelaRastreabilidade"></tbody></table></div></article>
+    </section>
+
+    <section id="painel-teores" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Teores</h2><p>Matriz completa de todos os elementos, usinas e resultados consolidados.</p></div></div>
+      <article class="bloco-qualidade"><div class="tabela-qualidade-container"><table class="tabela-qualidade tabela-matriz-teores"><thead><tr><th rowspan="2">Elemento</th><th colspan="3">Usina 47</th><th colspan="3">Usina 76</th><th colspan="3">Consolidado</th></tr><tr><th>AMG</th><th>CF</th><th>RF</th><th>AMG</th><th>CF</th><th>RF</th><th>AMG</th><th>CF</th><th>RF</th></tr></thead><tbody id="corpoTabelaTeoresQualidade"></tbody></table></div></article>
+    </section>
+
+    <section id="painel-dados" class="painel-aba-qualidade" hidden>
+      <div class="cabecalho-painel-qualidade"><div><h2>Dados filtrados</h2><p>Linhas utilizadas na visualização. O limite de exibição não altera os cálculos nem o PDF.</p></div><strong id="contadorLinhasDadosQualidade">0 linhas</strong></div>
+      <article class="bloco-qualidade"><div class="tabela-qualidade-container tabela-dados-container"><table class="tabela-qualidade"><thead><tr><th>Data</th><th>Pilha</th><th>Elemento</th><th>AMG U47</th><th>CF U47</th><th>RF U47</th><th>AMG U76</th><th>CF U76</th><th>RF U76</th><th>AMG consolidado</th><th>CF consolidado</th><th>RF consolidado</th></tr></thead><tbody id="corpoTabelaDadosQualidade"></tbody></table></div></article>
+    </section>
+
+    <footer class="rodape-qualidade"><span id="rodapePeriodoQualidade">Período não selecionado</span><span id="rodapeArquivosQualidade">Aguardando planilhas</span></footer>
+  </main>
+
+  <div id="modalEvolucaoQualidade" class="modal-evolucao-qualidade oculto" role="dialog" aria-modal="true" aria-labelledby="tituloModalEvolucao">
+    <div class="janela-evolucao-qualidade">
+      <header><div><span class="rotulo-qualidade">EVOLUÇÃO NO PERÍODO</span><h2 id="tituloModalEvolucao">Elemento</h2><p id="subtituloModalEvolucao">AMG, CF e RF</p></div><button type="button" id="btnFecharModalEvolucao" aria-label="Fechar">×</button></header>
+      <div class="grade-evolucao-qualidade">
+        <article><h3>Usina 47</h3><div><canvas id="graficoEvolucaoU47"></canvas></div></article>
+        <article><h3>Usina 76</h3><div><canvas id="graficoEvolucaoU76"></canvas></div></article>
+        <article><h3>Consolidado 47 + 76</h3><div><canvas id="graficoEvolucaoConsolidado"></canvas></div></article>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="../Compartilhado/Core.js"></script>
+  <script src="Usina.js"></script>
+  <script src="../Compartilhado/ChartTheme.js"></script>
+  <script src="Qualidade.js"></script>
+</body>
+</html>

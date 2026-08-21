@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumo de Reagentes — Portal FVO</title>
+  <link rel="stylesheet" href="../Compartilhado/Base.css">
+  <link rel="stylesheet" href="Usina.css">
+  <link rel="stylesheet" href="Reagentes.css">
+</head>
+<body class="pagina-portal pagina-reagentes-usina usina-ativa">
+  <header class="header-portal-fvo">
+    <div class="logo logo-portal"><img src="../Britagem/Imagens/Logo_CMOC.png" alt="CMOC"></div>
+    <div class="titulo-portal-geral">PORTAL FVO</div>
+    <div class="seletor-portais">
+      <a href="../Britagem/index.html" class="portal-opcao"><span class="portal-icone">◈</span><span>PORTAL BRITAGEM FVO</span></a>
+      <a href="index.html" class="portal-opcao portal-opcao-ativa"><span class="portal-icone">◫</span><span>PORTAL USINA FVO</span></a>
+    </div>
+  </header>
+
+  <nav class="menu-portal menu-usina">
+    <ul>
+      <li><a href="index.html">Início</a></li>
+      <li><a href="Producao.html">Produção</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Indicadores ▼</a>
+        <ul class="submenu">
+          <li><a href="#">OEE</a></li><li><a href="#">KPIs Operacionais</a></li>
+          <li><a href="#">Recuperação Metalúrgica</a></li><li><a href="#">Rendimento Mássico</a></li><li><a href="Qualidade.html">Qualidade</a></li>
+        </ul>
+      </li>
+      <li class="dropdown menu-secao-ativa">
+        <a href="#" class="dropdown-toggle">Reagentes ▼</a>
+        <ul class="submenu"><li class="menu-secao-ativa"><a href="Reagentes.html">Consumo de Reagentes</a></li></ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="container-reagentes-usina">
+    <section class="cabecalho-reagentes-usina">
+      <div class="titulo-reagentes-usina">
+        <span class="rotulo-reagentes-usina">BENEFICIAMENTO</span>
+        <div class="linha-titulo-reagentes">
+          <div>
+            <h1>Consumo de Reagentes</h1>
+            <p>Consumo, aderência, projeções e desempenho da usina por pilha.</p>
+          </div>
+          <button type="button" id="btnAbrirConsumoPilha" class="atalho-pilha-reagentes">
+            <span class="icone-atalho-pilha">▥</span>
+            <span><small>ANÁLISE INTEGRADA</small><strong>Consumo por pilha</strong><em id="contadorPilhasTopo">Carregue os indicadores</em></span>
+            <b>→</b>
+          </button>
+        </div>
+      </div>
+
+      <div class="acoes-reagentes-usina">
+        <button type="button" id="btnGerarPdfReagentes" class="btn-reagentes btn-pdf-reagentes">Gerar PDF</button>
+        <div class="grupo-upload-reagentes">
+          <input id="arquivoReagentes" type="file" accept=".xlsx,.xls,.xlsm" class="input-arquivo-reagentes">
+          <label for="arquivoReagentes" class="btn-reagentes btn-upload-reagentes">Planilha de reagentes</label>
+          <span id="nomeArquivoReagentes">Nenhuma planilha</span>
+        </div>
+        <div class="grupo-upload-reagentes">
+          <input id="arquivoIndicadoresReagentes" type="file" accept=".xlsx,.xls,.xlsm" class="input-arquivo-reagentes">
+          <label for="arquivoIndicadoresReagentes" class="btn-reagentes btn-upload-indicadores">Planilha de indicadores</label>
+          <span id="nomeArquivoIndicadoresReagentes">Nenhuma planilha</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="avisoReagentes" class="aviso-reagentes aviso-info" aria-live="polite">
+      Carregue a planilha de reagentes. Para a análise por pilha, carregue também a planilha de indicadores.
+    </section>
+
+    <section class="painel-filtros-reagentes" aria-label="Filtros do dashboard">
+      <div class="campo-filtro-reagentes"><label for="dataInicialReagentes">Data inicial</label><input type="date" id="dataInicialReagentes"></div>
+      <div class="campo-filtro-reagentes"><label for="dataFinalReagentes">Data final</label><input type="date" id="dataFinalReagentes"></div>
+      <div class="campo-filtro-reagentes campo-reagente-grafico">
+        <label for="filtroReagenteGrafico">Reagente nos gráficos</label>
+        <select id="filtroReagenteGrafico">
+          <option value="soda">Soda</option><option value="lupromin715">Lupromin 715</option><option value="flotanol">Flotanol</option>
+          <option value="lupromin1168">Lupromin 1168</option><option value="agem">Agem</option>
+        </select>
+      </div>
+      <button type="button" id="btnAtualizarReagentes" class="btn-atualizar-reagentes">Atualizar dashboard</button>
+    </section>
+
+    <section id="pagina1PdfReagentes" class="pagina-relatorio-reagentes">
+      <section id="resumoFaixasReagentes" class="resumo-faixas-reagentes" aria-label="Quantidade de reagentes por situação">
+        <article class="faixa-acima"><span>Acima da meta</span><strong id="qtdAcimaMeta">0</strong></article>
+        <article class="faixa-meta"><span>Na meta</span><strong id="qtdNaMeta">0</strong></article>
+        <article class="faixa-abaixo"><span>Abaixo da meta</span><strong id="qtdAbaixoMeta">0</strong></article>
+      </section>
+
+      <section id="cardsReagentes" class="cards-reagentes" aria-label="Resumo por reagente">
+        <div class="estado-vazio-reagentes">Carregue a planilha para visualizar os cinco reagentes.</div>
+      </section>
+
+      <section class="grid-graficos-reagentes">
+        <article class="bloco-reagentes">
+          <div class="cabecalho-bloco-reagentes"><div><h2>Consumo diário</h2><p id="subtituloConsumoDiario">Realizado e meta diária do reagente selecionado.</p></div></div>
+          <div class="area-grafico-reagentes"><canvas id="graficoConsumoDiarioReagentes"></canvas></div>
+        </article>
+        <article class="bloco-reagentes">
+          <div class="cabecalho-bloco-reagentes"><div><h2>Aderência acumulada no mês</h2><p id="subtituloAderenciaReagentes">Evolução do consumo acumulado em relação à meta diária acumulada.</p></div></div>
+          <div class="area-grafico-reagentes"><canvas id="graficoAderenciaReagentes"></canvas></div>
+        </article>
+      </section>
+    </section>
+
+    <section id="pagina2PdfReagentes" class="pagina-relatorio-reagentes pagina-pilhas-reagentes">
+      <section id="secaoConsumoPilha" class="bloco-reagentes secao-consumo-pilha">
+        <div class="cabecalho-secao-pilha">
+          <div><span class="rotulo-reagentes-usina">ANÁLISE INTEGRADA</span><h2>Consumo de reagentes por pilha</h2><p>O consumo é associado pela data. Em dias de transição, a divisão usa somente as massas das Pilhas A e B.</p></div>
+          <div class="campo-filtro-reagentes filtro-pilha-reagentes"><label for="filtroPilhaReagentes">Pilha em destaque</label><select id="filtroPilhaReagentes"><option value="">Aguardando indicadores</option></select></div>
+        </div>
+
+        <div id="avisoPilhaReagentes" class="aviso-pilha-reagentes">Carregue a planilha de indicadores para relacionar consumo, produção, alimentação, teores e recuperação metalúrgica.</div>
+
+        <section id="cardsPilhaReagentes" class="cards-pilha-reagentes">
+          <article><span>Pilha selecionada</span><strong id="cardNumeroPilha">—</strong><small id="cardPeriodoPilha">Sem período</small></article>
+          <article><span>Massa de alimentação</span><strong id="cardAlimentacaoPilha">—</strong><small>t</small></article>
+          <article><span>Produção da usina</span><strong id="cardProducaoPilha">—</strong><small>t</small></article>
+          <article><span>Recuperação metalúrgica</span><strong id="cardRecuperacaoPilha">—</strong><small>%</small></article>
+          <article><span>Consumo específico</span><strong id="cardConsumoEspecificoPilha">—</strong><small>kg/t alimentada</small></article>
+        </section>
+
+        <section class="grid-pilha-reagentes">
+          <article class="painel-grafico-pilha"><h3>Consumo por reagente na pilha</h3><div class="area-grafico-pilha"><canvas id="graficoConsumoPilhaReagentes"></canvas></div></article>
+          <article class="painel-teores-pilha">
+            <h3>Teores e desempenho</h3>
+            <dl>
+              <div><dt>P₂O₅ alimentação</dt><dd id="teorP2O5AlimentacaoPilha">—</dd></div><div><dt>P₂O₅ concentrado</dt><dd id="teorP2O5ConcentradoPilha">—</dd></div>
+              <div><dt>MgO alimentação</dt><dd id="teorMgOAlimentacaoPilha">—</dd></div><div><dt>MgO concentrado</dt><dd id="teorMgOConcentradoPilha">—</dd></div>
+            </dl>
+          </article>
+        </section>
+
+        <div class="grid-tabelas-pilha">
+          <article class="painel-tabela-pilha">
+            <h3>Desempenho da usina por pilha</h3>
+            <div class="tabela-reagentes-container"><table class="tabela-pilha-reagentes"><thead><tr>
+              <th>Pilha</th><th>Período</th><th>Alimentação</th><th>Produção</th><th>Rec. metal.</th><th>P₂O₅ alim.</th><th>P₂O₅ conc.</th><th>MgO alim.</th><th>MgO conc.</th>
+            </tr></thead><tbody id="corpoTabelaDesempenhoPilha"><tr><td colspan="9">Aguardando planilhas.</td></tr></tbody></table></div>
+          </article>
+          <article class="painel-tabela-pilha">
+            <h3>Consumo por reagente</h3>
+            <div class="tabela-reagentes-container"><table class="tabela-pilha-reagentes"><thead><tr>
+              <th>Pilha</th><th>Soda</th><th>Lup. 715</th><th>Flotanol</th><th>Lup. 1168</th><th>Agem</th><th>Total</th><th>kg/t</th>
+            </tr></thead><tbody id="corpoTabelaConsumoPilha"><tr><td colspan="8">Aguardando planilhas.</td></tr></tbody></table></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="blocoTratativasReagentes" class="bloco-reagentes bloco-tratativas-reagentes">
+        <div class="cabecalho-tratativas-reagentes">
+          <div><h2>Justificativas e ações</h2><p>Campos manuais para registrar desvios de consumo e as tratativas definidas.</p></div>
+          <button type="button" id="btnSalvarTratativasReagentes" class="btn-salvar-tratativas">Salvar textos</button>
+        </div>
+        <div class="grid-tratativas-reagentes">
+          <label><span>Justificativas</span><textarea id="justificativasReagentes" rows="6" placeholder="Ex.: consumo acima da meta devido à alteração do teor de alimentação..."></textarea></label>
+          <label><span>Ações de tratativa</span><textarea id="acoesTratativasReagentes" rows="6" placeholder="Ex.: revisar dosagem, acompanhar estabilidade e reavaliar no próximo turno..."></textarea></label>
+        </div>
+        <div id="notasRenderizadasPdf" class="notas-renderizadas-pdf">
+          <article><h3>Justificativas</h3><p id="textoJustificativasPdf">Não preenchido.</p></article>
+          <article><h3>Ações de tratativa</h3><p id="textoAcoesPdf">Não preenchido.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <footer class="rodape-reagentes"><span id="periodoDashboardReagentes">Período não selecionado</span><span id="origemDashboardReagentes">Aguardando planilhas</span></footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="../Compartilhado/Core.js"></script><script src="Usina.js"></script><script src="../Compartilhado/ChartTheme.js"></script><script src="Reagentes.js"></script>
+</body>
+</html>

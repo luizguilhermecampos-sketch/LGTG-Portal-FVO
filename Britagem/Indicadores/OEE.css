@@ -1,0 +1,1989 @@
+/* Portal FVO — estilos isolados: oee.
+   Gerado a partir somente dos seletores realmente usados nesta área. */
+
+.container-oee{
+    max-width:1750px;
+    margin:0 auto;
+    padding:28px 30px 45px;
+}
+
+.cabecalho-oee{
+    margin-bottom:22px;
+}
+
+.subtitulo-oee{
+    display:block;
+    color:#777;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1.2px;
+    margin-bottom:5px;
+}
+
+.cabecalho-oee h1{
+    color:#2D014D;
+    font-size:30px;
+    margin-bottom:6px;
+}
+
+.cabecalho-oee p{
+    color:#666;
+    font-size:14px;
+}
+
+.painel-filtros-oee{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    gap:16px;
+    background:#ffffff;
+    padding:18px 20px;
+    border-radius:14px;
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.09);
+    margin-bottom:22px;
+}
+
+.campo-oee{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.campo-oee label{
+    color:#2D014D;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.campo-oee input{
+    height:41px;
+    padding:8px 11px;
+    border:1px solid #d2d2d2;
+    border-radius:8px;
+    background:#fafafa;
+    color:#333;
+}
+
+.campo-arquivo-oee{
+    min-width:310px;
+}
+
+.campo-arquivo-oee input{
+    width:100%;
+}
+
+.campo-oee select{
+    height:41px;
+    padding:8px 11px;
+    border:1px solid #d2d2d2;
+    border-radius:8px;
+    background:#fafafa;
+    color:#333;
+    min-width:150px;
+}
+
+.campo-equipamento-oee select{
+    min-width:230px;
+}
+
+.campo-botao-oee{
+    margin-left:auto;
+}
+
+.campo-botao-oee button{
+    height:41px;
+    padding:0 26px;
+    border:none;
+    border-radius:8px;
+    background:#2D014D;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.campo-botao-oee button:hover{
+    background:#4A007A;
+    transform:translateY(-1px);
+}
+
+.card-oee:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 7px 18px rgba(0,0,0,0.14);
+}
+
+.card-oee-principal{
+    border-top-color:#2D014D;
+}
+
+.card-oee-impacto{
+    border-top-color:#2D7DD2;
+}
+
+.card-oee small{
+    display:block;
+    color:#666;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.card-oee strong{
+    display:block;
+    color:#2D014D;
+    font-size:26px;
+    line-height:1.05;
+    margin-bottom:5px;
+}
+
+.card-oee > div > span{
+    display:block;
+    color:#777;
+    font-size:11px;
+}
+
+.icone-card-oee{
+    width:48px;
+    height:48px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:#2D014D;
+    color:white;
+    font-size:19px;
+    font-weight:bold;
+}
+
+.sigla-oee{
+    width:48px;
+    height:48px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:
+        linear-gradient(
+            135deg,
+            #2D014D,
+            #5A147A
+        );
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.card-oee-impacto .icone-card-oee{
+    background:#2D7DD2;
+}
+
+.texto-impacto-oee{
+    font-size:17px !important;
+    line-height:1.25 !important;
+}
+
+.grid-graficos-oee{
+    display:grid;
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.grid-graficos-oee-principal{
+    grid-template-columns:
+        minmax(0,1.55fr)
+        minmax(320px,1fr)
+        minmax(320px,1fr);
+}
+
+.grid-graficos-oee-secundario{
+    grid-template-columns:
+        minmax(320px,0.9fr)
+        minmax(0,1.45fr)
+        minmax(280px,0.75fr);
+}
+
+.titulo-grafico-oee{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.titulo-grafico-oee h2{
+    color:#2D014D;
+    font-size:16px;
+    margin-bottom:4px;
+}
+
+.titulo-grafico-oee span{
+    color:#777;
+    font-size:11px;
+}
+
+.canvas-oee{
+    width:100%;
+    height:320px;
+    position:relative;
+}
+
+.canvas-oee-grande{
+    height:390px;
+}
+
+.canvas-oee canvas{
+    width:100% !important;
+    height:100% !important;
+}
+
+.grafico-equipamentos-oee{
+    min-width:0;
+}
+
+.resumo-oee{
+    background:white;
+    border-radius:14px;
+    padding:20px 22px;
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.09);
+    align-self:stretch;
+}
+
+.item-resumo-oee{
+    padding:13px 0;
+    border-bottom:
+        1px solid #eeeeee;
+}
+
+.item-resumo-oee:last-child{
+    border-bottom:none;
+}
+
+.item-resumo-oee span{
+    display:block;
+    color:#777;
+    font-size:11px;
+    margin-bottom:5px;
+}
+
+.item-resumo-oee strong{
+    display:block;
+    color:#2D014D;
+    font-size:14px;
+    line-height:1.35;
+}
+
+.rodape-oee{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:
+        5px
+        3px
+        0;
+    color:#888;
+    font-size:10px;
+}
+
+.card-oee:nth-child(2){
+    border-top-color:#D9534F;
+}
+
+.card-oee:nth-child(3){
+    border-top-color:#7A3E9D;
+}
+
+.card-oee:nth-child(4){
+    border-top-color:#FF8C1A;
+}
+
+.card-oee:nth-child(5){
+    border-top-color:#5A9E20;
+}
+
+.overlay-carregamento-oee{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(25,4,42,0.58);
+
+    backdrop-filter:
+        blur(3px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+.caixa-carregamento-oee{
+
+    min-width:260px;
+
+    padding:
+        28px 32px;
+
+    background:#ffffff;
+
+    border-radius:16px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.25);
+}
+
+.caixa-carregamento-oee strong{
+
+    display:block;
+
+    color:#2D014D;
+
+    font-size:16px;
+
+    margin-bottom:6px;
+}
+
+.caixa-carregamento-oee span{
+
+    display:block;
+
+    color:#777;
+
+    font-size:10px;
+}
+
+.spinner-oee{
+
+    width:42px;
+
+    height:42px;
+
+    margin:
+        0 auto 16px;
+
+    border:
+        4px solid #EEE7F2;
+
+    border-top-color:
+        #92D050;
+
+    border-radius:50%;
+
+    animation:
+        girarSpinnerOEE
+        0.8s linear
+        infinite;
+}
+
+.cabecalho-oee-acoes{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+.acoes-oee{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.btn-pdf-oee{
+
+    height:38px;
+
+    padding:
+        0 16px;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:0.2s;
+
+    background:#2D014D;
+
+    color:#ffffff;
+}
+
+.btn-pdf-oee:hover{
+
+    background:#4A007A;
+
+    transform:
+        translateY(-1px);
+}
+
+.btn-email-oee{
+
+    height:38px;
+
+    padding:
+        0 16px;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:0.2s;
+
+    background:#92D050;
+
+    color:#173300;
+}
+
+.btn-email-oee:hover{
+
+    background:#80C23F;
+
+    transform:
+        translateY(-1px);
+}
+
+.status-base-oee{
+
+    margin-left:auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:3px;
+
+    padding-bottom:3px;
+}
+
+.status-base-oee span{
+
+    color:#888;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    text-transform:uppercase;
+}
+
+.status-base-oee strong{
+
+    color:#2D014D;
+
+    font-size:10px;
+
+    white-space:nowrap;
+}
+
+@media (max-width:1450px) {
+  .cards-oee{
+          grid-template-columns:
+              repeat(3,minmax(0,1fr));
+      }
+  
+  .grid-graficos-oee-principal{
+          grid-template-columns:
+              minmax(0,1.4fr)
+              minmax(300px,1fr);
+      }
+  
+  .grid-graficos-oee-principal
+      .grafico-oee-card:last-child{
+          grid-column:
+              1 / -1;
+      }
+  
+  .grid-graficos-oee-secundario{
+          grid-template-columns:
+              repeat(2,minmax(0,1fr));
+      }
+  
+  .resumo-oee{
+          grid-column:
+              1 / -1;
+      }
+}
+
+@media (max-width:1000px) {
+  .container-oee{
+          padding:
+              22px
+              18px
+              35px;
+      }
+  
+  .painel-filtros-oee{
+          align-items:stretch;
+      }
+  
+  .campo-arquivo-oee{
+          width:100%;
+          min-width:0;
+      }
+  
+  .campo-arquivo-oee input{
+          width:100%;
+      }
+  
+  .campo-oee{
+          flex:1;
+          min-width:180px;
+      }
+  
+  .campo-equipamento-oee{
+          min-width:250px;
+      }
+  
+  .campo-botao-oee{
+          margin-left:0;
+      }
+  
+  .campo-botao-oee button{
+          width:100%;
+      }
+  
+  .cards-oee{
+          grid-template-columns:
+              repeat(2,minmax(0,1fr));
+      }
+  
+  .grid-graficos-oee-principal{
+          grid-template-columns:1fr;
+      }
+  
+  .grid-graficos-oee-secundario{
+          grid-template-columns:1fr;
+      }
+  
+  .grid-graficos-oee-principal
+      .grafico-oee-card:last-child{
+          grid-column:auto;
+      }
+  
+  .resumo-oee{
+          grid-column:auto;
+      }
+}
+
+@media (max-width:650px) {
+  .container-oee{
+          padding:
+              18px
+              12px
+              30px;
+      }
+  
+  .cabecalho-oee h1{
+          font-size:24px;
+      }
+  
+  .cabecalho-oee p{
+          font-size:12px;
+      }
+  
+  .painel-filtros-oee{
+          flex-direction:column;
+          padding:15px;
+      }
+  
+  .campo-oee{
+          width:100%;
+          min-width:0;
+      }
+  
+  .campo-equipamento-oee{
+          width:100%;
+          min-width:0;
+      }
+  
+  .campo-oee select{
+          width:100%;
+          min-width:0;
+      }
+  
+  .campo-oee input{
+          width:100%;
+          min-width:0;
+      }
+  
+  .cards-oee{
+          grid-template-columns:1fr;
+      }
+  
+  .card-oee{
+          min-height:105px;
+      }
+  
+  .grafico-oee-card{
+          padding:
+              17px
+              14px;
+      }
+  
+  .resumo-oee{
+          padding:
+              17px
+              14px;
+      }
+  
+  .canvas-oee{
+          height:300px;
+      }
+  
+  .canvas-oee-grande{
+          height:300px;
+      }
+  
+  .canvas-oee-pizza{
+          height:300px;
+      }
+  
+  .rodape-oee{
+          flex-direction:column;
+          gap:5px;
+      }
+}
+
+/* Padronização de leitura dos resultados */
+.cards-oee {
+    display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+    margin-bottom:20px;
+}
+
+.card-oee {
+  min-height: 135px;
+    background:white;
+  border-radius: var(--fvo-raio);
+    padding:17px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:
+        0 3px 12px rgba(0,0,0,0.09);
+    border-top:4px solid #92D050;
+    transition:0.25s;
+  border-top-width: 4px;
+}
+
+.card-oee strong,
+.card-oee-principal strong {
+  font-size: clamp(28px, 2.3vw, 38px);
+  font-variant-numeric: tabular-nums;
+}
+
+.grafico-oee-card {
+    background:white;
+  border-radius: var(--fvo-raio);
+    padding:20px 22px;
+  box-shadow: var(--fvo-sombra-card);
+}
+
+.canvas-oee,
+.canvas-oee-grande { min-height: 340px; }
+.canvas-oee-pizza {
+    height:390px; min-height: 300px; }
+
+.overlay-carregamento-oee.visivel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: all;
+}
+
+@media (max-width:900px) {
+  .cabecalho-oee-acoes{
+  
+          flex-direction:column;
+  
+          align-items:flex-start;
+  
+      }
+  
+  .acoes-oee{
+  
+          width:100%;
+  
+      }
+  
+  .btn-pdf-oee{
+  
+          flex:1;
+  
+      }
+  
+  .btn-email-oee{
+  
+          flex:1;
+  
+      }
+  
+  .status-base-oee{
+  
+          width:100%;
+  
+          margin-left:0;
+  
+      }
+}
+
+@media print {
+  .painel-filtros-oee{
+  
+          display:none !important;
+  
+      }
+  
+  .acoes-oee{
+  
+          display:none !important;
+  
+      }
+  
+  .overlay-carregamento-oee{
+  
+          display:none !important;
+  
+      }
+  
+  .container-oee{
+  
+          width:100% !important;
+  
+          max-width:none !important;
+  
+          margin:0 !important;
+  
+          padding:0 !important;
+  
+      }
+  
+  .cabecalho-oee{
+  
+          margin-bottom:4mm !important;
+  
+          padding-bottom:3mm !important;
+  
+          border-bottom:
+              2px solid #2D014D;
+  
+      }
+  
+  .cards-oee{
+  
+          gap:3mm !important;
+  
+          break-inside:avoid;
+  
+          page-break-inside:avoid;
+  
+      }
+  
+  .card-oee{
+  
+          box-shadow:none !important;
+  
+          border:
+              1px solid #dddddd !important;
+  
+      }
+  
+  .grid-graficos-oee{
+  
+          break-inside:avoid;
+  
+          page-break-inside:avoid;
+  
+      }
+  
+  .grafico-oee-card{
+  
+          box-shadow:none !important;
+  
+          border:
+              1px solid #dddddd !important;
+  
+      }
+  
+  .resumo-oee{
+  
+          box-shadow:none !important;
+  
+          border:
+              1px solid #dddddd !important;
+  
+      }
+  
+  .grid-graficos-oee-principal{
+  
+          break-before:page;
+  
+          page-break-before:always;
+  
+      }
+  
+  .canvas-oee-grande{
+  
+          height:
+              95mm !important;
+  
+      }
+  
+  .canvas-oee-pizza{
+  
+          height:
+              70mm !important;
+  
+      }
+  
+  .canvas-oee{
+  
+          height:
+              70mm !important;
+  
+      }
+  
+  .rodape-oee{
+  
+          margin-top:
+              4mm !important;
+  
+          font-size:
+              8px !important;
+  
+      }
+}
+
+/* ============================================================
+   OEE BRITAGEM — VISUAL CORPORATIVO CMOC (V2)
+   Mantém a estrutura e a lógica existentes, reforçando leitura,
+   contraste, responsividade e qualidade da impressão/PDF.
+============================================================ */
+
+.pagina-oee {
+    --oee-roxo: #2d014d;
+    --oee-roxo-escuro: #210038;
+    --oee-roxo-vivo: #5a1180;
+    --oee-verde: #92d050;
+    --oee-verde-escuro: #5f9d23;
+    --oee-laranja: #ee9622;
+    --oee-azul: #2878b8;
+    --oee-ciano: #00a0a8;
+    --oee-vermelho: #d83a52;
+    --oee-texto: #261f2a;
+    --oee-texto-suave: #6d6471;
+    --oee-borda: #e8e2ec;
+    --oee-fundo: #f5f3f7;
+    background:
+        radial-gradient(circle at 92% 4%, rgba(146, 208, 80, .11), transparent 22rem),
+        linear-gradient(180deg, #f7f5f8 0%, #f3f0f5 100%);
+}
+
+.pagina-oee .container-oee {
+    width: min(100%, 1780px);
+    max-width: none;
+    margin: 0 auto;
+    padding: 26px clamp(18px, 2.4vw, 40px) 42px;
+}
+
+.pagina-oee .cabecalho-oee-acoes {
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 4px 2px 0;
+}
+
+.pagina-oee .subtitulo-oee,
+.pagina-oee .eyebrow-oee {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 5px;
+    color: var(--oee-verde-escuro);
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.pagina-oee .subtitulo-oee::before,
+.pagina-oee .eyebrow-oee::before {
+    content: "";
+    width: 20px;
+    height: 3px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, var(--oee-verde), var(--oee-roxo-vivo));
+}
+
+.pagina-oee .cabecalho-oee h1 {
+    margin: 0 0 5px;
+    color: var(--oee-roxo);
+    font-size: clamp(26px, 2.3vw, 34px);
+    line-height: 1.05;
+    letter-spacing: -.035em;
+}
+
+.pagina-oee .cabecalho-oee p {
+    max-width: 760px;
+    margin: 0;
+    color: var(--oee-texto-suave);
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.pagina-oee .acoes-oee {
+    gap: 10px;
+}
+
+.pagina-oee .btn-pdf-oee,
+.pagina-oee .btn-email-oee,
+.pagina-oee .campo-botao-oee button {
+    min-height: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 17px;
+    border: 0;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 850;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.pagina-oee .btn-pdf-oee,
+.pagina-oee .campo-botao-oee button {
+    background: linear-gradient(135deg, var(--oee-roxo), #4b086c);
+    color: #fff;
+    box-shadow: 0 7px 16px rgba(45, 1, 77, .16);
+}
+
+.pagina-oee .btn-email-oee {
+    background: linear-gradient(135deg, #73b532, var(--oee-verde));
+    color: #173300;
+    box-shadow: 0 7px 16px rgba(95, 157, 35, .18);
+}
+
+.pagina-oee .btn-pdf-oee:hover,
+.pagina-oee .btn-email-oee:hover,
+.pagina-oee .campo-botao-oee button:hover {
+    transform: translateY(-2px);
+    filter: saturate(1.08);
+    box-shadow: 0 10px 22px rgba(45, 1, 77, .19);
+}
+
+.pagina-oee .icone-botao-oee {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Filtros */
+.pagina-oee .painel-filtros-oee {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
+    margin-bottom: 22px;
+    padding: 18px 20px;
+    overflow: hidden;
+    border: 1px solid rgba(45, 1, 77, .09);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, .97);
+    box-shadow: 0 10px 28px rgba(45, 1, 77, .08);
+}
+
+.pagina-oee .painel-filtros-oee::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    background: linear-gradient(180deg, var(--oee-verde), var(--oee-roxo-vivo));
+}
+
+.pagina-oee .campo-oee {
+    gap: 7px;
+}
+
+.pagina-oee .campo-oee label {
+    color: var(--oee-roxo);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+
+.pagina-oee .campo-oee input,
+.pagina-oee .campo-oee select {
+    min-height: 42px;
+    height: 42px;
+    padding: 9px 12px;
+    border: 1px solid #d7d0dc;
+    border-radius: 9px;
+    background: #fff;
+    color: var(--oee-texto);
+    font-size: 13px;
+    font-weight: 650;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.pagina-oee .campo-oee select:focus,
+.pagina-oee .campo-oee input:focus {
+    border-color: var(--oee-roxo-vivo);
+    box-shadow: 0 0 0 3px rgba(90, 17, 128, .10);
+}
+
+.pagina-oee .campo-dia-oee {
+    min-width: 190px;
+}
+
+.pagina-oee .campo-dia-oee input[type="date"] {
+    min-width: 190px;
+    color: var(--oee-roxo);
+    font-variant-numeric: tabular-nums;
+}
+
+.pagina-oee .ajuda-campo-oee {
+    display: none;
+}
+
+.pagina-oee .campo-arquivo-oee {
+    min-width: 300px;
+}
+
+.pagina-oee .campo-arquivo-oee input[type="file"] {
+    min-width: 285px;
+    width: 100%;
+    padding: 5px 7px;
+    overflow: hidden;
+    border: 1px solid rgba(90, 17, 128, .24);
+    border-radius: 10px;
+    background: linear-gradient(135deg, #fbf8ff 0%, #f0e6f8 100%);
+    color: #5c4967;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .90), 0 4px 12px rgba(45, 1, 77, .06);
+    cursor: pointer;
+}
+
+.pagina-oee .campo-arquivo-oee input[type="file"]::file-selector-button,
+.pagina-oee .campo-arquivo-oee input[type="file"]::-webkit-file-upload-button {
+    min-height: 30px;
+    margin: 0 11px 0 0;
+    padding: 7px 13px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #6f2598 0%, #8d4db4 100%);
+    color: #fff;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(90, 17, 128, .20);
+}
+
+.pagina-oee .campo-arquivo-oee input[type="file"]:hover {
+    border-color: rgba(90, 17, 128, .48);
+    background: linear-gradient(135deg, #faf5ff 0%, #eadcf6 100%);
+}
+
+.pagina-oee .campo-equipamento-oee select {
+    min-width: 235px;
+}
+
+.pagina-oee .campo-botao-oee {
+    margin-left: 0;
+}
+
+.pagina-oee .status-base-oee {
+    min-width: 165px;
+    margin-left: auto;
+    padding: 7px 0 4px 16px;
+    border-left: 1px solid #ebe5ef;
+}
+
+.pagina-oee .status-base-oee span {
+    color: #8a7d91;
+    font-size: 9px;
+    font-weight: 850;
+    letter-spacing: .08em;
+}
+
+.pagina-oee .status-base-oee strong {
+    color: var(--oee-roxo);
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+/* Cabeçalho executivo */
+.pagina-oee .cabecalho-secao-oee {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin: 2px 0 14px;
+}
+
+.pagina-oee .cabecalho-secao-oee h2 {
+    margin: 0 0 4px;
+    color: var(--oee-roxo);
+    font-size: clamp(20px, 1.7vw, 26px);
+    line-height: 1.1;
+}
+
+.pagina-oee .cabecalho-secao-oee p {
+    margin: 0;
+    color: var(--oee-texto-suave);
+    font-size: 12px;
+}
+
+.pagina-oee .selo-base-oee {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 10px 13px;
+    border: 1px solid rgba(146, 208, 80, .45);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(146, 208, 80, .14), rgba(255,255,255,.96));
+}
+
+.pagina-oee .selo-base-oee span {
+    color: var(--oee-verde-escuro);
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: .1em;
+}
+
+.pagina-oee .selo-base-oee strong {
+    color: var(--oee-roxo);
+    font-size: 11px;
+}
+
+/* Cards */
+.pagina-oee .cards-oee {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.pagina-oee .card-oee {
+    position: relative;
+    min-width: 0;
+    min-height: 124px;
+    padding: 17px 16px;
+    overflow: hidden;
+    border: 1px solid var(--oee-borda);
+    border-top: 0;
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(45, 1, 77, .075);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.pagina-oee .card-oee::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 4px;
+    background: var(--card-accent, var(--oee-verde));
+}
+
+.pagina-oee .card-oee:nth-child(1) { --card-accent: var(--oee-verde); }
+.pagina-oee .card-oee:nth-child(2) { --card-accent: var(--oee-vermelho); }
+.pagina-oee .card-oee:nth-child(3) { --card-accent: var(--oee-azul); }
+.pagina-oee .card-oee:nth-child(4) { --card-accent: var(--oee-laranja); }
+.pagina-oee .card-oee:nth-child(5) { --card-accent: var(--oee-verde); }
+.pagina-oee .card-oee:nth-child(6) { --card-accent: var(--oee-ciano); }
+
+.pagina-oee .card-oee:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 27px rgba(45, 1, 77, .12);
+}
+
+.pagina-oee .card-oee-principal {
+    background: linear-gradient(145deg, var(--oee-roxo) 0%, #4b086c 100%);
+    border-color: transparent;
+}
+
+.pagina-oee .card-oee-principal small,
+.pagina-oee .card-oee-principal strong,
+.pagina-oee .card-oee-principal > div > span {
+    color: #fff;
+}
+
+.pagina-oee .card-oee small {
+    margin-bottom: 7px;
+    color: #6e6076;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+}
+
+.pagina-oee .card-oee strong,
+.pagina-oee .card-oee-principal strong {
+    margin: 0 0 5px;
+    color: var(--oee-roxo);
+    font-size: clamp(24px, 1.9vw, 34px);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -.035em;
+    font-variant-numeric: tabular-nums;
+}
+
+.pagina-oee .card-oee > div > span {
+    color: #776b7e;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.pagina-oee .icone-card-oee,
+.pagina-oee .sigla-oee {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(45, 1, 77, .13);
+}
+
+.pagina-oee .icone-card-oee svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.9;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.pagina-oee .card-oee-principal .icone-card-oee {
+    background: rgba(255,255,255,.14);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: none;
+}
+
+.pagina-oee .card-oee:nth-child(2) .sigla-oee {
+    background: linear-gradient(135deg, #b52842, var(--oee-vermelho));
+}
+
+.pagina-oee .card-oee:nth-child(3) .sigla-oee {
+    background: linear-gradient(135deg, #1f6195, var(--oee-azul));
+}
+
+.pagina-oee .card-oee:nth-child(4) .sigla-oee {
+    background: linear-gradient(135deg, #c87514, var(--oee-laranja));
+}
+
+.pagina-oee .card-oee:nth-child(5) .sigla-oee {
+    background: linear-gradient(135deg, var(--oee-verde-escuro), var(--oee-verde));
+    color: #183100;
+}
+
+.pagina-oee .card-oee-impacto .icone-card-oee {
+    background: linear-gradient(135deg, #007f86, var(--oee-ciano));
+}
+
+.pagina-oee .texto-impacto-oee {
+    display: -webkit-box !important;
+    overflow: hidden;
+    color: var(--oee-roxo) !important;
+    font-size: 17px !important;
+    line-height: 1.18 !important;
+    letter-spacing: -.015em !important;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* Gráficos */
+.pagina-oee .grid-graficos-oee {
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.pagina-oee .grid-graficos-oee-principal {
+    grid-template-columns: minmax(0, 1.55fr) minmax(330px, .95fr) minmax(330px, .95fr);
+}
+
+.pagina-oee .grid-graficos-oee-secundario {
+    grid-template-columns: minmax(310px, .8fr) minmax(0, 1.4fr) minmax(300px, .72fr);
+}
+
+.pagina-oee .grafico-oee-card,
+.pagina-oee .resumo-oee {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--oee-borda);
+    border-radius: 14px;
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 9px 24px rgba(45, 1, 77, .065);
+}
+
+.pagina-oee .grafico-oee-card {
+    padding: 19px 20px 17px;
+}
+
+.pagina-oee .grafico-oee-card::before,
+.pagina-oee .resumo-oee::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--oee-roxo-vivo), var(--oee-verde));
+}
+
+.pagina-oee .titulo-grafico-oee {
+    margin-bottom: 11px;
+}
+
+.pagina-oee .titulo-grafico-oee h2 {
+    margin: 0 0 4px;
+    color: var(--oee-roxo);
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: -.015em;
+}
+
+.pagina-oee .titulo-grafico-oee span {
+    color: #7d7183;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.pagina-oee .canvas-oee {
+    min-height: 335px;
+    height: 335px;
+}
+
+.pagina-oee .canvas-oee-grande {
+    min-height: 365px;
+    height: 365px;
+}
+
+.pagina-oee .canvas-oee-pizza {
+    min-height: 365px;
+    height: 365px;
+}
+
+.pagina-oee .resumo-oee {
+    padding: 19px 20px;
+    background:
+        linear-gradient(180deg, rgba(247, 242, 250, .94), rgba(255,255,255,.98));
+}
+
+.pagina-oee .item-resumo-oee {
+    padding: 11px 0;
+    border-bottom: 1px solid #e9e3ed;
+}
+
+.pagina-oee .item-resumo-oee span {
+    margin-bottom: 4px;
+    color: #796c80;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+}
+
+.pagina-oee .item-resumo-oee strong {
+    color: var(--oee-roxo);
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.pagina-oee .rodape-oee {
+    padding: 3px 4px 0;
+    color: #817586;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+/* Cabeçalho exclusivo do relatório */
+.pagina-oee .cabecalho-relatorio-pdf-oee {
+    display: none;
+}
+
+/* Responsividade */
+@media (max-width: 1500px) {
+    .pagina-oee .cards-oee {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .pagina-oee .grid-graficos-oee-principal {
+        grid-template-columns: minmax(0, 1.45fr) minmax(310px, 1fr);
+    }
+
+    .pagina-oee .grid-graficos-oee-principal .grafico-oee-card:last-child {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 1050px) {
+    .pagina-oee .cabecalho-oee-acoes,
+    .pagina-oee .cabecalho-secao-oee {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .pagina-oee .selo-base-oee {
+        align-items: flex-start;
+    }
+
+    .pagina-oee .status-base-oee {
+        width: 100%;
+        margin-left: 0;
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .pagina-oee .grid-graficos-oee-principal,
+    .pagina-oee .grid-graficos-oee-secundario {
+        grid-template-columns: 1fr;
+    }
+
+    .pagina-oee .grid-graficos-oee-principal .grafico-oee-card:last-child,
+    .pagina-oee .resumo-oee {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 680px) {
+    .pagina-oee .container-oee {
+        padding: 18px 12px 30px;
+    }
+
+    .pagina-oee .painel-filtros-oee {
+        padding: 16px;
+    }
+
+    .pagina-oee .campo-oee,
+    .pagina-oee .campo-arquivo-oee,
+    .pagina-oee .campo-dia-oee,
+    .pagina-oee .campo-equipamento-oee {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .pagina-oee .campo-oee input,
+    .pagina-oee .campo-oee select,
+    .pagina-oee .campo-arquivo-oee input[type="file"],
+    .pagina-oee .campo-dia-oee input[type="date"] {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .pagina-oee .cards-oee {
+        grid-template-columns: 1fr;
+    }
+
+    .pagina-oee .acoes-oee {
+        width: 100%;
+    }
+
+    .pagina-oee .btn-pdf-oee,
+    .pagina-oee .btn-email-oee {
+        flex: 1;
+    }
+}
+
+/* ============================================================
+   IMPRESSÃO / PDF — A4 PAISAGEM, 2 PÁGINAS DENSAS E LEGÍVEIS
+============================================================ */
+@page {
+    size: A4 landscape;
+    margin: 7mm;
+}
+
+@media print {
+    html,
+    body.pagina-oee {
+        width: auto !important;
+        min-width: 0 !important;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .pagina-oee .header-portal-fvo,
+    .pagina-oee .menu-portal,
+    .pagina-oee .cabecalho-oee,
+    .pagina-oee .painel-filtros-oee,
+    .pagina-oee .acoes-oee,
+    .pagina-oee .overlay-carregamento-oee,
+    .pagina-oee .cabecalho-secao-oee,
+    .pagina-oee .rodape-oee {
+        display: none !important;
+    }
+
+    .pagina-oee .container-oee {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8mm;
+        min-height: 17mm;
+        margin-bottom: 4mm;
+        padding: 3.2mm 4mm;
+        border: 1px solid #ded6e4;
+        border-left: 4px solid var(--oee-verde);
+        border-radius: 3mm;
+        background: linear-gradient(90deg, #fbf9fc, #f3edf7);
+        break-inside: avoid;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee-marca {
+        display: flex;
+        align-items: center;
+        gap: 3.2mm;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee-marca img {
+        width: 25mm;
+        max-height: 11mm;
+        object-fit: contain;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee-marca div,
+    .pagina-oee .cabecalho-relatorio-pdf-oee-info {
+        display: flex;
+        flex-direction: column;
+        gap: .6mm;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee-marca span,
+    .pagina-oee .cabecalho-relatorio-pdf-oee-info span {
+        color: #716678;
+        font-size: 7.5pt;
+        font-weight: 700;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee-marca strong {
+        color: var(--oee-roxo);
+        font-size: 14pt;
+        line-height: 1.05;
+    }
+
+    .pagina-oee .cabecalho-relatorio-pdf-oee-info {
+        align-items: flex-end;
+        text-align: right;
+    }
+
+    .pagina-oee .cards-oee {
+        grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+        gap: 2.2mm !important;
+        margin-bottom: 3.2mm !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pagina-oee .card-oee {
+        min-height: 27mm !important;
+        padding: 3mm 2.8mm !important;
+        gap: 2.3mm !important;
+        border-radius: 2.8mm !important;
+        box-shadow: none !important;
+    }
+
+    .pagina-oee .icone-card-oee,
+    .pagina-oee .sigla-oee {
+        width: 9.5mm !important;
+        height: 9.5mm !important;
+        border-radius: 2.2mm !important;
+        font-size: 7pt !important;
+    }
+
+    .pagina-oee .icone-card-oee svg {
+        width: 5mm !important;
+        height: 5mm !important;
+    }
+
+    .pagina-oee .card-oee small {
+        font-size: 6.5pt !important;
+        margin-bottom: 1.2mm !important;
+    }
+
+    .pagina-oee .card-oee strong,
+    .pagina-oee .card-oee-principal strong {
+        font-size: 16pt !important;
+    }
+
+    .pagina-oee .card-oee > div > span {
+        font-size: 6.7pt !important;
+    }
+
+    .pagina-oee .texto-impacto-oee {
+        font-size: 10.5pt !important;
+        line-height: 1.12 !important;
+    }
+
+    .pagina-oee .grid-graficos-oee {
+        display: grid !important;
+        gap: 2.6mm !important;
+        margin: 0 !important;
+    }
+
+    .pagina-oee .grid-graficos-oee-principal {
+        grid-template-columns: 1.45fr .82fr .82fr !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pagina-oee .grid-graficos-oee-secundario {
+        grid-template-columns: .82fr 1.35fr .78fr !important;
+        break-before: page !important;
+        page-break-before: always !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        padding-top: 1mm;
+    }
+
+    .pagina-oee .grafico-oee-card,
+    .pagina-oee .resumo-oee {
+        padding: 3.2mm 3.3mm !important;
+        border-radius: 2.8mm !important;
+        box-shadow: none !important;
+        border: 1px solid #ded8e2 !important;
+    }
+
+    .pagina-oee .titulo-grafico-oee {
+        margin-bottom: 2mm !important;
+    }
+
+    .pagina-oee .titulo-grafico-oee h2 {
+        font-size: 9pt !important;
+        margin-bottom: .6mm !important;
+    }
+
+    .pagina-oee .titulo-grafico-oee span {
+        font-size: 6.7pt !important;
+    }
+
+    .pagina-oee .grid-graficos-oee-principal .canvas-oee,
+    .pagina-oee .grid-graficos-oee-principal .canvas-oee-grande,
+    .pagina-oee .grid-graficos-oee-principal .canvas-oee-pizza {
+        min-height: 0 !important;
+        height: 92mm !important;
+    }
+
+    .pagina-oee .grid-graficos-oee-secundario .canvas-oee {
+        min-height: 0 !important;
+        height: 111mm !important;
+    }
+
+    .pagina-oee .item-resumo-oee {
+        padding: 2.3mm 0 !important;
+    }
+
+    .pagina-oee .item-resumo-oee span {
+        font-size: 6.4pt !important;
+    }
+
+    .pagina-oee .item-resumo-oee strong {
+        font-size: 8.2pt !important;
+        line-height: 1.25 !important;
+    }
+}
+
+/* Ajustes finais de contraste e paginação */
+.pagina-oee .card-oee-principal small,
+.pagina-oee .card-oee-principal strong,
+.pagina-oee .card-oee-principal > div > span {
+    color: #ffffff !important;
+}
+
+@media print {
+    .pagina-oee .grid-graficos-oee-principal {
+        break-before: auto !important;
+        page-break-before: auto !important;
+    }
+
+    .pagina-oee .texto-impacto-oee {
+        font-size: 8.8pt !important;
+        line-height: 1.08 !important;
+    }
+}
+
+.pagina-oee .cabecalho-pagina2-oee-pdf {
+    display: none;
+}
+
+@media print {
+    .pagina-oee .cabecalho-pagina2-oee-pdf {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        min-height: 12mm;
+        margin-bottom: 3mm;
+        padding: 2.5mm 3.5mm;
+        border: 1px solid #ded6e4;
+        border-left: 4px solid var(--oee-roxo-vivo);
+        border-radius: 2.6mm;
+        background: linear-gradient(90deg, #fbf9fc, #f4eff7);
+        break-after: avoid;
+    }
+
+    .pagina-oee .cabecalho-pagina2-oee-pdf div {
+        display: flex;
+        flex-direction: column;
+        gap: .5mm;
+    }
+
+    .pagina-oee .cabecalho-pagina2-oee-pdf div span,
+    .pagina-oee .cabecalho-pagina2-oee-pdf > span {
+        color: #716678;
+        font-size: 7pt;
+        font-weight: 700;
+    }
+
+    .pagina-oee .cabecalho-pagina2-oee-pdf strong {
+        color: var(--oee-roxo);
+        font-size: 11pt;
+    }
+
+    .pagina-oee .grid-graficos-oee-secundario {
+        padding-top: 0 !important;
+    }
+
+    .pagina-oee .grid-graficos-oee-secundario .canvas-oee {
+        height: 137mm !important;
+    }
+
+    .pagina-oee .texto-impacto-oee {
+        max-width: 100% !important;
+        overflow: hidden !important;
+        overflow-wrap: anywhere !important;
+        word-break: break-word !important;
+        white-space: normal !important;
+        font-size: 7.6pt !important;
+        line-height: 1.05 !important;
+    }
+}
+
+/* ============================================================
+   OEE PDF V4 — MAIS ESPAÇO, GRÁFICOS MAIORES E 3 PÁGINAS
+   Mantém o layout da tela; altera somente a paginação/impressão.
+============================================================ */
+.pagina-oee .grupo-distribuicoes-oee-pdf,
+.pagina-oee .grupo-causas-oee-pdf {
+    display: contents;
+}
+
+.pagina-oee .cabecalho-pagina3-oee-pdf {
+    display: none;
+}
+
+@media print {
+    /* Página 1: visão executiva + equipamento */
+    .pagina-oee .grid-graficos-oee-principal,
+    .pagina-oee .grid-graficos-oee-secundario {
+        display: block !important;
+        break-before: auto !important;
+        page-break-before: auto !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .pagina-oee .grafico-equipamentos-oee {
+        width: 100% !important;
+        margin: 0 !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        break-after: auto !important;
+        page-break-after: auto !important;
+    }
+
+    .pagina-oee .grafico-equipamentos-oee .canvas-oee,
+    .pagina-oee .grafico-equipamentos-oee .canvas-oee-grande {
+        height: 121mm !important;
+        min-height: 121mm !important;
+    }
+
+    /* Página 2: distribuições + perdas por turno */
+    .pagina-oee .grupo-distribuicoes-oee-pdf {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 3mm !important;
+        align-items: stretch !important;
+        break-before: page !important;
+        page-break-before: always !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pagina-oee .grupo-distribuicoes-oee-pdf .cabecalho-pagina2-oee-pdf {
+        grid-column: 1 / -1 !important;
+        display: flex !important;
+        min-height: 12mm !important;
+        margin: 0 0 1mm 0 !important;
+    }
+
+    .pagina-oee .grupo-distribuicoes-oee-pdf .grafico-oee-card {
+        min-height: 90mm !important;
+        padding: 3.8mm 4mm !important;
+    }
+
+    .pagina-oee .grupo-distribuicoes-oee-pdf .canvas-oee,
+    .pagina-oee .grupo-distribuicoes-oee-pdf .canvas-oee-pizza {
+        height: 72mm !important;
+        min-height: 72mm !important;
+    }
+
+    .pagina-oee .grafico-turnos-oee {
+        width: 100% !important;
+        margin-top: 3mm !important;
+        padding: 3.5mm 4mm !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pagina-oee .grafico-turnos-oee .canvas-oee {
+        height: 62mm !important;
+        min-height: 62mm !important;
+    }
+
+    /* Página 3: causas + resumo */
+    .pagina-oee .grupo-causas-oee-pdf {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1.75fr) minmax(0, .75fr) !important;
+        gap: 3mm !important;
+        align-items: stretch !important;
+        break-before: page !important;
+        page-break-before: always !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pagina-oee .cabecalho-pagina3-oee-pdf {
+        grid-column: 1 / -1 !important;
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6mm;
+        min-height: 12mm;
+        margin-bottom: 1mm;
+        padding: 2.5mm 3.5mm;
+        border: 1px solid #ded6e4;
+        border-left: 4px solid var(--oee-verde);
+        border-radius: 2.6mm;
+        background: linear-gradient(90deg, #fbf9fc, #f4eff7);
+        break-after: avoid;
+    }
+
+    .pagina-oee .cabecalho-pagina3-oee-pdf div {
+        display: flex;
+        flex-direction: column;
+        gap: .5mm;
+    }
+
+    .pagina-oee .cabecalho-pagina3-oee-pdf div span,
+    .pagina-oee .cabecalho-pagina3-oee-pdf > span {
+        color: #716678;
+        font-size: 7.4pt;
+        font-weight: 700;
+    }
+
+    .pagina-oee .cabecalho-pagina3-oee-pdf strong {
+        color: var(--oee-roxo);
+        font-size: 11.5pt;
+    }
+
+    .pagina-oee .grupo-causas-oee-pdf .grafico-motivos-oee,
+    .pagina-oee .grupo-causas-oee-pdf .resumo-oee {
+        min-height: 166mm !important;
+        padding: 4mm 4.2mm !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .pagina-oee .grupo-causas-oee-pdf .grafico-motivos-oee .canvas-oee {
+        height: 145mm !important;
+        min-height: 145mm !important;
+    }
+
+    .pagina-oee .grupo-causas-oee-pdf .resumo-oee {
+        background: linear-gradient(180deg, #faf7fc 0%, #ffffff 100%) !important;
+    }
+
+    /* Tipografia dos cards de gráfico um pouco maior no PDF */
+    .pagina-oee .titulo-grafico-oee h2 {
+        font-size: 10pt !important;
+    }
+
+    .pagina-oee .titulo-grafico-oee span {
+        font-size: 7.3pt !important;
+    }
+
+    .pagina-oee .item-resumo-oee {
+        padding: 3mm 0 !important;
+    }
+
+    .pagina-oee .item-resumo-oee span {
+        font-size: 7pt !important;
+    }
+
+    .pagina-oee .item-resumo-oee strong {
+        font-size: 9pt !important;
+        line-height: 1.28 !important;
+    }
+}

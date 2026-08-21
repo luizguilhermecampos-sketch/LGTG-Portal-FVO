@@ -1,0 +1,326 @@
+/* ================================================================
+   PORTAL FVO — BRITAGEM
+   Home corporativa isolada da Usina e dos demais módulos.
+   ================================================================ */
+
+.home-britagem-nova{
+    width:100%;
+    margin:0;
+    padding:0;
+}
+
+.hero-britagem{
+    width:100%;
+    height:calc(100vh - 110px);
+    min-height:650px;
+    position:relative;
+    overflow:hidden;
+    background:#11151a;
+    isolation:isolate;
+}
+
+.hero-video{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    transform:scale(1.015);
+}
+
+/* Degradê escuro que garante leitura sem esconder o vídeo. */
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,12,17,.95) 0%,
+            rgba(9,13,19,.88) 28%,
+            rgba(9,13,19,.62) 52%,
+            rgba(9,13,19,.28) 76%,
+            rgba(9,13,19,.18) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(11,7,18,.10) 0%,
+            rgba(11,7,18,.08) 50%,
+            rgba(5,8,12,.58) 100%
+        );
+}
+
+.hero-britagem::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 68% 45%, rgba(146,208,80,.10), transparent 28%),
+        linear-gradient(180deg, rgba(45,1,77,.10), transparent 34%);
+}
+
+.hero-britagem::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:5px;
+    z-index:4;
+    pointer-events:none;
+    background:linear-gradient(90deg,#92D050 0%,#75BE35 28%,rgba(117,190,53,.1) 70%,transparent 100%);
+}
+
+.hero-conteudo{
+    position:relative;
+    z-index:3;
+    width:min(100%, 1660px);
+    height:100%;
+    margin:0 auto;
+    padding:clamp(58px,7vh,96px) clamp(42px,5vw,76px) clamp(46px,6vh,72px);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.hero-texto{
+    width:min(1040px, 100%);
+    color:#fff;
+}
+
+.hero-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 20px 28px;
+    padding:8px 13px 8px 10px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    background:rgba(21,15,29,.42);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:rgba(255,255,255,.86);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.7px;
+    text-transform:uppercase;
+    box-shadow:0 8px 28px rgba(0,0,0,.16);
+}
+
+.hero-eyebrow-marca{
+    width:8px;
+    height:8px;
+    flex:0 0 8px;
+    border-radius:50%;
+    background:#92D050;
+    box-shadow:0 0 0 4px rgba(146,208,80,.14),0 0 16px rgba(146,208,80,.60);
+}
+
+.hero-titulo-linha{
+    display:flex;
+    align-items:stretch;
+    gap:20px;
+}
+
+.hero-titulo-linha > span{
+    width:7px;
+    border-radius:10px;
+    flex-shrink:0;
+    background:linear-gradient(180deg,#A6E85F 0%,#78C93A 100%);
+    box-shadow:0 0 22px rgba(146,208,80,.28);
+}
+
+.hero-titulo-linha h1{
+    margin:0;
+    color:#fff;
+    font-size:clamp(46px,4.35vw,68px);
+    line-height:1.04;
+    letter-spacing:-1.7px;
+    font-weight:800;
+    text-wrap:balance;
+    text-shadow:0 3px 24px rgba(0,0,0,.26);
+}
+
+.hero-descricao{
+    margin:26px 0 38px 28px;
+    max-width:680px;
+    color:rgba(255,255,255,.88);
+    font-size:clamp(17px,1.25vw,20px);
+    line-height:1.55;
+    font-weight:500;
+    text-shadow:0 2px 16px rgba(0,0,0,.28);
+}
+
+/* Pilares operacionais — substituem a antiga faixa de acessos rápidos. */
+.pilares-britagem{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+    width:min(100%, 1020px);
+    margin-left:28px;
+}
+
+.pilar-britagem{
+    min-height:112px;
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr);
+    align-items:center;
+    gap:13px;
+    padding:16px 18px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:15px;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.035));
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 12px 34px rgba(0,0,0,.16);
+    transition:transform .22s ease,border-color .22s ease,background .22s ease;
+}
+
+.pilar-britagem:hover{
+    transform:translateY(-3px);
+    border-color:rgba(146,208,80,.44);
+    background:linear-gradient(145deg,rgba(146,208,80,.13),rgba(255,255,255,.045));
+}
+
+.icone-pilar{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    color:#B2F06E;
+    background:rgba(146,208,80,.13);
+    border:1px solid rgba(146,208,80,.30);
+    font-size:19px;
+    font-weight:800;
+    box-shadow:inset 0 0 16px rgba(146,208,80,.06);
+}
+
+.pilar-britagem strong{
+    display:block;
+    margin-bottom:5px;
+    color:#fff;
+    font-size:15px;
+    line-height:1.2;
+    font-weight:800;
+}
+
+.pilar-britagem span{
+    display:block;
+    color:rgba(255,255,255,.70);
+    font-size:12px;
+    line-height:1.42;
+    font-weight:500;
+}
+
+/* A antiga faixa branca de atalhos foi removida da Home. */
+.acessos-rapidos-home,
+.titulo-acessos,
+.acesso-rapido{
+    display:none !important;
+}
+
+@media (max-width:1200px){
+    .hero-britagem{
+        height:auto;
+        min-height:calc(100vh - 110px);
+    }
+
+    .hero-conteudo{
+        min-height:calc(100vh - 110px);
+        padding:60px 36px 50px;
+    }
+
+    .hero-texto{
+        width:min(920px,100%);
+    }
+
+    .pilares-britagem{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        width:min(760px,calc(100% - 28px));
+    }
+}
+
+@media (max-width:800px){
+    .hero-britagem{
+        min-height:calc(100vh - 110px);
+    }
+
+    .hero-conteudo{
+        min-height:calc(100vh - 110px);
+        padding:48px 22px 42px;
+    }
+
+    .hero-eyebrow{
+        margin-left:17px;
+        font-size:10px;
+        letter-spacing:1.25px;
+    }
+
+    .hero-titulo-linha{
+        gap:13px;
+    }
+
+    .hero-titulo-linha > span{
+        width:5px;
+    }
+
+    .hero-titulo-linha h1{
+        font-size:clamp(38px,8vw,52px);
+    }
+
+    .hero-descricao{
+        margin:22px 0 30px 18px;
+        font-size:16px;
+    }
+
+    .pilares-britagem{
+        margin-left:18px;
+        width:calc(100% - 18px);
+        gap:10px;
+    }
+}
+
+@media (max-width:560px){
+    .hero-conteudo{
+        padding:38px 14px 34px;
+    }
+
+    .hero-eyebrow{
+        margin:0 0 16px 12px;
+        padding:7px 10px;
+    }
+
+    .hero-titulo-linha h1{
+        font-size:36px;
+        letter-spacing:-1px;
+    }
+
+    .hero-descricao{
+        margin-left:14px;
+        font-size:15px;
+    }
+
+    .pilares-britagem{
+        grid-template-columns:1fr;
+        margin-left:14px;
+        width:calc(100% - 14px);
+    }
+
+    .pilar-britagem{
+        min-height:88px;
+        padding:13px 15px;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .pilar-britagem{
+        transition:none;
+    }
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Usina FVO - CMOC</title>
+    <link rel="stylesheet" href="../Compartilhado/Base.css">
+    <link rel="stylesheet" href="Usina.css">
+</head>
+
+<body class="pagina-portal usina-ativa pagina-home-usina">
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+    <header class="header-portal-fvo">
+
+        <div class="logo logo-portal">
+            <img src="../Britagem/Imagens/Logo_CMOC.png" alt="CMOC">
+        </div>
+
+        <div class="titulo-portal-geral">
+            PORTAL FVO
+        </div>
+
+        <div class="seletor-portais">
+
+            <a href="../Britagem/index.html" class="portal-opcao">
+                <span class="portal-icone">◈</span>
+                <span>PORTAL BRITAGEM FVO</span>
+            </a>
+
+            <a href="index.html" class="portal-opcao portal-opcao-ativa" aria-current="page">
+                <span class="portal-icone">◫</span>
+                <span>PORTAL USINA FVO</span>
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+    <nav class="menu-portal menu-usina">
+
+        <ul>
+
+            <li class="menu-secao-ativa">
+                <a href="index.html">Início</a>
+            </li>
+
+            <li>
+                <a href="Producao.html">Produção</a>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Indicadores ▼</a>
+                <ul class="submenu">
+                    <li><a href="#">OEE</a></li>
+                    <li><a href="#">KPIs Operacionais</a></li>
+                    <li><a href="#">Recuperação Metalúrgica</a></li>
+                    <li><a href="#">Rendimento Mássico</a></li>
+                    <li><a href="Qualidade.html">Qualidade</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle">Reagentes ▼</a>
+                <ul class="submenu">
+                    <li><a href="Reagentes.html">Consumo de Reagentes</a></li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <!-- =====================================================
+         HOME — MESMO PADRÃO VISUAL DA BRITAGEM
+    ====================================================== -->
+    <main class="home-usina-nova">
+
+        <section class="hero-usina">
+
+            <!-- Enquanto não houver vídeo específico da Usina,
+                 mantém o vídeo corporativo já utilizado no portal. -->
+            <video class="hero-video-usina" autoplay muted loop playsinline>
+                <source src="../Britagem/Imagens/Britagem.mp4" type="video/mp4">
+            </video>
+
+            <div class="hero-overlay-usina"></div>
+
+            <div class="hero-conteudo-usina">
+
+                <div class="hero-texto-usina">
+
+                    <div class="hero-eyebrow-usina">
+                        <span class="hero-eyebrow-marca-usina"></span>
+                        <span>GESTÃO OPERACIONAL • USINA FVO</span>
+                    </div>
+
+                    <div class="hero-titulo-linha-usina">
+                        <span></span>
+                        <h1>
+                            Bem-vindo ao<br>
+                            Portal Usina FVO
+                        </h1>
+                    </div>
+
+                    <p class="hero-descricao-usina">
+                        Informação, desempenho e controle para um
+                        beneficiamento cada vez mais eficiente.
+                    </p>
+
+                    <div class="pilares-usina">
+
+                        <div class="pilar-usina">
+                            <div class="icone-pilar-usina">⚙</div>
+                            <div>
+                                <strong>Operação</strong>
+                                <span>Informações para suporte à rotina das Usinas 47 e 76</span>
+                            </div>
+                        </div>
+
+                        <div class="pilar-usina">
+                            <div class="icone-pilar-usina">◇</div>
+                            <div>
+                                <strong>Qualidade</strong>
+                                <span>Controle de teores, recuperação e rendimento do processo</span>
+                            </div>
+                        </div>
+
+                        <div class="pilar-usina">
+                            <div class="icone-pilar-usina">⚗</div>
+                            <div>
+                                <strong>Reagentes</strong>
+                                <span>Acompanhamento de consumo e aderência operacional</span>
+                            </div>
+                        </div>
+
+                        <div class="pilar-usina">
+                            <div class="icone-pilar-usina">◎</div>
+                            <div>
+                                <strong>Performance</strong>
+                                <span>Foco em metas, estabilidade e melhoria contínua</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../Compartilhado/Core.js"></script>
+    <script src="Usina.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insumos — Barras dos Britadores</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="Insumos.css">
+</head>
+<body class="pagina-portal britagem-ativa pagina-insumos">
+
+    <header class="header-portal-fvo">
+        <div class="logo logo-portal">
+            <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+        </div>
+        <div class="titulo-portal-geral">PORTAL FVO</div>
+        <div class="seletor-portais">
+            <a href="../index.html" class="portal-opcao portal-opcao-ativa">
+                <span class="portal-icone">◈</span>
+                <span>PORTAL BRITAGEM FVO</span>
+            </a>
+            <a href="../../Usina/index.html" class="portal-opcao">
+                <span class="portal-icone">◫</span>
+                <span>PORTAL USINA FVO</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="menu-portal menu-britagem">
+        <ul>
+            <li><a href="../index.html">Início</a></li>
+        </ul>
+    </nav>
+
+    <main class="container-insumos">
+
+        <section class="cabecalho-insumos">
+            <div>
+                <span class="eyebrow-insumos">INSUMOS • BRITADORES DE IMPACTO</span>
+                <h1>Barras dos Britadores A e B</h1>
+                <p>
+                    Acompanhe consumo específico, massa perdida, vida útil, perfil de desgaste,
+                    requisições e estoque de barras em uma única visão operacional.
+                </p>
+            </div>
+
+            <div class="acoes-insumos no-print">
+                <button type="button" id="btnGerarPDFInsumos" class="btn-insumos btn-pdf-insumos">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v5h5M10 14h6M10 18h4"/></svg>
+                    <span>Gerar PDF</span>
+                </button>
+                <div class="atualizacao-insumos">
+                    <span>Última atualização</span>
+                    <strong id="ultimaAtualizacaoInsumos">-</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="painel-base-insumos no-print">
+            <div class="campo-arquivo-insumos">
+                <label for="arquivoBarras">Planilha Controle de Barras</label>
+                <input type="file" id="arquivoBarras" accept=".xlsx,.xls,.xlsm">
+            </div>
+
+            <button type="button" id="btnCarregarInsumos" class="btn-insumos btn-carregar-insumos">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+                <span>Carregar Dados</span>
+            </button>
+
+            <div class="status-base-insumos">
+                <span>BASE</span>
+                <strong id="statusBaseInsumos">Aguardando planilha</strong>
+            </div>
+        </section>
+
+        <section class="painel-filtros-insumos no-print">
+            <div class="campo-filtro-insumos">
+                <label for="filtroBritadorInsumos">Britador</label>
+                <select id="filtroBritadorInsumos">
+                    <option value="TODOS">Comparativo A × B</option>
+                    <option value="A">Britador A</option>
+                    <option value="B">Britador B</option>
+                </select>
+            </div>
+
+            <div class="campo-filtro-insumos">
+                <label for="filtroPeriodoInsumos">Período</label>
+                <select id="filtroPeriodoInsumos">
+                    <option value="TODOS">Histórico completo</option>
+                </select>
+            </div>
+
+            <button type="button" id="btnAtualizarInsumos" class="btn-insumos btn-atualizar-insumos">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>
+                <span>Atualizar Visão</span>
+            </button>
+
+            <div class="referencia-meta-insumos">
+                <span>META DE CONSUMO</span>
+                <strong id="metaConsumoTopo">12,0 g/t</strong>
+            </div>
+        </section>
+
+        <section class="faixa-identificacao-insumos print-only">
+            <div>
+                <span>PORTAL FVO • BRITAGEM</span>
+                <strong>Insumos — Barras dos Britadores</strong>
+            </div>
+            <div>
+                <span id="pdfFiltroInsumos">Filtro: Histórico completo</span>
+                <span id="pdfGeradoInsumos">Gerado em: -</span>
+            </div>
+        </section>
+
+        <section class="abas-insumos no-print" aria-label="Seções do painel de insumos">
+            <button type="button" class="aba-insumos ativa" data-aba="visao">Visão Geral</button>
+            <button type="button" class="aba-insumos" data-aba="desgaste">Desgaste</button>
+            <button type="button" class="aba-insumos" data-aba="consumo">Consumo</button>
+            <button type="button" class="aba-insumos" data-aba="requisicoes">Requisições</button>
+        </section>
+
+        <section id="aba-visao" class="conteudo-aba-insumos ativa secao-impressao-insumos">
+            <div class="titulo-secao-insumos print-only">
+                <span>01</span>
+                <div><strong>Visão Geral</strong><small>Desempenho e situação atual das barras</small></div>
+            </div>
+
+            <section class="cards-kpi-insumos">
+                <article class="card-kpi-insumos card-kpi-roxo">
+                    <div class="icone-kpi-insumos">
+                        <svg viewBox="0 0 24 24"><path d="M4 18V6M4 18h16M8 15l3-4 3 2 5-7"/></svg>
+                    </div>
+                    <div>
+                        <span>CONSUMO ESPECÍFICO</span>
+                        <strong id="kpiConsumoPonderado">-</strong>
+                        <small>Desgaste total ÷ massa processada</small>
+                    </div>
+                </article>
+
+                <article class="card-kpi-insumos card-kpi-verde">
+                    <div class="icone-kpi-insumos">
+                        <svg viewBox="0 0 24 24"><path d="M4 20h16M6 17l4-9 4 5 4-8"/></svg>
+                    </div>
+                    <div>
+                        <span>MASSA PROCESSADA</span>
+                        <strong id="kpiMassaProcessada">-</strong>
+                        <small>Ciclos concluídos no filtro</small>
+                    </div>
+                </article>
+
+                <article class="card-kpi-insumos card-kpi-laranja">
+                    <div class="icone-kpi-insumos">
+                        <svg viewBox="0 0 24 24"><path d="M7 4h10l3 6-3 10H7L4 10z"/><path d="M9 8h6M8 13h8"/></svg>
+                    </div>
+                    <div>
+                        <span>MASSA PERDIDA</span>
+                        <strong id="kpiMassaPerdida">-</strong>
+                        <small>Desgaste acumulado das barras</small>
+                    </div>
+                </article>
+
+                <article class="card-kpi-insumos card-kpi-azul">
+                    <div class="icone-kpi-insumos">
+                        <svg viewBox="0 0 24 24"><path d="M3 7h18v10H3z"/><path d="M7 11h10M8 4v3M16 4v3"/></svg>
+                    </div>
+                    <div>
+                        <span>CICLOS CONCLUÍDOS</span>
+                        <strong id="kpiCiclos">-</strong>
+                        <small>Troca → retirada com dados válidos</small>
+                    </div>
+                </article>
+
+                <article class="card-kpi-insumos card-kpi-turquesa">
+                    <div class="icone-kpi-insumos">
+                        <svg viewBox="0 0 24 24"><path d="M4 7h16v12H4z"/><path d="M8 7V4h8v3M8 12h8"/></svg>
+                    </div>
+                    <div>
+                        <span>BARRAS REQUISITADAS</span>
+                        <strong id="kpiRequisicoes">-</strong>
+                        <small>Quantidade registrada no período</small>
+                    </div>
+                </article>
+
+                <article class="card-kpi-insumos card-kpi-meta">
+                    <div class="icone-kpi-insumos">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="m15 9 5-5"/></svg>
+                    </div>
+                    <div>
+                        <span>REFERÊNCIA</span>
+                        <strong id="kpiMeta">12,0 g/t</strong>
+                        <small>Meta da planilha Consumo Mensal</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="situacao-atual-grid">
+                <article class="painel-situacao-insumos britador-a" id="situacaoBritadorA">
+                    <div class="cabecalho-situacao-insumos">
+                        <div class="medalhao-britador">A</div>
+                        <div>
+                            <span>BRITADOR A</span>
+                            <h2>Situação Atual</h2>
+                        </div>
+                        <span class="status-barra-insumos" id="statusBarraA">Aguardando dados</span>
+                    </div>
+                    <div class="dados-situacao-insumos">
+                        <div><span>Fornecedor atual</span><strong id="fornecedorAtualA">-</strong></div>
+                        <div><span>Início da campanha</span><strong id="inicioCampanhaA">-</strong></div>
+                        <div><span>Última inversão</span><strong id="ultimaInversaoA">-</strong></div>
+                        <div><span>Última medição</span><strong id="ultimaMedicaoA">-</strong></div>
+                        <div><span>Medida atual</span><strong id="medidaAtualA">-</strong></div>
+                        <div><span>Último consumo fechado</span><strong id="ultimoConsumoA">-</strong></div>
+                    </div>
+                </article>
+
+                <article class="painel-situacao-insumos britador-b" id="situacaoBritadorB">
+                    <div class="cabecalho-situacao-insumos">
+                        <div class="medalhao-britador">B</div>
+                        <div>
+                            <span>BRITADOR B</span>
+                            <h2>Situação Atual</h2>
+                        </div>
+                        <span class="status-barra-insumos" id="statusBarraB">Aguardando dados</span>
+                    </div>
+                    <div class="dados-situacao-insumos">
+                        <div><span>Fornecedor atual</span><strong id="fornecedorAtualB">-</strong></div>
+                        <div><span>Início da campanha</span><strong id="inicioCampanhaB">-</strong></div>
+                        <div><span>Última inversão</span><strong id="ultimaInversaoB">-</strong></div>
+                        <div><span>Última medição</span><strong id="ultimaMedicaoB">-</strong></div>
+                        <div><span>Medida atual</span><strong id="medidaAtualB">-</strong></div>
+                        <div><span>Último consumo fechado</span><strong id="ultimoConsumoB">-</strong></div>
+                    </div>
+                </article>
+            </section>
+
+            <section class="grid-graficos-insumos grid-graficos-visao">
+                <article class="painel-grafico-insumos grafico-consumo-ciclos">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>DESEMPENHO POR CAMPANHA</span>
+                            <h2>Consumo Específico por Ciclo</h2>
+                            <p>Consumo calculado em g/t para cada ciclo concluído.</p>
+                        </div>
+                        <div class="badge-meta-insumos" id="badgeMetaCiclos">Meta 12,0 g/t</div>
+                    </div>
+                    <div class="canvas-insumos canvas-alto"><canvas id="graficoConsumoCiclos"></canvas></div>
+                </article>
+
+                <article class="painel-grafico-insumos grafico-massa-perdida">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>DESGASTE FÍSICO</span>
+                            <h2>Massa Perdida por Ciclo</h2>
+                            <p>Quantidade de barra consumida entre instalação e retirada.</p>
+                        </div>
+                    </div>
+                    <div class="canvas-insumos canvas-alto"><canvas id="graficoMassaPerdida"></canvas></div>
+                </article>
+            </section>
+
+            <section class="painel-tabela-insumos">
+                <div class="titulo-painel-insumos">
+                    <div>
+                        <span>ÚLTIMAS CAMPANHAS</span>
+                        <h2>Resumo dos Ciclos Concluídos</h2>
+                        <p>Últimos registros válidos conforme filtros aplicados.</p>
+                    </div>
+                </div>
+                <div class="tabela-scroll-insumos">
+                    <table class="tabela-insumos">
+                        <thead>
+                            <tr>
+                                <th>Britador</th><th>Fornecedor</th><th>Instalação</th><th>Retirada</th>
+                                <th>Massa processada</th><th>Massa perdida</th><th>Consumo</th><th>Horas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyCiclosInsumos"><tr><td colspan="8">Carregue a planilha para visualizar.</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <section id="aba-desgaste" class="conteudo-aba-insumos secao-impressao-insumos">
+            <div class="titulo-secao-insumos">
+                <span>02</span>
+                <div><strong>Perfil de Desgaste</strong><small>Espessura medida e critérios operacionais</small></div>
+            </div>
+
+            <section class="grid-graficos-insumos grid-desgaste-insumos">
+                <article class="painel-grafico-insumos painel-desgaste-principal">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>ESPESSURA DAS BARRAS</span>
+                            <h2>Evolução do Perfil de Desgaste</h2>
+                            <p>Medidas em centímetros com limites de ação definidos na planilha.</p>
+                        </div>
+                    </div>
+                    <div class="canvas-insumos canvas-desgaste"><canvas id="graficoPerfilDesgaste"></canvas></div>
+                </article>
+
+                <article class="painel-criterios-insumos">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>CRITÉRIOS OPERACIONAIS</span>
+                            <h2>Faixas de Ação</h2>
+                        </div>
+                    </div>
+                    <div class="criterio-desgaste criterio-vermelho">
+                        <strong>&lt; 2,49 cm</strong><span>Realizar troca</span>
+                    </div>
+                    <div class="criterio-desgaste criterio-laranja">
+                        <strong>3,00 a 5,00 cm</strong><span>Inspeção 2× por turno</span>
+                    </div>
+                    <div class="criterio-desgaste criterio-verde">
+                        <strong>5,00 a 11,00 cm</strong><span>Inspeção 1× por turno</span>
+                    </div>
+                    <p class="nota-criterios-insumos">Valores acima de 11 cm não possuem ação específica definida na planilha original.</p>
+                </article>
+            </section>
+
+            <section class="painel-tabela-insumos">
+                <div class="titulo-painel-insumos">
+                    <div>
+                        <span>INSPEÇÕES / VIRADAS / TROCAS</span>
+                        <h2>Últimos Registros de Desgaste</h2>
+                    </div>
+                </div>
+                <div class="tabela-scroll-insumos">
+                    <table class="tabela-insumos">
+                        <thead><tr><th>Data e hora</th><th>Britador</th><th>Turma</th><th>Medida</th><th>Atividade</th><th>Status</th></tr></thead>
+                        <tbody id="tbodyDesgasteInsumos"><tr><td colspan="6">Carregue a planilha para visualizar.</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <section id="aba-consumo" class="conteudo-aba-insumos secao-impressao-insumos">
+            <div class="titulo-secao-insumos">
+                <span>03</span>
+                <div><strong>Consumo</strong><small>Eficiência por ciclo, fornecedor e consolidado mensal</small></div>
+            </div>
+
+            <section class="grid-graficos-insumos grid-consumo-insumos">
+                <article class="painel-grafico-insumos">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>CONSOLIDADO MENSAL</span>
+                            <h2>Consumo Específico Mensal</h2>
+                            <p>Consumo consolidado da britagem comparado à meta registrada na planilha.</p>
+                        </div>
+                    </div>
+                    <div class="canvas-insumos canvas-alto"><canvas id="graficoConsumoMensal"></canvas></div>
+                </article>
+
+                <article class="painel-grafico-insumos">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>FORNECEDORES</span>
+                            <h2>Desempenho por Fornecedor</h2>
+                            <p>Consumo específico médio por britador e fornecedor, apenas em ciclos concluídos.</p>
+                        </div>
+                    </div>
+                    <div class="canvas-insumos canvas-alto"><canvas id="graficoFornecedor"></canvas></div>
+                </article>
+            </section>
+
+            <section class="cards-resumo-consumo-insumos">
+                <article><span>Melhor ciclo no filtro</span><strong id="resumoMelhorCiclo">-</strong><small id="resumoMelhorCicloInfo">-</small></article>
+                <article><span>Maior consumo no filtro</span><strong id="resumoPiorCiclo">-</strong><small id="resumoPiorCicloInfo">-</small></article>
+                <article><span>Horas operadas acumuladas</span><strong id="resumoHorasOperadas">-</strong><small>Ciclos concluídos válidos</small></article>
+                <article><span>Consumo acima da meta</span><strong id="resumoAcimaMeta">-</strong><small>Quantidade de ciclos</small></article>
+            </section>
+
+            <section class="painel-tabela-insumos">
+                <div class="titulo-painel-insumos">
+                    <div>
+                        <span>COMPARATIVO</span>
+                        <h2>Resumo por Fornecedor</h2>
+                        <p>Indicadores descritivos; fornecedores com poucos ciclos devem ser interpretados com cautela.</p>
+                    </div>
+                </div>
+                <div class="tabela-scroll-insumos">
+                    <table class="tabela-insumos">
+                        <thead><tr><th>Britador</th><th>Fornecedor</th><th>Ciclos</th><th>Massa processada</th><th>Massa perdida</th><th>Consumo médio</th><th>Consumo ponderado</th></tr></thead>
+                        <tbody id="tbodyFornecedoresInsumos"><tr><td colspan="7">Carregue a planilha para visualizar.</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <section id="aba-requisicoes" class="conteudo-aba-insumos secao-impressao-insumos">
+            <div class="titulo-secao-insumos">
+                <span>04</span>
+                <div><strong>Requisições e Estoque</strong><small>Solicitações de barras e estoque de barras usadas</small></div>
+            </div>
+
+            <section class="cards-requisicoes-insumos">
+                <article class="card-requisicao-insumos"><span>REQUISITADAS — A</span><strong id="reqTotalA">-</strong><small>barras</small></article>
+                <article class="card-requisicao-insumos"><span>REQUISITADAS — B</span><strong id="reqTotalB">-</strong><small>barras</small></article>
+                <article class="card-requisicao-insumos"><span>ESTOQUE USADAS — A</span><strong id="estoqueAtualA">-</strong><small id="estoqueDataA">Último registro: -</small></article>
+                <article class="card-requisicao-insumos"><span>ESTOQUE USADAS — B</span><strong id="estoqueAtualB">-</strong><small id="estoqueDataB">Último registro: -</small></article>
+            </section>
+
+            <section class="grid-graficos-insumos grid-requisicoes-insumos">
+                <article class="painel-grafico-insumos">
+                    <div class="titulo-painel-insumos">
+                        <div>
+                            <span>CONSUMO DE ESTOQUE</span>
+                            <h2>Barras Requisitadas por Mês</h2>
+                            <p>Quantidade de barras requisitadas para os Britadores A e B.</p>
+                        </div>
+                    </div>
+                    <div class="canvas-insumos canvas-alto"><canvas id="graficoRequisicoesMensais"></canvas></div>
+                </article>
+
+                <article class="painel-destaques-requisicoes">
+                    <div class="titulo-painel-insumos">
+                        <div><span>ÚLTIMAS MOVIMENTAÇÕES</span><h2>Resumo Operacional</h2></div>
+                    </div>
+                    <div class="destaque-requisicao"><span>Última requisição A</span><strong id="ultimaReqA">-</strong><small id="ultimaReqAInfo">-</small></div>
+                    <div class="destaque-requisicao"><span>Última requisição B</span><strong id="ultimaReqB">-</strong><small id="ultimaReqBInfo">-</small></div>
+                    <div class="destaque-requisicao"><span>Total requisitado no filtro</span><strong id="totalReqFiltro">-</strong><small>barras</small></div>
+                </article>
+            </section>
+
+            <section class="painel-tabela-insumos">
+                <div class="titulo-painel-insumos">
+                    <div><span>HISTÓRICO</span><h2>Últimas Requisições</h2></div>
+                </div>
+                <div class="tabela-scroll-insumos">
+                    <table class="tabela-insumos">
+                        <thead><tr><th>Data</th><th>Britador</th><th>Quantidade</th><th>Requisitante</th><th>Reserva</th></tr></thead>
+                        <tbody id="tbodyRequisicoesInsumos"><tr><td colspan="5">Carregue a planilha para visualizar.</td></tr></tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+        <footer class="rodape-insumos print-only">
+            <span>Portal FVO • Britagem • Insumos</span>
+            <span id="rodapeGeracaoInsumos">-</span>
+        </footer>
+    </main>
+
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="Insumos.js"></script>
+</body>
+</html>

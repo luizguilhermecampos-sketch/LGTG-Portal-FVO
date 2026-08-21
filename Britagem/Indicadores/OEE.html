@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        OEE - Britagem FVO
+    </title>
+<script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js">
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2">
+    </script>
+<link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="OEE.css">
+</head>
+
+
+<body class="pagina-portal britagem-ativa pagina-oee">
+
+
+    <div
+        id="overlayCarregamentoOEE"
+        class="overlay-carregamento-oee">
+
+        <div class="caixa-carregamento-oee">
+
+            <div class="spinner-oee"></div>
+
+            <strong>
+                Carregando dados...
+            </strong>
+
+            <span id="textoCarregamentoOEE">
+                Preparando planilha
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <header class="header-portal-fvo">
+
+        <div class="logo logo-portal">
+
+            <img
+                src="../Imagens/Logo_CMOC.png"
+                alt="CMOC">
+
+        </div>
+
+
+        <div class="titulo-portal-geral">
+
+            PORTAL FVO
+
+        </div>
+
+
+        <div class="seletor-portais">
+
+
+            <a
+                href="../index.html"
+                class="portal-opcao portal-opcao-ativa">
+
+                <span class="portal-icone">
+                    ◈
+                </span>
+
+                <span>
+                    PORTAL BRITAGEM FVO
+                </span>
+
+            </a>
+
+
+            <a
+                href="../../Usina/index.html"
+                class="portal-opcao">
+
+                <span class="portal-icone">
+                    ◫
+                </span>
+
+                <span>
+                    PORTAL USINA FVO
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </header>
+
+
+    <nav class="menu-portal menu-britagem">
+
+        <ul>
+
+            <li>
+
+                <a href="../index.html">
+                    Início
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <main class="container-oee">
+
+
+        <section class="cabecalho-oee cabecalho-oee-acoes">
+
+            <div>
+
+                <span class="subtitulo-oee">
+                    ACOMPANHAMENTO OPERACIONAL
+                </span>
+
+                <h1>
+                    OEE — Britagem
+                </h1>
+
+                <p>
+                    Visão diária das perdas operacionais, principais impactos,
+                    equipamentos e turnos da britagem FVO.
+                </p>
+
+            </div>
+
+
+            <div class="acoes-oee">
+
+                <button
+                    type="button"
+                    id="btnGerarPDFOEE"
+                    class="btn-pdf-oee">
+
+                    <svg class="icone-botao-oee" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 3h8l4 4v14H7z"/>
+                        <path d="M15 3v5h5M10 14h6M10 18h4"/>
+                    </svg>
+                    <span>Gerar PDF</span>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnEnviarEmailOEE"
+                    class="btn-email-oee">
+
+                    <svg class="icone-botao-oee" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="5" width="18" height="14" rx="2"/>
+                        <path d="m4 7 8 6 8-6"/>
+                    </svg>
+                    <span>Enviar por E-mail</span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section class="painel-filtros-oee">
+
+
+            <div class="campo-oee campo-arquivo-oee">
+
+                <label>
+                    Planilha OEE
+                </label>
+
+                <input
+                    type="file"
+                    id="arquivoOEE"
+                    accept=".xlsx,.xls,.xlsm">
+
+            </div>
+
+
+            <div class="campo-oee campo-dia-oee">
+
+                <label for="filtroDia">
+                    Dia
+                </label>
+
+                <input
+                    type="date"
+                    id="filtroDia"
+                    aria-label="Filtrar OEE por dia">
+
+                <small class="ajuda-campo-oee">
+                    Limpe a data para analisar toda a base
+                </small>
+
+            </div>
+
+
+            <div class="campo-oee">
+
+                <label>
+                    Turno
+                </label>
+
+                <select id="filtroTurno">
+
+                    <option value="todos">
+                        Todos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="campo-oee campo-equipamento-oee">
+
+                <label>
+                    Equipamento
+                </label>
+
+                <select id="filtroEquipamento">
+
+                    <option value="todos">
+                        Todos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="campo-oee campo-botao-oee">
+
+                <button
+                    type="button"
+                    id="btnGerarOEE">
+
+                    Gerar Análise
+
+                </button>
+
+            </div>
+
+
+            <div class="status-base-oee">
+
+                <span>
+                    Base
+                </span>
+
+                <strong id="statusBaseOEE">
+                    Aguardando planilha
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="cabecalho-relatorio-pdf-oee" aria-hidden="true">
+            <div class="cabecalho-relatorio-pdf-oee-marca">
+                <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+                <div>
+                    <span>PORTAL FVO • BRITAGEM</span>
+                    <strong>OEE — Análise de Perdas</strong>
+                </div>
+            </div>
+
+            <div class="cabecalho-relatorio-pdf-oee-info">
+                <span id="periodoRelatorioPDFOEE">Dia analisado: -</span>
+                <span id="filtrosRelatorioPDFOEE">Filtros: -</span>
+                <span id="geradoEmRelatorioPDFOEE">Gerado em: -</span>
+            </div>
+        </section>
+
+        <div class="cabecalho-secao-oee">
+            <div>
+                <span class="eyebrow-oee">VISÃO EXECUTIVA</span>
+                <h2>Perdas operacionais do dia</h2>
+                <p>Horas de perda, classificação OEE, equipamentos, natureza e principais ofensores.</p>
+            </div>
+
+            <div class="selo-base-oee">
+                <span>BASE DE ANÁLISE</span>
+                <strong>Horas de perda • Aba Lista</strong>
+            </div>
+        </div>
+
+
+        <section class="cards-oee">
+
+
+            <article class="card-oee card-oee-principal">
+
+                <span class="icone-card-oee icone-horas-oee" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 2"/>
+                    </svg>
+                </span>
+
+                <div>
+
+                    <small>
+                        Horas Totais de Perda
+                    </small>
+
+                    <strong id="cardHorasTotais">
+                        -
+                    </strong>
+
+                    <span>
+                        horas
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="card-oee">
+
+                <span class="sigla-oee">
+                    PMC
+                </span>
+
+                <div>
+
+                    <small>
+                        Manutenção Corretiva
+                    </small>
+
+                    <strong id="cardPMC">
+                        -
+                    </strong>
+
+                    <span id="percentualPMC">
+                        -
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="card-oee">
+
+                <span class="sigla-oee">
+                    PFE
+                </span>
+
+                <div>
+
+                    <small>
+                        Fatores Externos
+                    </small>
+
+                    <strong id="cardPFE">
+                        -
+                    </strong>
+
+                    <span id="percentualPFE">
+                        -
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="card-oee">
+
+                <span class="sigla-oee">
+                    PFP
+                </span>
+
+                <div>
+
+                    <small>
+                        Falha de Processo
+                    </small>
+
+                    <strong id="cardPFP">
+                        -
+                    </strong>
+
+                    <span id="percentualPFP">
+                        -
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="card-oee">
+
+                <span class="sigla-oee">
+                    RED
+                </span>
+
+                <div>
+
+                    <small>
+                        Redução de Carga
+                    </small>
+
+                    <strong id="cardReducao">
+                        -
+                    </strong>
+
+                    <span id="percentualReducao">
+                        -
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="card-oee card-oee-impacto">
+
+                <span class="icone-card-oee icone-impacto-oee" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3 3 21h18L12 3Z"/>
+                        <path d="M12 9v5M12 18h.01"/>
+                    </svg>
+                </span>
+
+                <div>
+
+                    <small>
+                        Principal Impacto
+                    </small>
+
+                    <strong
+                        id="cardPrincipalImpacto"
+                        class="texto-impacto-oee">
+
+                        -
+
+                    </strong>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <section class="grid-graficos-oee grid-graficos-oee-principal">
+
+
+            <article class="grafico-oee-card grafico-equipamentos-oee">
+
+                <div class="titulo-grafico-oee">
+
+                    <div>
+
+                        <h2>
+                            Tempo de Perda por Equipamento
+                        </h2>
+
+                        <span>
+                            Horas de perda no dia e filtros selecionados
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="canvas-oee canvas-oee-grande">
+
+                    <canvas id="graficoEquipamentosOEE"></canvas>
+
+                </div>
+
+            </article>
+
+
+            <div class="grupo-distribuicoes-oee-pdf">
+
+                <div class="cabecalho-pagina2-oee-pdf" aria-hidden="true">
+                    <div>
+                        <span>PORTAL FVO • OEE BRITAGEM</span>
+                        <strong>Distribuição das perdas</strong>
+                    </div>
+                    <span id="periodoPagina2PDFOEE">Dia analisado: -</span>
+                </div>
+
+                <article class="grafico-oee-card">
+
+                <div class="titulo-grafico-oee">
+
+                    <div>
+
+                        <h2>
+                            Distribuição das Perdas por OEE
+                        </h2>
+
+                        <span>
+                            Participação de cada classificação
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="canvas-oee canvas-oee-pizza">
+
+                    <canvas id="graficoClassificacaoOEE"></canvas>
+
+                </div>
+
+            </article>
+
+
+            <article class="grafico-oee-card">
+
+                <div class="titulo-grafico-oee">
+
+                    <div>
+
+                        <h2>
+                            Natureza da Ocorrência
+                        </h2>
+
+                        <span>
+                            Distribuição das horas por natureza
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="canvas-oee canvas-oee-pizza">
+
+                    <canvas id="graficoNaturezaOEE"></canvas>
+
+                </div>
+
+            </article>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="grid-graficos-oee grid-graficos-oee-secundario">
+
+
+            <article class="grafico-oee-card grafico-turnos-oee">
+
+                <div class="titulo-grafico-oee">
+
+                    <div>
+
+                        <h2>
+                            Perdas por Turno
+                        </h2>
+
+                        <span>
+                            Horas de perda por equipe/turno
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="canvas-oee">
+
+                    <canvas id="graficoTurnosOEE"></canvas>
+
+                </div>
+
+            </article>
+
+
+            <div class="grupo-causas-oee-pdf">
+
+                <div class="cabecalho-pagina3-oee-pdf" aria-hidden="true">
+                    <div>
+                        <span>PORTAL FVO • OEE BRITAGEM</span>
+                        <strong>Causas e resumo executivo</strong>
+                    </div>
+                    <span id="periodoPagina3PDFOEE">Dia analisado: -</span>
+                </div>
+
+            <article class="grafico-oee-card grafico-motivos-oee">
+
+                <div class="titulo-grafico-oee">
+
+                    <div>
+
+                        <h2>
+                            Top 10 Motivos de Parada
+                        </h2>
+
+                        <span>
+                            Maiores motivos em horas
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="canvas-oee">
+
+                    <canvas id="graficoMotivosOEE"></canvas>
+
+                </div>
+
+            </article>
+
+
+            <article class="resumo-oee">
+
+                <div class="titulo-grafico-oee">
+
+                    <div>
+
+                        <h2>
+                            Resumo da Análise
+                        </h2>
+
+                        <span>
+                            Principais destaques
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="item-resumo-oee">
+
+                    <span>
+                        Principal impacto
+                    </span>
+
+                    <strong id="resumoImpacto">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="item-resumo-oee">
+
+                    <span>
+                        Equipamento mais impactado
+                    </span>
+
+                    <strong id="resumoEquipamento">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="item-resumo-oee">
+
+                    <span>
+                        Natureza predominante
+                    </span>
+
+                    <strong id="resumoNatureza">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="item-resumo-oee">
+
+                    <span>
+                        Turno com maior perda
+                    </span>
+
+                    <strong id="resumoTurno">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="item-resumo-oee">
+
+                    <span>
+                        Dia / período analisado
+                    </span>
+
+                    <strong id="resumoPeriodo">
+                        -
+                    </strong>
+
+                </div>
+
+
+            </article>
+
+            </div>
+
+
+        </section>
+
+
+        <div class="rodape-oee">
+
+            <span>
+                Fonte: Planilha OEE - Aba Lista
+            </span>
+
+            <span>
+                Horas calculadas a partir da coluna "Tempo".
+            </span>
+
+        </div>
+
+
+    </main>
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../Britagem.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="OEE.js"></script>
+</body>
+
+</html>

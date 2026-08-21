@@ -1,0 +1,553 @@
+/* ============================================================
+   PORTAL FVO — BASE COMPARTILHADA
+   Somente estrutura, tokens e componentes realmente comuns.
+============================================================ */
+
+:root {
+  --fvo-roxo-950: #210038;
+  --fvo-roxo-900: #2d014d;
+  --fvo-roxo-800: #3d0764;
+  --fvo-roxo-100: #f2ebf6;
+  --fvo-verde-600: #68a724;
+  --fvo-verde-500: #92d050;
+  --fvo-laranja-500: #ee9622;
+  --fvo-vermelho-500: #d83a52;
+  --fvo-azul-500: #2878b8;
+  --fvo-cinza-950: #221e25;
+  --fvo-cinza-700: #514a55;
+  --fvo-cinza-500: #766f79;
+  --fvo-cinza-300: #d9d4dc;
+  --fvo-cinza-200: #e8e4ea;
+  --fvo-cinza-100: #f4f2f5;
+  --fvo-branco: #ffffff;
+  --fvo-sombra-card: 0 8px 24px rgba(45, 1, 77, 0.09);
+  --fvo-sombra-hover: 0 14px 34px rgba(45, 1, 77, 0.15);
+  --fvo-raio: 14px;
+  --fvo-transicao: 180ms ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--fvo-cinza-100);
+  color: var(--fvo-cinza-950);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.modal-aberto,
+body.carregando-dados {
+  overflow: hidden;
+}
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+}
+
+button,
+label[for],
+select,
+input[type="date"],
+input[type="file"] {
+  cursor: pointer;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+  transition: border-color var(--fvo-transicao), box-shadow var(--fvo-transicao), transform var(--fvo-transicao), background-color var(--fvo-transicao), color var(--fvo-transicao);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(146, 208, 80, 0.55);
+  outline-offset: 3px;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+.oculto,
+[hidden] {
+  display: none !important;
+}
+
+.positivo {
+  color: var(--fvo-verde-600) !important;
+  font-weight: 800;
+}
+
+.negativo {
+  color: var(--fvo-vermelho-500) !important;
+  font-weight: 800;
+}
+
+/* Cabeçalho compartilhado */
+.header-portal-fvo {
+  position: relative;
+  z-index: 1000;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: minmax(125px, 0.7fr) minmax(150px, 1fr) minmax(420px, 2fr);
+  align-items: center;
+  gap: 22px;
+  padding: 12px clamp(18px, 3vw, 48px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--fvo-roxo-900);
+  color: var(--fvo-branco);
+  box-shadow: 0 5px 18px rgba(24, 0, 42, 0.2);
+}
+
+.logo-portal {
+  display: flex;
+  align-items: center;
+}
+
+.logo-portal img {
+  width: auto;
+  max-width: 145px;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+.titulo-portal-geral {
+  color: var(--fvo-branco);
+  font-size: clamp(17px, 1.6vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.seletor-portais {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(190px, 1fr));
+  justify-self: end;
+  width: min(100%, 620px);
+  gap: 8px;
+}
+
+.portal-opcao {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 8px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 9px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.portal-opcao:hover {
+  border-color: rgba(146, 208, 80, 0.8);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--fvo-branco);
+}
+
+.portal-opcao-ativa {
+  border-color: var(--fvo-verde-500);
+  background: rgba(146, 208, 80, 0.15);
+  color: var(--fvo-branco);
+  box-shadow: inset 0 -3px 0 var(--fvo-verde-500);
+}
+
+.portal-icone {
+  color: var(--fvo-verde-500);
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Navegação compartilhada */
+.menu-portal {
+  position: relative;
+  z-index: 900;
+  min-height: 50px;
+  display: flex;
+  align-items: stretch;
+  padding: 0 clamp(16px, 3vw, 48px);
+  background: var(--fvo-branco);
+  border-bottom: 1px solid var(--fvo-cinza-200);
+  box-shadow: 0 3px 12px rgba(45, 1, 77, 0.06);
+}
+
+.menu-portal > ul {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-portal li {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.menu-portal a {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 17px;
+  border-bottom: 3px solid transparent;
+  color: var(--fvo-cinza-700);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu-portal a:hover,
+.menu-portal .menu-secao-ativa > a {
+  border-bottom-color: var(--fvo-verde-500);
+  background: var(--fvo-roxo-100);
+  color: var(--fvo-roxo-900);
+}
+
+.submenu {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  z-index: 1000;
+  min-width: 240px;
+  display: none;
+  margin: 0;
+  padding: 7px;
+  border: 1px solid var(--fvo-cinza-200);
+  border-radius: 0 0 11px 11px;
+  background: var(--fvo-branco);
+  box-shadow: 0 14px 30px rgba(32, 0, 55, 0.18);
+  list-style: none;
+}
+
+.dropdown-aberto > .submenu,
+.submenu-ativo {
+  display: block;
+}
+
+.submenu li {
+  display: block;
+}
+
+.submenu a {
+  min-height: 40px;
+  justify-content: flex-start;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 7px;
+  white-space: normal;
+}
+
+.submenu a:hover,
+.submenu .menu-secao-ativa > a {
+  border: 0;
+  background: var(--fvo-roxo-100);
+}
+
+/* Cabeçalho compacto usado pelos dashboards legados já revisados */
+.header-dashboard-fvo {
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: minmax(120px, 180px) 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 12px clamp(18px, 3vw, 48px);
+  background: var(--fvo-roxo-900);
+  color: #fff;
+  box-shadow: 0 5px 18px rgba(24, 0, 42, 0.2);
+}
+
+.header-dashboard-fvo .logo img {
+  width: auto;
+  max-width: 145px;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+.header-dashboard-fvo .titulo {
+  color: #fff;
+  font-size: clamp(17px, 1.8vw, 25px);
+  font-weight: 900;
+  letter-spacing: 0.035em;
+}
+
+.menu-dashboard-fvo {
+  min-height: 50px;
+  display: flex;
+  align-items: stretch;
+  padding: 0 clamp(14px, 3vw, 42px);
+  overflow-x: auto;
+  border-bottom: 1px solid var(--fvo-cinza-200);
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(45, 1, 77, 0.06);
+}
+
+.menu-dashboard-fvo ul {
+  min-width: max-content;
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-dashboard-fvo li { display: flex; }
+
+.menu-dashboard-fvo a {
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 3px solid transparent;
+  color: var(--fvo-cinza-700);
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu-dashboard-fvo a:hover,
+.menu-dashboard-fvo a.ativo {
+  border-bottom-color: var(--fvo-verde-500);
+  background: var(--fvo-roxo-100);
+  color: var(--fvo-roxo-900);
+}
+
+/* Carregamento compartilhado — Flash e relatórios */
+.overlay-carregamento-fvo {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(24, 0, 41, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.caixa-carregamento-fvo {
+  width: min(360px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 28px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.32);
+  text-align: center;
+}
+
+.caixa-carregamento-fvo strong {
+  margin-top: 18px;
+  color: var(--fvo-roxo-900);
+  font-size: 18px;
+}
+
+.caixa-carregamento-fvo span {
+  margin-top: 7px;
+  color: var(--fvo-cinza-500);
+  font-size: 12px;
+}
+
+.spinner-carregamento-fvo {
+  width: 54px;
+  height: 54px;
+  border: 6px solid var(--fvo-roxo-100);
+  border-top-color: var(--fvo-verde-500);
+  border-right-color: var(--fvo-roxo-900);
+  border-radius: 50%;
+  animation: girar-spinner-fvo 0.8s linear infinite;
+}
+
+/* Blocos de leitura e resultados */
+.card-kpi,
+.card-oee,
+.card-resumo-pareto,
+.card-producao-usina,
+.bloco-producao,
+.grafico-oee-card,
+.grafico-card-pareto,
+.grafico-pilhas-card,
+.bloco-grafico-resumo {
+  border-color: var(--fvo-cinza-200);
+  background: var(--fvo-branco);
+  box-shadow: var(--fvo-sombra-card);
+}
+
+.card-kpi:hover,
+.card-oee:hover,
+.card-resumo-pareto:hover,
+.card-producao-usina:hover {
+  box-shadow: var(--fvo-sombra-hover);
+}
+
+canvas {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+table {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes girarSpinnerKPI {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes girarSpinnerPareto {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes girarSpinnerOEE {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes girar-spinner-producao {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes girar-spinner-fvo {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 920px) {
+  .header-portal-fvo {
+    grid-template-columns: auto 1fr;
+  }
+
+  .seletor-portais {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .menu-portal {
+    overflow-x: auto;
+    padding: 0 10px;
+  }
+
+  .menu-portal > ul {
+    width: max-content;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-portal-fvo {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .logo-portal,
+  .titulo-portal-geral {
+    justify-self: center;
+  }
+
+  .seletor-portais {
+    grid-template-columns: 1fr;
+  }
+
+  .portal-opcao {
+    min-height: 40px;
+  }
+}
+
+@page {
+  size: A4 landscape;
+  margin: 9mm;
+}
+
+@media print {
+  html,
+  body {
+    min-width: 0;
+    background: #ffffff !important;
+    color: #222222;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .header-portal-fvo,
+  .header-dashboard-fvo,
+  .menu-portal,
+  .menu-dashboard-fvo,
+  button,
+  .acoes-topo-producao,
+  .acoes-kpi,
+  .acoes-oee,
+  .acoes-pareto,
+  .acoes-flash,
+  .acoes-planejamento-pilha,
+  .acoes-relatorio-pilha,
+  .painel-upload-flash,
+  .painel-upload-pilhas {
+    display: none !important;
+  }
+
+  .card-kpi,
+  .card-oee,
+  .card-resumo-pareto,
+  .card-producao-usina,
+  .bloco-producao,
+  .grafico-oee-card,
+  .grafico-card-pareto,
+  .grafico-pilhas-card,
+  .bloco-planejamento,
+  .card-simulador-pilha,
+  table,
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  canvas {
+    min-height: 210px;
+  }
+}

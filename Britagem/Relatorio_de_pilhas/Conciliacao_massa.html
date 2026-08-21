@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conciliação de Massa — Pilhas</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="Conciliacao_Massa.css">
+</head>
+
+<body class="pagina-portal britagem-ativa pagina-conciliacao-massa">
+
+    <header class="header-portal-fvo">
+        <div class="logo logo-portal">
+            <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+        </div>
+        <div class="titulo-portal-geral">PORTAL FVO</div>
+        <div class="seletor-portais">
+            <a href="../index.html" class="portal-opcao portal-opcao-ativa">
+                <span class="portal-icone">◈</span>
+                <span>PORTAL BRITAGEM FVO</span>
+            </a>
+            <a href="../../Usina/index.html" class="portal-opcao">
+                <span class="portal-icone">◫</span>
+                <span>PORTAL USINA FVO</span>
+            </a>
+        </div>
+    </header>
+
+    <nav class="menu-portal menu-britagem">
+        <ul>
+            <li><a href="../index.html">Início</a></li>
+        </ul>
+    </nav>
+
+    <main class="container-conciliacao">
+
+        <section class="cabecalho-conciliacao">
+            <div>
+                <span class="eyebrow-conciliacao">CONTROLE DE MASSA • FORMAÇÃO DE PILHAS</span>
+                <h1>Conciliação de Massa</h1>
+                <p>
+                    Compare a massa registrada na balança da Britagem com a massa estimada
+                    pelas viagens e acompanhe a evolução do fator caçamba.
+                </p>
+            </div>
+
+            <div class="acoes-conciliacao">
+                <button type="button" id="btnGerarPDF" class="btn-acao-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v5h5M10 14h6M10 18h4"/></svg>
+                    <span>Gerar PDF</span>
+                </button>
+                <div class="atualizacao-conciliacao">
+                    <span>Última atualização</span>
+                    <strong id="ultimaAtualizacaoConciliacao">-</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="painel-bases-conciliacao no-print">
+            <div class="campo-base-conciliacao">
+                <label for="arquivoAnalisePilhas">Análise de Pilhas — Massa da Britagem</label>
+                <input type="file" id="arquivoAnalisePilhas" accept=".xlsx,.xls,.xlsm">
+            </div>
+
+            <div class="campo-base-conciliacao">
+                <label for="arquivoRelatorioTurno">Relatório de Turno — Viagens</label>
+                <input type="file" id="arquivoRelatorioTurno" accept=".xlsx,.xls,.xlsm">
+            </div>
+
+            <button type="button" id="btnCarregarBases" class="btn-carregar-bases">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+                <span>Carregar Bases</span>
+            </button>
+
+            <div class="status-bases-conciliacao">
+                <span>BASES</span>
+                <strong id="statusBasesConciliacao">Aguardando arquivos</strong>
+            </div>
+        </section>
+
+        <section class="painel-consulta-conciliacao no-print">
+            <div class="campo-consulta-conciliacao campo-pilha-conciliacao">
+                <label for="numeroPilhaConciliacao">Pilha</label>
+                <input id="numeroPilhaConciliacao" type="text" inputmode="numeric" list="listaPilhasConciliacao" placeholder="Ex.: 55">
+                <datalist id="listaPilhasConciliacao"></datalist>
+            </div>
+
+            <div class="campo-consulta-conciliacao campo-fator-conciliacao">
+                <label for="fatorCacamba">Fator Caçamba de Referência</label>
+                <div class="input-unidade-conciliacao">
+                    <input id="fatorCacamba" type="number" min="0.1" step="0.1" value="50">
+                    <span>t/viagem</span>
+                </div>
+                <small>Valor editável. Padrão inicial: 50 t/viagem.</small>
+            </div>
+
+            <button type="button" id="btnAnalisarConciliacao" class="btn-analisar-conciliacao">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><path d="m4 8 6-4 6 5 6-6"/></svg>
+                <span>Analisar Pilha</span>
+            </button>
+        </section>
+
+        <section class="faixa-identificacao-relatorio print-only">
+            <div>
+                <span>PORTAL FVO • BRITAGEM</span>
+                <strong>Conciliação de Massa da Pilha</strong>
+            </div>
+            <div class="faixa-identificacao-direita">
+                <span id="pdfPilhaConciliacao">Pilha: -</span>
+                <span id="pdfGeradoConciliacao">Gerado em: -</span>
+            </div>
+        </section>
+
+        <section class="cards-conciliacao">
+            <article class="card-conciliacao card-pilha">
+                <div class="icone-card-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19h18M5 19 9 7h6l4 12M10 7l2-4 2 4"/></svg>
+                </div>
+                <div>
+                    <span>PILHA</span>
+                    <strong id="cardPilha">-</strong>
+                    <small id="cardLadoPilha">Aguardando análise</small>
+                </div>
+            </article>
+
+            <article class="card-conciliacao card-massa-balanca">
+                <div class="icone-card-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 7h12M7 7l-3 6h6L7 7Zm10 0-3 6h6l-3-6Z"/><path d="M8 20h8"/></svg>
+                </div>
+                <div>
+                    <span>MASSA BALANÇA</span>
+                    <strong id="cardMassaBalanca">-</strong>
+                    <small>Britagem • Análise de Pilhas</small>
+                </div>
+            </article>
+
+            <article class="card-conciliacao card-viagens">
+                <div class="icone-card-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+                </div>
+                <div>
+                    <span>VIAGENS REALIZADAS</span>
+                    <strong id="cardViagensRealizadas">-</strong>
+                    <small id="cardViagensProgramadas">Programadas: -</small>
+                </div>
+            </article>
+
+            <article class="card-conciliacao card-fator-real">
+                <div class="icone-card-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 17 9 8l4 5 3-6 4 10"/><path d="M3 20h18"/></svg>
+                </div>
+                <div>
+                    <span>CARGA MÉDIA REAL</span>
+                    <strong id="cardCargaMediaReal">-</strong>
+                    <small id="cardCargaMediaContexto">Massa balança ÷ viagens</small>
+                </div>
+            </article>
+
+            <article class="card-conciliacao card-massa-estimada">
+                <div class="icone-card-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16M8 16v-4M13 16V8M18 16V4"/></svg>
+                </div>
+                <div>
+                    <span>MASSA PELAS VIAGENS</span>
+                    <strong id="cardMassaEstimada">-</strong>
+                    <small id="cardFatorReferencia">Fator: 50,0 t/viagem</small>
+                </div>
+            </article>
+
+            <article class="card-conciliacao card-diferenca">
+                <div class="icone-card-conciliacao">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M5 17h14"/><path d="m16 4 3 3-3 3M8 14l-3 3 3 3"/></svg>
+                </div>
+                <div>
+                    <span>DIFERENÇA</span>
+                    <strong id="cardDiferenca">-</strong>
+                    <small id="cardDiferencaPercentual">-</small>
+                </div>
+            </article>
+        </section>
+
+        <section class="resumo-operacional-conciliacao">
+            <div class="resumo-operacional-item">
+                <span>ADERÊNCIA DE VIAGENS</span>
+                <strong id="resumoAderencia">-</strong>
+            </div>
+            <div class="resumo-operacional-item">
+                <span>SALDO DE VIAGENS</span>
+                <strong id="resumoSaldo">-</strong>
+            </div>
+            <div class="resumo-operacional-item resumo-periodo-formacao">
+                <span>PERÍODO / ORIGEM</span>
+                <strong id="resumoPeriodo">-</strong>
+            </div>
+            <div class="resumo-operacional-item resumo-leitura">
+                <span>LEITURA</span>
+                <strong id="resumoLeitura">Aguardando análise</strong>
+            </div>
+        </section>
+
+        <section class="grid-graficos-conciliacao">
+            <article class="painel-grafico-conciliacao painel-comparacao-massa">
+                <div class="titulo-painel-conciliacao">
+                    <div>
+                        <span>CONCILIAÇÃO</span>
+                        <h2>Balança × Viagens</h2>
+                        <p>Comparação da massa registrada com a estimativa pelo fator caçamba.</p>
+                    </div>
+                    <div class="badge-fator" id="badgeFatorComparacao">50,0 t/viagem</div>
+                </div>
+                <div class="canvas-comparacao-wrap">
+                    <canvas id="graficoComparacaoMassa"></canvas>
+                </div>
+            </article>
+
+            <article class="painel-grafico-conciliacao painel-fator-cacamba pdf-break-before">
+                <div class="titulo-painel-conciliacao">
+                    <div>
+                        <span>TENDÊNCIA</span>
+                        <h2>Fator Caçamba</h2>
+                        <p>Carga média real das pilhas com linha de referência editável.</p>
+                    </div>
+                    <div class="badge-fator badge-fator-referencia" id="badgeFatorHistorico">Referência: 50,0</div>
+                </div>
+                <div class="canvas-fator-wrap">
+                    <canvas id="graficoFatorCacamba"></canvas>
+                </div>
+                <div class="rodape-grafico-fator">
+                    <span>Exibição: até 30 pilhas com massa e viagens válidas.</span>
+                    <strong id="amostraHistoricoFator">0 pilhas</strong>
+                </div>
+            </article>
+        </section>
+
+        <section class="grid-detalhes-conciliacao">
+            <article class="painel-detalhes-conciliacao painel-composicao-formacao">
+                <div class="titulo-painel-conciliacao">
+                    <div>
+                        <span>FORMAÇÃO</span>
+                        <h2>Composição por Frente / Polígono</h2>
+                        <p>Somente o bloco principal de formação da pilha.</p>
+                    </div>
+                </div>
+                <div class="tabela-conciliacao-wrap">
+                    <table class="tabela-conciliacao">
+                        <thead>
+                            <tr>
+                                <th>Seq.</th>
+                                <th>Polígono</th>
+                                <th>Área</th>
+                                <th>Banco</th>
+                                <th>Programadas</th>
+                                <th>Realizadas</th>
+                                <th>Aderência</th>
+                            </tr>
+                        </thead>
+                        <tbody id="corpoTabelaFormacao">
+                            <tr><td colspan="7" class="sem-dados-tabela">Carregue as bases e consulte uma pilha.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="painel-detalhes-conciliacao painel-criterio-conciliacao">
+                <div class="titulo-painel-conciliacao">
+                    <div>
+                        <span>RASTREABILIDADE</span>
+                        <h2>Critério da Conciliação</h2>
+                        <p>Origem dos números utilizados no cálculo.</p>
+                    </div>
+                </div>
+
+                <div class="criterios-conciliacao">
+                    <div class="criterio-item">
+                        <span>MASSA BALANÇA</span>
+                        <strong id="criterioMassa">Análise de Pilhas • aba “Pilha”</strong>
+                    </div>
+                    <div class="criterio-item">
+                        <span>VIAGENS</span>
+                        <strong id="criterioViagens">Relatório de Turno • formação principal</strong>
+                    </div>
+                    <div class="criterio-item">
+                        <span>ABA UTILIZADA</span>
+                        <strong id="criterioAbaTurno">-</strong>
+                    </div>
+                    <div class="criterio-item">
+                        <span>FATOR DE REFERÊNCIA</span>
+                        <strong id="criterioFator">50,0 t/viagem</strong>
+                    </div>
+                </div>
+
+                <div class="formula-conciliacao">
+                    <span>FÓRMULAS</span>
+                    <p><b>Massa pelas viagens</b> = Viagens realizadas × Fator caçamba</p>
+                    <p><b>Carga média real</b> = Massa da balança ÷ Viagens realizadas</p>
+                    <p><b>Diferença</b> = Massa da balança − Massa pelas viagens</p>
+                </div>
+            </article>
+        </section>
+
+        <footer class="rodape-pdf-conciliacao print-only">
+            <span>Portal FVO • Britagem • Conciliação de Massa</span>
+            <span id="rodapeGeracaoConciliacao">-</span>
+        </footer>
+
+    </main>
+
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="Conciliacao_Massa.js"></script>
+</body>
+</html>

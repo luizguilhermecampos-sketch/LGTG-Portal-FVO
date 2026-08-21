@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Produção da Usina - Portal FVO</title>
+    <link rel="stylesheet" href="../Compartilhado/Base.css">
+    <link rel="stylesheet" href="Usina.css">
+    <link rel="stylesheet" href="Producao.css">
+</head>
+<body class="pagina-portal pagina-producao-usina usina-ativa">
+<header class="header-portal-fvo"><div class="logo logo-portal"><img src="../Britagem/Imagens/Logo_CMOC.png" alt="CMOC"></div><div class="titulo-portal-geral">PORTAL FVO</div><div class="seletor-portais"><a href="../Britagem/index.html" class="portal-opcao"><span class="portal-icone">◈</span><span>PORTAL BRITAGEM FVO</span></a><a href="index.html" class="portal-opcao portal-opcao-ativa"><span class="portal-icone">◫</span><span>PORTAL USINA FVO</span></a></div></header>
+<nav class="menu-portal menu-usina"><ul><li><a href="index.html">Início</a></li><li class="menu-secao-ativa"><a href="Producao.html">Produção</a></li><li class="dropdown"><a href="#" class="dropdown-toggle">Indicadores ▼</a><ul class="submenu"><li><a href="#">OEE</a></li><li><a href="#">KPIs Operacionais</a></li><li><a href="#">Recuperação Metalúrgica</a></li><li><a href="#">Rendimento Mássico</a></li><li><a href="Qualidade.html">Qualidade</a></li><li></ul></li><li class="dropdown"><a href="#" class="dropdown-toggle">Reagentes ▼</a><ul class="submenu"><li><a href="Reagentes.html">Consumo de Reagentes</a></li></ul></li></ul></nav>
+<main class="container-producao-usina">
+<section class="cabecalho-producao-usina"><div><span class="rotulo-producao-usina">BENEFICIAMENTO</span><h1>Produção da Usina</h1><p>Acompanhamento da produção das Usinas 47 e 76.</p></div><div class="acoes-topo-producao"><button id="btnGerarPdfProducao" class="btn-acao-producao">Gerar PDF</button><button id="btnEnviarEmailProducao" class="btn-acao-producao btn-email-producao">Enviar por e-mail</button><input type="file" id="arquivoProducao" accept=".xlsx,.xls,.xlsm,.csv" class="input-arquivo-producao"><label for="arquivoProducao" class="btn-upload-producao">Carregar planilha</label><span id="nomeArquivoProducao" class="nome-arquivo-producao">Nenhuma planilha carregada</span></div></section>
+<div id="avisoProducao" class="aviso-producao">Carregue a planilha de indicadores para visualizar o dashboard.</div>
+<section class="painel-filtros-producao"><div class="campo-filtro-producao"><label>Data inicial</label><input type="date" id="dataInicialProducao"></div><div class="campo-filtro-producao"><label>Data final</label><input type="date" id="dataFinalProducao"></div><div class="campo-filtro-producao"><label>Usina</label><select id="filtroUsinaProducao"><option value="consolidado">Consolidado</option><option value="47">Usina 47</option><option value="76">Usina 76</option></select></div><div class="campo-filtro-producao"><label>Comparar com</label><select id="filtroMetaProducao"><option value="ambos">S&amp;OP + BAP</option><option value="sop">Somente S&amp;OP</option><option value="bap">Somente BAP</option></select></div><button id="btnAtualizarProducao" class="btn-atualizar-producao">Atualizar dashboard</button></section>
+<section id="relatorioProducaoPdf">
+<section id="cardsProducaoUsina" class="cards-producao-usina">
+<article class="card-producao-usina"><b>▥</b><div><span>Produção realizada</span><strong id="cardProducaoRealizada">0 t</strong></div></article>
+<article id="cardContainerMetaSop" class="card-producao-usina verde"><b>◎</b><div><span>Meta S&amp;OP</span><strong id="cardMetaSop">0 t</strong></div></article>
+<article id="cardContainerMetaBap" class="card-producao-usina laranja"><b>◉</b><div><span>Meta BAP</span><strong id="cardMetaBap">0 t</strong></div></article>
+<article id="cardContainerAderenciaSop" class="card-producao-usina verde"><b>%</b><div><span>Aderência S&amp;OP</span><strong id="cardAderenciaSop">0%</strong></div></article>
+<article id="cardContainerAderenciaBap" class="card-producao-usina laranja"><b>%</b><div><span>Aderência BAP</span><strong id="cardAderenciaBap">0%</strong></div></article>
+<article class="card-producao-usina"><b>↕</b><div><span id="tituloDiferencaProducao">Diferença para S&amp;OP</span><strong id="cardDiferencaProducao">0 t</strong></div></article>
+<article class="card-producao-usina"><b>47</b><div><span>Produção Usina 47</span><strong id="cardUsina47">0 t</strong></div></article>
+<article class="card-producao-usina verde"><b>76</b><div><span>Produção Usina 76</span><strong id="cardUsina76">0 t</strong></div></article>
+</section>
+<section id="gridGraficosProducao" class="grid-graficos-producao"><article class="bloco-producao"><h2>Produção diária — Real × Meta</h2><p>Comparativo conforme os filtros selecionados.</p><div class="area-canvas-producao"><canvas id="graficoProducaoDiaria"></canvas></div></article><article class="bloco-producao"><h2>Produção acumulada</h2><p>Evolução acumulada no período selecionado.</p><div class="area-canvas-producao"><canvas id="graficoProducaoAcumulada"></canvas></div></article></section>
+<section id="gridInferiorProducao" class="grid-inferior-producao"><article class="bloco-producao"><h2>Produção por usina</h2><p>Participação diária das Usinas 47 e 76.</p><div class="area-canvas-producao"><canvas id="graficoProducaoUsinas"></canvas></div></article><article class="bloco-producao"><h2>Resumo mensal</h2><p>Meses incluídos no período filtrado.</p><div class="tabela-producao-container"><table class="tabela-resumo-producao"><thead id="cabecalhoTabelaProducao"></thead><tbody id="corpoTabelaProducao"><tr><td>Carregue uma planilha.</td></tr></tbody></table></div></article></section>
+<section id="blocoResumoAnualProducao" class="bloco-producao bloco-resumo-anual-producao"><h2>Resumo anual do período filtrado</h2><p>Considera somente as datas selecionadas.</p><div id="resumoAnualProducao">Carregue uma planilha.</div></section>
+</section>
+<div class="rodape-dashboard-producao"><span id="periodoDashboardProducao">Período não selecionado</span><span id="ultimaAtualizacaoProducao">Aguardando carregamento</span></div>
+</main>
+<div id="overlayCarregamentoProducao" class="overlay-carregamento-producao oculto"><div class="caixa-carregamento-producao"><div class="spinner-producao"></div><strong id="tituloCarregamentoProducao">Carregando</strong><span id="textoCarregamentoProducao">Aguarde...</span></div></div>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="../Compartilhado/Core.js"></script>
+    <script src="Usina.js"></script>
+    <script src="../Compartilhado/ChartTheme.js"></script>
+    <script src="Producao.js"></script>
+</body></html>

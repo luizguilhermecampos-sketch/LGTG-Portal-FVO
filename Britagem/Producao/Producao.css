@@ -1,0 +1,650 @@
+/* ============================================================
+   PRODUÇÃO — BRITAGEM FVO
+============================================================ */
+
+.pagina-producao-britagem {
+    --prod-roxo: #3d0764;
+    --prod-roxo-escuro: #2d014d;
+    --prod-roxo-claro: #f3ecf8;
+    --prod-verde: #92d050;
+    --prod-verde-escuro: #5b9223;
+    --prod-laranja: #ee9622;
+    --prod-azul: #2878b8;
+    --prod-turquesa: #15979b;
+    --prod-borda: #e3dce7;
+    background: #f5f3f6;
+}
+
+.container-producao {
+    width: min(1560px, calc(100% - 34px));
+    margin: 0 auto;
+    padding: 26px 0 42px;
+}
+
+.cabecalho-producao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin-bottom: 18px;
+}
+
+.eyebrow-producao,
+.titulo-secao-producao > div:first-child > span,
+.tag-grafico-producao,
+.cabecalho-tabela-producao > div:first-child > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--prod-verde-escuro);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.eyebrow-producao::before,
+.titulo-secao-producao > div:first-child > span::before {
+    width: 18px;
+    height: 2px;
+    content: "";
+    border-radius: 99px;
+    background: var(--prod-verde);
+}
+
+.cabecalho-producao h1 {
+    margin: 5px 0 3px;
+    color: var(--prod-roxo-escuro);
+    font-size: clamp(28px, 2.8vw, 42px);
+    line-height: 1.05;
+}
+
+.cabecalho-producao p {
+    max-width: 830px;
+    margin: 0;
+    color: #625b66;
+    font-size: 14px;
+}
+
+.acoes-producao {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.btn-producao {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 11px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.btn-producao svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.btn-producao:disabled {
+    cursor: not-allowed;
+    opacity: .45;
+    transform: none !important;
+}
+
+.btn-pdf-producao,
+.btn-atualizar-producao {
+    background: linear-gradient(135deg, #3d0764, #560086);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(61, 7, 100, .18);
+}
+
+.btn-producao:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(61, 7, 100, .23);
+}
+
+.atualizacao-producao,
+.status-base-producao {
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 14px;
+    border-left: 1px solid #e3dce7;
+}
+
+.atualizacao-producao span,
+.status-base-producao span {
+    color: #8b818f;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.atualizacao-producao strong,
+.status-base-producao strong {
+    color: var(--prod-roxo-escuro);
+    font-size: 11px;
+}
+
+.painel-controles-producao {
+    display: grid;
+    grid-template-columns: minmax(260px, 1.25fr) minmax(180px, .75fr) minmax(290px, 1fr) auto minmax(165px, .7fr);
+    align-items: end;
+    gap: 13px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    border: 1px solid var(--prod-borda);
+    border-left: 4px solid var(--prod-verde);
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(45, 1, 77, .07);
+}
+
+.campo-arquivo-producao,
+.campo-filtro-producao,
+.campo-periodo-producao {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.campo-arquivo-producao label,
+.campo-filtro-producao label,
+.campo-periodo-producao > label {
+    color: var(--prod-roxo-escuro);
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.campo-arquivo-producao input[type="file"],
+.campo-filtro-producao input[type="date"] {
+    width: 100%;
+    min-height: 44px;
+    border: 1px solid #d9cce3;
+    border-radius: 11px;
+    background: linear-gradient(180deg, #fbf9fc, #f6f0fa);
+    color: #3e3144;
+    font-weight: 700;
+}
+
+.campo-filtro-producao input[type="date"] {
+    padding: 0 13px;
+}
+
+.campo-arquivo-producao input[type="file"] {
+    padding: 5px;
+}
+
+.campo-arquivo-producao input[type="file"]::file-selector-button {
+    margin-right: 10px;
+    padding: 9px 13px;
+    border: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #6a1bb1, #8c52d9);
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.seletor-periodo-producao {
+    min-height: 44px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3px;
+    border: 1px solid #ded3e5;
+    border-radius: 11px;
+    background: #f5f0f8;
+}
+
+.periodo-producao {
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: #746a78;
+    font-size: 12px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.periodo-producao.ativo {
+    background: var(--prod-roxo);
+    color: white;
+    box-shadow: 0 5px 12px rgba(61, 7, 100, .18);
+}
+
+.status-base-producao {
+    min-height: 44px;
+    justify-content: center;
+}
+
+.titulo-secao-producao {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 6px 0 12px;
+}
+
+.titulo-secao-producao h2 {
+    margin: 4px 0 2px;
+    color: var(--prod-roxo-escuro);
+    font-size: 24px;
+}
+
+.titulo-secao-producao p {
+    margin: 0;
+    color: #6f6673;
+    font-size: 12px;
+}
+
+.selo-base-producao {
+    min-width: 230px;
+    padding: 10px 14px;
+    border: 1px solid rgba(146, 208, 80, .55);
+    border-radius: 11px;
+    background: linear-gradient(135deg, #f5faef, #fff);
+    text-align: right;
+}
+
+.selo-base-producao span,
+.selo-periodo-produtividade span {
+    display: block;
+    color: #70a63c;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .08em;
+}
+
+.selo-base-producao strong,
+.selo-periodo-produtividade strong {
+    color: var(--prod-roxo-escuro);
+    font-size: 11px;
+}
+
+.cards-producao {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 13px;
+    margin-bottom: 16px;
+}
+
+.card-producao {
+    position: relative;
+    min-height: 112px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px 17px;
+    overflow: hidden;
+    border: 1px solid var(--prod-borda);
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 7px 18px rgba(45, 1, 77, .07);
+}
+
+.card-producao::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    content: "";
+}
+
+.card-dia::after { background: var(--prod-roxo); }
+.card-mes::after { background: var(--prod-verde); }
+.card-ano::after { background: var(--prod-laranja); }
+.card-turma::after { background: var(--prod-turquesa); }
+
+.icone-card-producao {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: var(--prod-roxo-claro);
+    color: var(--prod-roxo);
+}
+
+.card-mes .icone-card-producao { background: #eff8e7; color: #659d2c; }
+.card-ano .icone-card-producao { background: #fff4e4; color: #d97900; }
+.card-turma .icone-card-producao { background: #e7f8f7; color: #108a8e; }
+
+.icone-card-producao svg {
+    width: 27px;
+    height: 27px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.card-producao span {
+    display: block;
+    margin-bottom: 4px;
+    color: #6f6374;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .05em;
+}
+
+.card-producao strong {
+    display: block;
+    color: var(--prod-roxo-escuro);
+    font-size: clamp(24px, 2vw, 32px);
+    line-height: 1;
+}
+
+.card-producao small {
+    display: block;
+    margin-top: 5px;
+    color: #827987;
+    font-size: 10px;
+}
+
+.grid-graficos-producao {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.grafico-card-producao,
+.tabela-card-producao {
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--prod-borda);
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(45, 1, 77, .06);
+}
+
+.cabecalho-grafico-producao,
+.cabecalho-tabela-producao {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.tag-grafico-producao {
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: #f2eaf7;
+    color: var(--prod-roxo);
+}
+
+.tag-grafico-producao.tag-verde { background: #edf7e4; color: #5f9627; }
+
+.cabecalho-grafico-producao h2,
+.cabecalho-tabela-producao h2 {
+    margin: 4px 0 2px;
+    color: var(--prod-roxo-escuro);
+    font-size: 18px;
+}
+
+.cabecalho-grafico-producao p {
+    margin: 0;
+    color: #817884;
+    font-size: 10px;
+}
+
+.canvas-producao {
+    position: relative;
+    width: 100%;
+    min-height: 320px;
+}
+
+.canvas-producao canvas {
+    width: 100% !important;
+    height: 320px !important;
+}
+
+.secao-produtividade-producao {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(430px, .8fr);
+    gap: 14px;
+}
+
+.canvas-produtividade { min-height: 360px; }
+.canvas-produtividade canvas { height: 360px !important; }
+
+.selo-periodo-produtividade {
+    min-width: 115px;
+    padding: 8px 11px;
+    border-radius: 9px;
+    background: #f4f8ef;
+    text-align: right;
+}
+
+.mini-resumo-producao {
+    padding: 8px 11px;
+    border-radius: 9px;
+    background: #f4eff7;
+    text-align: right;
+}
+
+.mini-resumo-producao span {
+    display: block;
+    color: #817486;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.mini-resumo-producao strong {
+    color: var(--prod-roxo-escuro);
+    font-size: 16px;
+}
+
+.tabela-wrap-producao {
+    overflow-x: auto;
+}
+
+.tabela-producao-turmas {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+}
+
+.tabela-producao-turmas th {
+    padding: 10px 9px;
+    border-bottom: 2px solid #ded4e4;
+    color: #665b6a;
+    font-size: 9px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.tabela-producao-turmas td {
+    padding: 11px 9px;
+    border-bottom: 1px solid #eee8f0;
+    color: #4c444f;
+    font-weight: 700;
+}
+
+.tabela-producao-turmas tbody tr:nth-child(even) { background: #fbf9fc; }
+.tabela-producao-turmas tbody tr:first-child:not(.linha-vazia-producao) td:first-child { color: #5f9627; font-weight: 900; }
+
+.linha-vazia-producao td {
+    padding: 28px 10px;
+    color: #968d99;
+    text-align: center;
+}
+
+.print-only { display: none !important; }
+
+.cabecalho-pdf-producao {
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--prod-roxo-escuro);
+    color: #fff;
+}
+
+.pdf-marca-producao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pdf-marca-producao img {
+    width: 78px;
+    max-height: 30px;
+    object-fit: contain;
+}
+
+.pdf-marca-producao span,
+.pdf-meta-producao span {
+    display: block;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.pdf-marca-producao strong {
+    display: block;
+    font-size: 15px;
+}
+
+.pdf-meta-producao {
+    text-align: right;
+}
+
+@media (max-width: 1180px) {
+    .painel-controles-producao {
+        grid-template-columns: 1.2fr .8fr 1fr auto;
+    }
+    .status-base-producao {
+        grid-column: 1 / -1;
+        border-left: 0;
+        border-top: 1px solid #eee7f1;
+        padding: 8px 0 0;
+    }
+    .cards-producao { grid-template-columns: repeat(2, 1fr); }
+    .secao-produtividade-producao { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+    .container-producao { width: min(100% - 20px, 1560px); padding-top: 18px; }
+    .cabecalho-producao,
+    .titulo-secao-producao { align-items: flex-start; flex-direction: column; }
+    .painel-controles-producao { grid-template-columns: 1fr; align-items: stretch; }
+    .btn-atualizar-producao { width: 100%; }
+    .cards-producao,
+    .grid-graficos-producao { grid-template-columns: 1fr; }
+    .selo-base-producao { width: 100%; text-align: left; }
+}
+
+@media print {
+    @page { size: A4 landscape; margin: 7mm; }
+
+    html, body {
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #fff !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .header-portal-fvo,
+    .menu-portal,
+    .no-print,
+    .cabecalho-producao,
+    .selo-base-producao {
+        display: none !important;
+    }
+
+    .print-only { display: flex !important; }
+
+    .container-producao {
+        width: 100% !important;
+        max-width: none !important;
+        padding: 0 !important;
+    }
+
+    .cabecalho-pdf-producao { margin-bottom: 6mm; }
+
+    .titulo-secao-producao { margin: 0 0 4mm; }
+    .titulo-secao-producao h2 { font-size: 17pt; }
+    .titulo-secao-producao p { font-size: 8pt; }
+
+    .cards-producao {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 3mm;
+        margin-bottom: 4mm;
+    }
+
+    .card-producao {
+        min-height: 24mm;
+        padding: 3.5mm;
+        box-shadow: none;
+    }
+
+    .card-producao strong { font-size: 18pt; }
+    .card-producao span { font-size: 7pt; }
+    .card-producao small { font-size: 6.5pt; }
+    .icone-card-producao { width: 11mm; height: 11mm; flex-basis: 11mm; }
+
+    .grid-graficos-producao {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 4mm;
+        margin: 0;
+    }
+
+    .grafico-card-producao,
+    .tabela-card-producao {
+        padding: 3mm;
+        border-color: #ddd;
+        box-shadow: none;
+        break-inside: avoid;
+    }
+
+    .cabecalho-grafico-producao h2,
+    .cabecalho-tabela-producao h2 { font-size: 12pt; }
+    .cabecalho-grafico-producao p { font-size: 7pt; }
+
+    .canvas-producao,
+    .canvas-producao canvas {
+        height: 105mm !important;
+        min-height: 105mm !important;
+    }
+
+    .bloco-pdf-pagina-1 { break-after: page; page-break-after: always; }
+
+    .cabecalho-pdf-pagina-2 {
+        margin-top: 0;
+        margin-bottom: 5mm;
+    }
+
+    .secao-produtividade-producao {
+        grid-template-columns: 1.32fr .68fr !important;
+        gap: 4mm;
+    }
+
+    .canvas-produtividade,
+    .canvas-produtividade canvas {
+        height: 145mm !important;
+        min-height: 145mm !important;
+    }
+
+    .tabela-producao-turmas { font-size: 8pt; }
+    .tabela-producao-turmas th { padding: 2.3mm 1.8mm; font-size: 6.7pt; }
+    .tabela-producao-turmas td { padding: 2.6mm 1.8mm; font-size: 7.5pt; }
+}

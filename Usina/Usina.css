@@ -1,0 +1,346 @@
+/* ================================================================
+   PORTAL FVO — USINA
+   Home corporativa no mesmo padrão visual da Home da Britagem.
+   Regras isoladas pela classe .pagina-home-usina para não interferir
+   nas páginas internas de Produção, Qualidade e Reagentes.
+   ================================================================ */
+
+.pagina-home-usina .home-usina-nova{
+    width:100%;
+    margin:0;
+    padding:0;
+}
+
+.pagina-home-usina .hero-usina{
+    width:100%;
+    height:calc(100vh - 110px);
+    min-height:650px;
+    position:relative;
+    overflow:hidden;
+    background:#11151a;
+    isolation:isolate;
+}
+
+.pagina-home-usina .hero-video-usina{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:0;
+    transform:scale(1.015);
+}
+
+/* Degradê escuro: mantém o vídeo visível e garante leitura. */
+.pagina-home-usina .hero-overlay-usina{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,12,17,.95) 0%,
+            rgba(9,13,19,.88) 28%,
+            rgba(9,13,19,.62) 52%,
+            rgba(9,13,19,.28) 76%,
+            rgba(9,13,19,.18) 100%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(11,7,18,.10) 0%,
+            rgba(11,7,18,.08) 50%,
+            rgba(5,8,12,.58) 100%
+        );
+}
+
+.pagina-home-usina .hero-usina::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+        radial-gradient(circle at 68% 45%, rgba(146,208,80,.10), transparent 28%),
+        linear-gradient(180deg, rgba(45,1,77,.10), transparent 34%);
+}
+
+.pagina-home-usina .hero-usina::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height:5px;
+    z-index:4;
+    pointer-events:none;
+    background:linear-gradient(
+        90deg,
+        #92D050 0%,
+        #75BE35 28%,
+        rgba(117,190,53,.1) 70%,
+        transparent 100%
+    );
+}
+
+.pagina-home-usina .hero-conteudo-usina{
+    position:relative;
+    z-index:3;
+    width:min(100%, 1660px);
+    height:100%;
+    margin:0 auto;
+    padding:clamp(58px,7vh,96px) clamp(42px,5vw,76px) clamp(46px,6vh,72px);
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.pagina-home-usina .hero-texto-usina{
+    width:min(1040px,100%);
+    color:#fff;
+}
+
+.pagina-home-usina .hero-eyebrow-usina{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 20px 28px;
+    padding:8px 13px 8px 10px;
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;
+    background:rgba(21,15,29,.42);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    color:rgba(255,255,255,.86);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.7px;
+    text-transform:uppercase;
+    box-shadow:0 8px 28px rgba(0,0,0,.16);
+}
+
+.pagina-home-usina .hero-eyebrow-marca-usina{
+    width:8px;
+    height:8px;
+    flex:0 0 8px;
+    border-radius:50%;
+    background:#92D050;
+    box-shadow:
+        0 0 0 4px rgba(146,208,80,.14),
+        0 0 16px rgba(146,208,80,.60);
+}
+
+.pagina-home-usina .hero-titulo-linha-usina{
+    display:flex;
+    align-items:stretch;
+    gap:20px;
+}
+
+.pagina-home-usina .hero-titulo-linha-usina > span{
+    width:7px;
+    border-radius:10px;
+    flex-shrink:0;
+    background:linear-gradient(180deg,#A6E85F 0%,#78C93A 100%);
+    box-shadow:0 0 22px rgba(146,208,80,.28);
+}
+
+.pagina-home-usina .hero-titulo-linha-usina h1{
+    margin:0;
+    color:#fff;
+    font-size:clamp(46px,4.35vw,68px);
+    line-height:1.04;
+    letter-spacing:-1.7px;
+    font-weight:800;
+    text-wrap:balance;
+    text-shadow:0 3px 24px rgba(0,0,0,.26);
+}
+
+.pagina-home-usina .hero-descricao-usina{
+    margin:26px 0 38px 28px;
+    max-width:680px;
+    color:rgba(255,255,255,.88);
+    font-size:clamp(17px,1.25vw,20px);
+    line-height:1.55;
+    font-weight:500;
+    text-shadow:0 2px 16px rgba(0,0,0,.28);
+}
+
+/* Quatro pilares no mesmo padrão da Home da Britagem. */
+.pagina-home-usina .pilares-usina{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+    width:min(100%,1020px);
+    margin-left:28px;
+}
+
+.pagina-home-usina .pilar-usina{
+    min-height:112px;
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr);
+    align-items:center;
+    gap:13px;
+    padding:16px 18px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:15px;
+    background:linear-gradient(
+        145deg,
+        rgba(255,255,255,.105),
+        rgba(255,255,255,.035)
+    );
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:0 12px 34px rgba(0,0,0,.16);
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        background .22s ease;
+}
+
+.pagina-home-usina .pilar-usina:hover{
+    transform:translateY(-3px);
+    border-color:rgba(146,208,80,.44);
+    background:linear-gradient(
+        145deg,
+        rgba(146,208,80,.13),
+        rgba(255,255,255,.045)
+    );
+}
+
+.pagina-home-usina .icone-pilar-usina{
+    width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    color:#B2F06E;
+    background:rgba(146,208,80,.13);
+    border:1px solid rgba(146,208,80,.30);
+    font-size:19px;
+    font-weight:800;
+    box-shadow:inset 0 0 16px rgba(146,208,80,.06);
+}
+
+.pagina-home-usina .pilar-usina strong{
+    display:block;
+    margin-bottom:5px;
+    color:#fff;
+    font-size:15px;
+    line-height:1.2;
+    font-weight:800;
+}
+
+.pagina-home-usina .pilar-usina span{
+    display:block;
+    color:rgba(255,255,255,.70);
+    font-size:12px;
+    line-height:1.42;
+    font-weight:500;
+}
+
+/* A faixa antiga de Acessos Rápidos não faz mais parte da Home. */
+.pagina-home-usina .acessos-rapidos-home,
+.pagina-home-usina .titulo-acessos,
+.pagina-home-usina .acesso-rapido{
+    display:none !important;
+}
+
+@media (max-width:1200px){
+    .pagina-home-usina .hero-usina{
+        height:auto;
+        min-height:calc(100vh - 110px);
+    }
+
+    .pagina-home-usina .hero-conteudo-usina{
+        min-height:calc(100vh - 110px);
+        padding:60px 36px 50px;
+    }
+
+    .pagina-home-usina .hero-texto-usina{
+        width:min(920px,100%);
+    }
+
+    .pagina-home-usina .pilares-usina{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        width:min(760px,calc(100% - 28px));
+    }
+}
+
+@media (max-width:800px){
+    .pagina-home-usina .hero-usina{
+        min-height:calc(100vh - 110px);
+    }
+
+    .pagina-home-usina .hero-conteudo-usina{
+        min-height:calc(100vh - 110px);
+        padding:48px 22px 42px;
+    }
+
+    .pagina-home-usina .hero-eyebrow-usina{
+        margin-left:17px;
+        font-size:10px;
+        letter-spacing:1.25px;
+    }
+
+    .pagina-home-usina .hero-titulo-linha-usina{
+        gap:13px;
+    }
+
+    .pagina-home-usina .hero-titulo-linha-usina > span{
+        width:5px;
+    }
+
+    .pagina-home-usina .hero-titulo-linha-usina h1{
+        font-size:clamp(38px,8vw,52px);
+    }
+
+    .pagina-home-usina .hero-descricao-usina{
+        margin:22px 0 30px 18px;
+        font-size:16px;
+    }
+
+    .pagina-home-usina .pilares-usina{
+        margin-left:18px;
+        width:calc(100% - 18px);
+        gap:10px;
+    }
+}
+
+@media (max-width:560px){
+    .pagina-home-usina .hero-conteudo-usina{
+        padding:38px 14px 34px;
+    }
+
+    .pagina-home-usina .hero-eyebrow-usina{
+        margin:0 0 16px 12px;
+        padding:7px 10px;
+    }
+
+    .pagina-home-usina .hero-titulo-linha-usina h1{
+        font-size:36px;
+        letter-spacing:-1px;
+    }
+
+    .pagina-home-usina .hero-descricao-usina{
+        margin-left:14px;
+        font-size:15px;
+    }
+
+    .pagina-home-usina .pilares-usina{
+        grid-template-columns:1fr;
+        margin-left:14px;
+        width:calc(100% - 14px);
+    }
+
+    .pagina-home-usina .pilar-usina{
+        min-height:88px;
+        padding:13px 15px;
+    }
+}
+
+@media (prefers-reduced-motion:reduce){
+    .pagina-home-usina .pilar-usina{
+        transition:none;
+    }
+}

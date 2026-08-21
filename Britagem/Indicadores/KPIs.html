@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        KPIs Operacionais - Britagem FVO
+    </title>
+<!-- LEITURA EXCEL -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js">
+    </script>
+
+    <!-- GRÁFICOS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+    <link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="KPIs.css">
+</head>
+
+
+<body class="pagina-kpis">
+
+
+    <!-- =====================================================
+         TELA DE CARREGAMENTO
+    ====================================================== -->
+
+    <div
+        id="overlayCarregamento"
+        class="overlay-carregamento-kpi">
+
+        <div class="caixa-carregamento-kpi">
+
+            <div class="spinner-kpi"></div>
+
+            <strong>
+                Carregando dados...
+            </strong>
+
+            <span id="textoCarregamento">
+                Preparando planilha
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="header-dashboard-fvo">
+
+        <div class="logo">
+
+            <img
+                src="../Imagens/Logo_CMOC.png"
+                alt="CMOC">
+
+        </div>
+
+        <div class="titulo">
+
+            KPIs OPERACIONAIS - BRITAGEM FVO
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    <nav class="menu-dashboard-fvo">
+
+        <ul>
+
+            <li>
+
+                <a href="../index.html">
+                    Início
+                </a>
+
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container-kpi">
+
+
+        <!-- =================================================
+             FILTROS PRINCIPAIS
+        ================================================== -->
+
+        <section class="painel-filtros-kpi">
+
+
+            <!-- PLANILHA -->
+
+            <div class="campo-kpi">
+
+                <label for="arquivoExcel">
+                    Planilha
+                </label>
+
+                <input
+                    type="file"
+                    id="arquivoExcel"
+                    accept=".xlsx,.xls,.xlsm">
+
+            </div>
+
+
+            <!-- MÊS -->
+
+            <div class="campo-kpi">
+
+                <label for="mesSelecionado">
+                    Mês
+                </label>
+
+                <select id="mesSelecionado">
+
+                    <option>
+                        Janeiro
+                    </option>
+
+                    <option>
+                        Fevereiro
+                    </option>
+
+                    <option>
+                        Março
+                    </option>
+
+                    <option>
+                        Abril
+                    </option>
+
+                    <option>
+                        Maio
+                    </option>
+
+                    <option>
+                        Junho
+                    </option>
+
+                    <option>
+                        Julho
+                    </option>
+
+                    <option selected>
+                        Agosto
+                    </option>
+
+                    <option>
+                        Setembro
+                    </option>
+
+                    <option>
+                        Outubro
+                    </option>
+
+                    <option>
+                        Novembro
+                    </option>
+
+                    <option>
+                        Dezembro
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- VISUALIZAÇÃO -->
+
+            <div class="campo-kpi">
+
+                <label>
+                    Visualização
+                </label>
+
+                <div class="seletor-visualizacao">
+
+                    <button
+                        type="button"
+                        id="btnMensal"
+                        class="btn-periodo ativo">
+
+                        Mensal
+
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btnAcumulado"
+                        class="btn-periodo">
+
+                        Acumulado
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- GERAR -->
+
+            <div class="campo-kpi campo-botao">
+
+                <button
+                    type="button"
+                    class="btn-gerar-kpi"
+                    onclick="gerarIndicadores()">
+
+                    <svg class="icone-botao-kpi" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/></svg>
+                    <span>Gerar Indicadores</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- PDF -->
+
+            <div class="campo-kpi campo-botao">
+
+                <button
+                    type="button"
+                    id="btnGerarPDF"
+                    class="btn-gerar-pdf-kpi">
+
+                    <svg class="icone-botao-kpi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v5h5M10 14h6M10 18h4"/></svg>
+                    <span>Gerar PDF</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="campo-kpi campo-botao">
+
+                <button
+                    type="button"
+                    id="btnEnviarEmail"
+                    class="btn-email-kpi">
+
+                    <svg class="icone-botao-kpi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+                    <span>Enviar por E-mail</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- ATUALIZAÇÃO -->
+
+            <div class="ultima-atualizacao">
+
+                <span>
+                    Última atualização
+                </span>
+
+                <strong id="ultimaAtualizacao">
+                    -
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- Cabeçalho exclusivo do relatório impresso/PDF -->
+        <section class="cabecalho-relatorio-pdf" aria-hidden="true">
+            <div class="cabecalho-relatorio-pdf-marca">
+                <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+                <div>
+                    <span>PORTAL FVO • BRITAGEM</span>
+                    <strong>KPIs Operacionais</strong>
+                </div>
+            </div>
+
+            <div class="cabecalho-relatorio-pdf-info">
+                <span id="periodoRelatorioPDF">Período: -</span>
+                <span id="referenciaRelatorioPDF">Referência: -</span>
+                <span id="geradoEmRelatorioPDF">Gerado em: -</span>
+            </div>
+        </section>
+
+
+        <!-- =================================================
+             CARDS PRINCIPAIS
+        ================================================== -->
+
+        <div class="cabecalho-secao-kpi">
+            <div>
+                <span class="eyebrow-kpi">VISÃO EXECUTIVA</span>
+                <h1>Desempenho operacional da britagem</h1>
+                <p>Produção, metas, qualidade e eficiência em uma única leitura.</p>
+            </div>
+            <div class="selo-base-kpi">
+                <span>BASE DE PRODUÇÃO</span>
+                <strong>Toneladas secas • tbs</strong>
+            </div>
+        </div>
+
+        <section class="cards-kpi">
+
+
+            <!-- PRODUÇÃO -->
+
+            <div class="card-kpi card-producao card-kpi-destaque">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Produção Real (tbs)
+                    </h3>
+
+                    <div class="icone-kpi icone-producao" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/><path d="m14 6 3-3 3 3"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor valor-principal"
+                    id="producaoReal">
+
+                    -
+
+                </div>
+
+                <div class="metas-producao">
+
+                    <div>
+
+                        <span>
+                            BAP (tbs)
+                        </span>
+
+                        <strong id="metaBap">
+                            -
+                        </strong>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            S&amp;OP (tbs)
+                        </span>
+
+                        <strong id="metaSop">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ATINGIMENTO BAP -->
+
+            <div
+                class="card-kpi card-meta-bap-kpi"
+                id="cardAtingimentoBAP">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Atingimento BAP
+                    </h3>
+
+                    <div
+                        class="status-kpi"
+                        id="statusBAP">
+
+                        ●
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="atingimentoBAP">
+
+                    -
+
+                </div>
+
+                <div class="info-secundaria">
+
+                    Acumulado:
+
+                    <strong id="atingimentoBAPAcumulado">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ATINGIMENTO S&amp;OP -->
+
+            <div
+                class="card-kpi card-meta-sop-kpi"
+                id="cardAtingimentoSOP">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Atingimento S&amp;OP
+                    </h3>
+
+                    <div
+                        class="status-kpi"
+                        id="statusSOP">
+
+                        ●
+
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="atingimentoSOP">
+
+                    -
+
+                </div>
+
+                <div class="info-secundaria">
+
+                    Acumulado:
+
+                    <strong id="atingimentoSOPAcumulado">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- P2O5 -->
+
+            <div
+                class="card-kpi card-qualidade-kpi"
+                id="cardP205">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        P2O5
+                    </h3>
+
+                    <div class="icone-kpi icone-qualidade" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h6m-5 0v5l-5 9a3 3 0 0 0 2.6 4.5h8.8A3 3 0 0 0 19 17l-5-9V3"/><path d="M7.5 15h9"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="p205">
+
+                    -
+
+                </div>
+
+                <div class="info-secundaria">
+
+                    Meta:
+
+                    <strong id="metaP205">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- NB2O5 -->
+
+            <div
+                class="card-kpi card-qualidade-kpi"
+                id="cardNb">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Nb2O5
+                    </h3>
+
+                    <div class="icone-kpi icone-qualidade" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h6m-5 0v5l-5 9a3 3 0 0 0 2.6 4.5h8.8A3 3 0 0 0 19 17l-5-9V3"/><path d="M7.5 15h9"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="nb">
+
+                    -
+
+                </div>
+
+                <div class="info-secundaria">
+
+                    Meta:
+
+                    <strong id="metaNb">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- BAO -->
+
+            <div
+                class="card-kpi card-qualidade-kpi"
+                id="cardBao">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        BaO
+                    </h3>
+
+                    <div class="icone-kpi icone-qualidade" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M9 3h6m-5 0v5l-5 9a3 3 0 0 0 2.6 4.5h8.8A3 3 0 0 0 19 17l-5-9V3"/><path d="M7.5 15h9"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="bao">
+
+                    -
+
+                </div>
+
+                <div class="info-secundaria">
+
+                    Meta:
+
+                    <strong id="metaBao">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- GRANULOMETRIA -->
+
+            <div
+                class="card-kpi card-granulometria-kpi"
+                id="cardGranulo">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Granulometria
+                    </h3>
+
+                    <div class="icone-kpi icone-granulo" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="7" r="2"/><circle cx="15" cy="15.5" r="4"/><circle cx="6" cy="17" r="2"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="granulo">
+
+                    -
+
+                </div>
+
+                <div class="info-secundaria">
+
+                    Meta:
+
+                    <strong id="metaGranulo">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- DISPONIBILIDADE -->
+
+            <div
+                class="card-kpi card-kpi-menor card-eficiencia-kpi"
+                id="cardDisponibilidade">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Disponibilidade
+                    </h3>
+
+                    <div class="icone-kpi icone-status" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16.5 8.5"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="disponibilidade">
+
+                    -
+
+                </div>
+
+                <div class="linha-meta-kpi">
+
+                    <span>
+                        Meta:
+                    </span>
+
+                    <strong id="metaDisponibilidade">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="barra-kpi">
+
+                    <div
+                        class="barra-kpi-preenchimento"
+                        id="barraDisponibilidade">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- UTILIZAÇÃO -->
+
+            <div
+                class="card-kpi card-kpi-menor card-eficiencia-kpi"
+                id="cardUtilizacao">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Utilização
+                    </h3>
+
+                    <div class="icone-kpi icone-status" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16.5 8.5"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="utilizacao">
+
+                    -
+
+                </div>
+
+                <div class="linha-meta-kpi">
+
+                    <span>
+                        Meta:
+                    </span>
+
+                    <strong id="metaUtilizacao">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="barra-kpi">
+
+                    <div
+                        class="barra-kpi-preenchimento"
+                        id="barraUtilizacao">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUTIVIDADE -->
+
+            <div
+                class="card-kpi card-kpi-menor card-produtividade-kpi"
+                id="cardProdutividade">
+
+                <div class="card-kpi-topo">
+
+                    <h3>
+                        Produtividade (t/h)
+                    </h3>
+
+                    <div class="icone-kpi icone-produtividade" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M4 17a8 8 0 1 1 16 0"/><path d="m12 13 4-4"/><path d="M7 17h10"/></svg>
+                    </div>
+
+                </div>
+
+                <div
+                    class="valor"
+                    id="produtividade">
+
+                    -
+
+                </div>
+
+                <div class="linha-meta-kpi">
+
+                    <span>
+                        Meta:
+                    </span>
+
+                    <strong id="metaProdutividade">
+                        -
+                    </strong>
+
+                </div>
+
+                <div class="barra-kpi">
+
+                    <div
+                        class="barra-kpi-preenchimento"
+                        id="barraProdutividade">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MTD / YTD
+        ================================================== -->
+
+        <section class="acompanhamento-producao-kpi">
+
+
+            <div class="cabecalho-acompanhamento-producao">
+
+                <div>
+
+                    <span class="subtitulo-acompanhamento">
+                        ACOMPANHAMENTO DA PRODUÇÃO
+                    </span>
+
+                    <h2 class="titulo-com-icone-kpi">
+                        <span class="icone-titulo-kpi" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M4 18V6m5 12v-8m5 8V4m5 14v-5"/></svg>
+                        </span>
+                        Produção Acumulada — Real × S&amp;OP × BAP
+                    </h2>
+
+                    <p>
+                        Produção seca acumulada com data de referência.
+                    </p>
+
+                </div>
+
+
+                <div class="controles-mtd-ytd">
+
+
+                    <div class="campo-data-mtd">
+
+                        <label for="dataReferencia">
+                            Data de referência
+                        </label>
+
+                        <input
+                            type="date"
+                            id="dataReferencia">
+
+                    </div>
+
+
+                    <div class="seletor-mtd-ytd">
+
+                        <button
+                            type="button"
+                            id="btnMTD"
+                            class="btn-periodo-producao ativo">
+
+                            MTD
+
+                        </button>
+
+                        <button
+                            type="button"
+                            id="btnYTD"
+                            class="btn-periodo-producao">
+
+                            YTD
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARDS -->
+
+            <div class="cards-producao-acumulada">
+
+
+                <div class="card-producao-acumulada card-real-acumulado">
+
+                    <span>
+                        REAL
+                    </span>
+
+                    <strong id="producaoAcumuladaReal">
+                        -
+                    </strong>
+
+                    <small>
+                        toneladas secas
+                    </small>
+
+                </div>
+
+
+                <div class="card-producao-acumulada card-meta-sop">
+
+                    <span>
+                        S&amp;OP
+                    </span>
+
+                    <strong id="producaoAcumuladaSOP">
+                        -
+                    </strong>
+
+                    <small>
+                        toneladas secas
+                    </small>
+
+                </div>
+
+
+                <div class="card-producao-acumulada card-meta-bap">
+
+                    <span>
+                        BAP
+                    </span>
+
+                    <strong id="producaoAcumuladaBAP">
+                        -
+                    </strong>
+
+                    <small>
+                        toneladas secas
+                    </small>
+
+                </div>
+
+
+                <div
+                    class="card-producao-acumulada"
+                    id="cardAtingimentoAcumuladoSOP">
+
+                    <span>
+                        ATINGIMENTO S&amp;OP
+                    </span>
+
+                    <strong id="atingimentoAcumuladoSOP">
+                        -
+                    </strong>
+
+                    <small id="statusAcumuladoSOP">
+                        -
+                    </small>
+
+                </div>
+
+
+                <div
+                    class="card-producao-acumulada"
+                    id="cardAtingimentoAcumuladoBAP">
+
+                    <span>
+                        ATINGIMENTO BAP
+                    </span>
+
+                    <strong id="atingimentoAcumuladoBAP">
+                        -
+                    </strong>
+
+                    <small id="statusAcumuladoBAP">
+                        -
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- GRÁFICO + RESUMO -->
+
+            <div class="linha-acompanhamento-producao">
+
+
+                <div class="grafico-acompanhamento-producao">
+
+                    <div class="titulo-grafico-acompanhamento">
+
+                        <div>
+
+                            <h3 id="tituloGraficoMTDYTD">
+                                Produção MTD
+                            </h3>
+
+                            <span id="periodoGraficoMTDYTD">
+                                Selecione uma data
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="canvas-mtd-ytd">
+
+                        <canvas id="graficoMTDYTD"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <aside class="resumo-acompanhamento-producao">
+
+                    <h3>
+                        Resumo
+                    </h3>
+
+
+                    <div class="item-resumo-producao">
+
+                        <span>
+                            Gap S&amp;OP
+                        </span>
+
+                        <strong id="gapAcumuladoSOP">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="item-resumo-producao">
+
+                        <span>
+                            Gap BAP
+                        </span>
+
+                        <strong id="gapAcumuladoBAP">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="divisor-resumo-producao"></div>
+
+
+                    <div class="status-geral-producao">
+
+                        <span>
+                            STATUS DA PRODUÇÃO
+                        </span>
+
+                        <strong id="statusGeralProducao">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <p id="textoResumoMTDYTD">
+
+                        Carregue a planilha para visualizar
+                        o acompanhamento.
+
+                    </p>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GRÁFICO ORIGINAL
+        ================================================== -->
+
+        <section class="bloco-grafico-resumo">
+
+
+            <div class="grafico-kpi">
+
+                <div class="titulo-grafico">
+
+                    <h2 class="titulo-com-icone-kpi">
+                        <span class="icone-titulo-kpi" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M4 19V9m6 10V5m6 14v-7m4 7H2"/><path d="m14 6 3-3 3 3"/></svg>
+                        </span>
+                        Produção Real × BAP × S&amp;OP
+                    </h2>
+
+                    <span id="periodoGrafico">
+                        Produção mensal
+                    </span>
+
+                </div>
+
+                <div class="canvas-grafico-kpi">
+
+                    <canvas id="graficoProducao"></canvas>
+
+                </div>
+
+            </div>
+
+
+            <aside class="resumo-mes">
+
+                <h2 id="tituloResumoMes">
+                    Resumo do Mês
+                </h2>
+
+
+                <div class="item-resumo">
+
+                    <span>
+                        Desvio BAP
+                    </span>
+
+                    <strong id="desvioBAP">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="item-resumo">
+
+                    <span>
+                        Desvio S&amp;OP
+                    </span>
+
+                    <strong id="desvioSOP">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="divisor-resumo"></div>
+
+
+                <div class="item-resumo">
+
+                    <span>
+                        Melhor resultado
+                    </span>
+
+                    <strong id="melhorMes">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div class="item-resumo">
+
+                    <span>
+                        Maior produção
+                    </span>
+
+                    <strong id="recordeAno">
+                        -
+                    </strong>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- =================================================
+             INSIGHTS
+        ================================================== -->
+
+        <section class="insights-kpi">
+
+            <h2 class="titulo-com-icone-kpi">
+                <span class="icone-titulo-kpi" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M8.5 15.5A7 7 0 1 1 15.5 15.5C14.6 16.3 14 17 14 18h-4c0-1-.6-1.7-1.5-2.5Z"/></svg>
+                </span>
+                Insights do Mês
+            </h2>
+
+            <div class="lista-insights">
+
+
+                <div class="insight">
+
+                    <strong>
+                        Produção
+                    </strong>
+
+                    <span id="textoInsightProducao">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <strong>
+                        Qualidade
+                    </strong>
+
+                    <span id="textoInsightQualidade">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <strong>
+                        Disponibilidade
+                    </strong>
+
+                    <span id="textoInsightDisponibilidade">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="insight">
+
+                    <strong>
+                        Produtividade
+                    </strong>
+
+                    <span id="textoInsightProdutividade">
+                        -
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../Britagem.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="KPIs.js"></script>
+</body>
+
+</html>

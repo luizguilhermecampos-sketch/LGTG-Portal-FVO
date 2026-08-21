@@ -1,0 +1,1088 @@
+/* =========================================================
+   PARETO - PORTAL BRITAGEM FVO
+   Visual corporativo e regras de impressão
+========================================================= */
+
+.pagina-pareto{
+    background:
+        radial-gradient(circle at 92% 7%, rgba(146,208,80,.12), transparent 25%),
+        linear-gradient(180deg,#f8f6f9 0%,#f4f2f5 100%);
+}
+
+.container-pareto{
+    width:100%;
+    max-width:1680px;
+    margin:0 auto;
+    padding:28px clamp(20px,2.5vw,42px) 54px;
+}
+
+.cabecalho-pareto{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    margin-bottom:18px;
+}
+
+.titulo-pagina-pareto{min-width:0;}
+
+.subtitulo-pareto{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    color:var(--fvo-verde-600);
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:1.45px;
+    text-transform:uppercase;
+}
+
+.subtitulo-pareto::before{
+    content:"";
+    width:18px;
+    height:2px;
+    border-radius:2px;
+    background:var(--fvo-verde-500);
+}
+
+.cabecalho-pareto h1{
+    margin:5px 0 5px;
+    color:var(--fvo-roxo-900);
+    font-size:clamp(28px,2.25vw,38px);
+    line-height:1.08;
+    letter-spacing:-.7px;
+}
+
+.descricao-pareto,
+.secao-titulo-pareto p,
+.grafico-titulo-pareto p,
+.cabecalho-card-detalhe p{
+    margin:0;
+    color:var(--fvo-cinza-700);
+    font-size:13px;
+    font-weight:500;
+}
+
+.acoes-pareto{
+    display:flex;
+    gap:10px;
+    flex:0 0 auto;
+}
+
+.btn-pdf-pareto,
+.btn-email-pareto,
+.btn-gerar-pareto{
+    min-height:42px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    padding:0 18px;
+    border:0;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(45,1,77,.13);
+}
+
+.btn-pdf-pareto,
+.btn-gerar-pareto{
+    color:#fff;
+    background:linear-gradient(135deg,#2d014d 0%,#520482 100%);
+}
+
+.btn-email-pareto{
+    color:#173300;
+    background:linear-gradient(135deg,#92d050 0%,#78bd37 100%);
+}
+
+.btn-pdf-pareto:hover,
+.btn-gerar-pareto:hover,
+.btn-email-pareto:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px rgba(45,1,77,.19);
+}
+
+.btn-pdf-pareto svg,
+.btn-email-pareto svg,
+.btn-gerar-pareto svg{
+    width:16px;
+    height:16px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.painel-pareto{
+    display:grid;
+    grid-template-columns:minmax(280px,1.45fr) auto minmax(165px,.75fr) auto minmax(150px,.65fr);
+    align-items:end;
+    gap:12px;
+    padding:16px 18px;
+    margin-bottom:24px;
+    border:1px solid rgba(45,1,77,.08);
+    border-left:4px solid var(--fvo-verde-500);
+    border-radius:15px;
+    background:rgba(255,255,255,.97);
+    box-shadow:var(--fvo-sombra-card);
+}
+
+.controle-pareto{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.controle-pareto label{
+    color:var(--fvo-roxo-900);
+    font-size:11px;
+    font-weight:900;
+}
+
+.label-invisivel{visibility:hidden;}
+
+.controle-arquivo input[type="file"]{
+    width:100%;
+    min-height:42px;
+    padding:5px 7px;
+    border:1px solid #d8c9e4;
+    border-radius:10px;
+    background:linear-gradient(180deg,#fbf8ff 0%,#f3ebfa 100%);
+    color:#5b4764;
+    font-size:11px;
+    font-weight:700;
+    box-shadow:inset 0 1px 0 #fff;
+}
+
+.controle-arquivo input[type="file"]::file-selector-button{
+    margin-right:10px;
+    padding:9px 14px;
+    border:0;
+    border-radius:8px;
+    background:linear-gradient(135deg,#6b1da0 0%,#8a43c2 100%);
+    color:#fff;
+    font-size:11px;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 4px 10px rgba(107,29,160,.22);
+}
+
+.controle-arquivo input[type="file"]:hover{
+    border-color:#a77cc4;
+    background:#f2e8fa;
+}
+
+.abas-pareto{
+    display:flex;
+    gap:4px;
+    min-height:42px;
+    padding:4px;
+    border:1px solid #e0d9e5;
+    border-radius:10px;
+    background:#f1eef3;
+}
+
+.painel-pareto .aba{
+    min-width:64px;
+    padding:0 14px;
+    border:0;
+    border-radius:7px;
+    background:transparent;
+    color:#635a67;
+    font-size:11px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.painel-pareto .aba:hover{background:#e6e0e9;}
+.painel-pareto .aba.ativa{
+    color:#fff;
+    background:linear-gradient(135deg,#3a005f 0%,#65069d 100%);
+    box-shadow:0 4px 10px rgba(45,1,77,.20);
+}
+
+.filtro-pareto input,
+.filtro-pareto select{
+    width:100%;
+    min-width:165px;
+    height:42px;
+    padding:0 12px;
+    border:1px solid #d9d2dc;
+    border-radius:10px;
+    outline:0;
+    background:#fff;
+    color:#302a33;
+    font-size:12px;
+    font-weight:700;
+}
+
+.filtro-pareto input:focus,
+.filtro-pareto select:focus{
+    border-color:#7d3fa8;
+    box-shadow:0 0 0 3px rgba(100,27,147,.11);
+}
+
+.status-base-pareto{
+    min-height:42px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:2px;
+    padding-left:14px;
+    border-left:1px solid #e4dfe7;
+}
+
+.status-base-pareto span{
+    color:#8c788f;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.8px;
+}
+
+.status-base-pareto strong{
+    color:var(--fvo-roxo-900);
+    font-size:10px;
+    line-height:1.25;
+}
+
+.secao-titulo-pareto{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:22px;
+    margin:2px 0 12px;
+}
+
+.secao-titulo-pareto h2{
+    margin:4px 0 2px;
+    color:var(--fvo-roxo-900);
+    font-size:22px;
+    line-height:1.15;
+}
+
+.selo-base-pareto{
+    flex:0 0 auto;
+    padding:9px 13px;
+    border:1px solid rgba(104,167,36,.35);
+    border-radius:10px;
+    background:linear-gradient(135deg,rgba(146,208,80,.11),rgba(255,255,255,.95));
+    text-align:right;
+}
+
+.selo-base-pareto span{
+    display:block;
+    color:var(--fvo-verde-600);
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.selo-base-pareto strong{
+    color:var(--fvo-roxo-900);
+    font-size:10px;
+}
+
+.cards-resumo-pareto{
+    display:grid;
+    grid-template-columns:1.05fr 1.35fr 1fr 1fr .9fr;
+    gap:12px;
+    margin-bottom:16px;
+}
+
+.card-resumo-pareto{
+    position:relative;
+    min-height:116px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+    overflow:hidden;
+    padding:16px;
+    border:1px solid #ece7ef;
+    border-radius:14px;
+    background:#fff;
+    box-shadow:0 6px 18px rgba(45,1,77,.07);
+}
+
+.card-resumo-pareto::after{
+    content:"";
+    position:absolute;
+    inset:auto 0 0;
+    height:3px;
+    background:var(--cor-card,#92d050);
+}
+
+.card-resumo-pareto:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--fvo-sombra-hover);
+}
+
+.card-perda-total{
+    --cor-card:#92d050;
+    color:#fff;
+    border-color:#3a005f;
+    background:linear-gradient(135deg,#2d014d 0%,#4c006e 100%);
+}
+.card-principal{--cor-card:#d83a52;}
+.card-impacto{--cor-card:#ee9622;}
+.card-top3{--cor-card:#2878b8;}
+.card-ocorrencias{--cor-card:#08a3a7;}
+
+.icone-card-pareto{
+    width:46px;
+    height:46px;
+    flex:0 0 46px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    color:var(--cor-card,#92d050);
+    background:color-mix(in srgb,var(--cor-card,#92d050) 12%,white);
+    box-shadow:0 6px 14px color-mix(in srgb,var(--cor-card,#92d050) 18%,transparent);
+}
+
+.card-perda-total .icone-card-pareto{
+    color:#fff;
+    background:rgba(255,255,255,.13);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+
+.icone-card-pareto svg{
+    width:23px;
+    height:23px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.conteudo-card-pareto{min-width:0;}
+.conteudo-card-pareto span{
+    display:block;
+    margin-bottom:6px;
+    color:#746779;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.35px;
+    text-transform:uppercase;
+}
+
+.card-perda-total .conteudo-card-pareto span,
+.card-perda-total .conteudo-card-pareto small{color:rgba(255,255,255,.82);}
+
+.conteudo-card-pareto strong{
+    display:block;
+    color:var(--fvo-roxo-900);
+    font-size:clamp(22px,2vw,31px);
+    line-height:1.02;
+    font-variant-numeric:tabular-nums;
+}
+
+.card-perda-total .conteudo-card-pareto strong{color:#fff;}
+
+.conteudo-card-pareto strong.texto-card{
+    display:-webkit-box;
+    overflow:hidden;
+    font-size:clamp(15px,1.25vw,20px);
+    line-height:1.15;
+    -webkit-line-clamp:2;
+    line-clamp:2;
+    -webkit-box-orient:vertical;
+}
+
+.conteudo-card-pareto small{
+    display:block;
+    margin-top:6px;
+    color:#918593;
+    font-size:9px;
+    font-weight:700;
+}
+
+.grafico-card-pareto,
+.ranking-card-pareto,
+.resumo-executivo-pareto{
+    border:1px solid #e8e2eb;
+    border-radius:15px;
+    background:#fff;
+    box-shadow:var(--fvo-sombra-card);
+}
+
+.grafico-card-pareto{
+    padding:19px 20px 14px;
+    margin-bottom:16px;
+    border-left:4px solid var(--fvo-roxo-900);
+}
+
+.grafico-titulo-pareto,
+.cabecalho-card-detalhe{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.tag-grafico-pareto{
+    display:inline-block;
+    margin-bottom:4px;
+    color:var(--fvo-verde-600);
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1.15px;
+}
+
+.grafico-titulo-pareto h2,
+.cabecalho-card-detalhe h2,
+.resumo-executivo-pareto h2{
+    margin:0 0 3px;
+    color:var(--fvo-roxo-900);
+    font-size:19px;
+    line-height:1.15;
+}
+
+.legenda-pareto{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding-top:6px;
+    flex:0 0 auto;
+}
+
+.legenda-pareto span{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:#625b65;
+    font-size:10px;
+    font-weight:800;
+}
+
+.legenda-pareto i{display:block;}
+.legenda-barra{
+    width:18px;
+    height:9px;
+    border-radius:3px;
+    background:linear-gradient(90deg,#3a005f,#7a23a3);
+}
+.legenda-linha{
+    width:21px;
+    height:3px;
+    border-radius:4px;
+    background:#ee9622;
+}
+
+.grafico-area{
+    width:100%;
+    height:510px;
+    margin-top:5px;
+    padding:8px 2px 0;
+}
+
+#graficoPareto{
+    width:100% !important;
+    height:100% !important;
+}
+
+.rodape-grafico-pareto{
+    min-height:31px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    margin-top:7px;
+    padding:8px 10px 0;
+    border-top:1px solid #eee9f0;
+}
+
+.rodape-grafico-pareto span{
+    color:#8b818e;
+    font-size:9px;
+    font-weight:700;
+}
+
+.rodape-grafico-pareto strong{
+    color:var(--fvo-roxo-900);
+    font-size:10px;
+    text-align:right;
+}
+
+.detalhamento-pareto{
+    display:grid;
+    grid-template-columns:minmax(0,2.15fr) minmax(290px,.85fr);
+    gap:16px;
+}
+
+.ranking-card-pareto{
+    min-width:0;
+    overflow:hidden;
+    padding:18px 18px 14px;
+    border-left:4px solid var(--fvo-verde-500);
+}
+
+.tabela-wrap-pareto{
+    width:100%;
+    overflow-x:auto;
+    margin-top:13px;
+}
+
+.tabela-ranking-pareto{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0;
+    color:#453d48;
+    font-size:11px;
+}
+
+.tabela-ranking-pareto thead th{
+    padding:9px 10px;
+    border-bottom:1px solid #ded7e2;
+    background:#f5f1f7;
+    color:#655a69;
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:.3px;
+    text-align:left;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.tabela-ranking-pareto thead th:first-child{border-radius:8px 0 0 8px;}
+.tabela-ranking-pareto thead th:last-child{border-radius:0 8px 8px 0;}
+
+.tabela-ranking-pareto tbody td{
+    padding:9px 10px;
+    border-bottom:1px solid #eeeaf0;
+    font-weight:700;
+    vertical-align:middle;
+}
+
+.tabela-ranking-pareto tbody tr:last-child td{border-bottom:0;}
+.tabela-ranking-pareto tbody tr:hover td{background:#faf8fb;}
+.tabela-ranking-pareto td:nth-child(n+3),
+.tabela-ranking-pareto th:nth-child(n+3){text-align:right;}
+
+.posicao-ranking-pareto{
+    width:27px;
+    height:27px;
+    display:inline-grid;
+    place-items:center;
+    border-radius:8px;
+    background:#efe7f4;
+    color:var(--fvo-roxo-900);
+    font-size:10px;
+    font-weight:900;
+}
+
+.tabela-ranking-pareto tr:nth-child(1) .posicao-ranking-pareto{background:#3b005f;color:#fff;}
+.tabela-ranking-pareto tr:nth-child(2) .posicao-ranking-pareto{background:#7b3fa0;color:#fff;}
+.tabela-ranking-pareto tr:nth-child(3) .posicao-ranking-pareto{background:#92d050;color:#173300;}
+
+.barra-participacao-pareto{
+    min-width:84px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:7px;
+}
+
+.barra-participacao-pareto i{
+    width:42px;
+    height:5px;
+    overflow:hidden;
+    border-radius:5px;
+    background:#ece7ef;
+}
+
+.barra-participacao-pareto i::after{
+    content:"";
+    display:block;
+    width:var(--largura,0%);
+    height:100%;
+    border-radius:inherit;
+    background:linear-gradient(90deg,#5c0a86,#92d050);
+}
+
+.linha-vazia-pareto td{
+    padding:32px 10px !important;
+    color:#8b818e;
+    text-align:center !important;
+}
+
+.resumo-executivo-pareto{
+    padding:18px;
+    border-top:4px solid var(--fvo-laranja-500);
+    background:
+        linear-gradient(145deg,rgba(247,241,250,.97),rgba(255,255,255,.98));
+}
+
+.cabecalho-resumo-pareto{
+    display:flex;
+    align-items:center;
+    gap:11px;
+    margin-bottom:13px;
+}
+
+.icone-resumo-pareto{
+    width:43px;
+    height:43px;
+    flex:0 0 43px;
+    display:grid;
+    place-items:center;
+    border-radius:11px;
+    background:#fff0dc;
+    color:#c76f00;
+}
+
+.icone-resumo-pareto svg{
+    width:22px;
+    height:22px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.cabecalho-resumo-pareto span{
+    color:#9a6b32;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.9px;
+}
+
+.resumo-executivo-pareto > p{
+    margin:0 0 15px;
+    padding-bottom:14px;
+    border-bottom:1px solid #e5dce8;
+    color:#5f5663;
+    font-size:11px;
+    line-height:1.55;
+}
+
+.mini-indicadores-pareto{
+    display:grid;
+    gap:10px;
+}
+
+.mini-indicadores-pareto > div{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:10px 0;
+    border-bottom:1px solid #ebe5ed;
+}
+
+.mini-indicadores-pareto > div:last-child{border-bottom:0;}
+.mini-indicadores-pareto span{
+    color:#786d7c;
+    font-size:9px;
+    font-weight:800;
+}
+.mini-indicadores-pareto strong{
+    color:var(--fvo-roxo-900);
+    font-size:13px;
+    text-align:right;
+}
+
+.cabecalho-pdf-pareto{display:none;}
+
+/* Carregamento */
+.overlay-carregamento-pareto{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(25,4,42,.58);
+    backdrop-filter:blur(3px);
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .2s ease,visibility .2s ease;
+}
+.overlay-carregamento-pareto.visivel{
+    opacity:1;
+    visibility:visible;
+    pointer-events:all;
+}
+.caixa-carregamento-pareto{
+    min-width:280px;
+    padding:28px 32px;
+    border-radius:16px;
+    background:#fff;
+    text-align:center;
+    box-shadow:0 18px 48px rgba(0,0,0,.26);
+}
+.caixa-carregamento-pareto strong{
+    display:block;
+    margin-bottom:5px;
+    color:var(--fvo-roxo-900);
+    font-size:16px;
+}
+.caixa-carregamento-pareto span{color:#777;font-size:10px;}
+.spinner-pareto{
+    width:44px;
+    height:44px;
+    margin:0 auto 15px;
+    border:4px solid #eee7f2;
+    border-top-color:var(--fvo-verde-500);
+    border-right-color:var(--fvo-roxo-900);
+    border-radius:50%;
+    animation:girarSpinnerPareto .8s linear infinite;
+}
+@keyframes girarSpinnerPareto{to{transform:rotate(360deg);}}
+
+@media (max-width:1280px){
+    .painel-pareto{grid-template-columns:minmax(260px,1.5fr) auto minmax(160px,.8fr) auto;}
+    .status-base-pareto{grid-column:1/-1;border-left:0;border-top:1px solid #eee8f0;padding:9px 0 0;}
+    .cards-resumo-pareto{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .detalhamento-pareto{grid-template-columns:1fr;}
+}
+
+@media (max-width:900px){
+    .container-pareto{padding:22px 14px 38px;}
+    .cabecalho-pareto,.secao-titulo-pareto{align-items:flex-start;flex-direction:column;}
+    .acoes-pareto{width:100%;}
+    .btn-pdf-pareto,.btn-email-pareto{flex:1;}
+    .painel-pareto{grid-template-columns:1fr 1fr;align-items:end;}
+    .controle-arquivo{grid-column:1/-1;}
+    .controle-botao{align-self:end;}
+    .selo-base-pareto{text-align:left;}
+    .cards-resumo-pareto{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .grafico-area{height:450px;}
+}
+
+@media (max-width:620px){
+    .painel-pareto{grid-template-columns:1fr;}
+    .controle-arquivo,.controle-analise,.filtro-pareto,.controle-botao,.status-base-pareto{grid-column:1;}
+    .controle-botao .label-invisivel{display:none;}
+    .btn-gerar-pareto{width:100%;}
+    .cards-resumo-pareto{grid-template-columns:1fr;}
+    .card-resumo-pareto{min-height:98px;}
+    .grafico-titulo-pareto{flex-direction:column;}
+    .legenda-pareto{padding-top:0;}
+    .grafico-area{height:420px;}
+    .rodape-grafico-pareto{align-items:flex-start;flex-direction:column;}
+}
+
+/* =========================================================
+   IMPRESSÃO / PDF
+========================================================= */
+@page{
+    size:A4 landscape;
+    margin:7mm;
+}
+
+@media print{
+    html,body{
+        width:auto !important;
+        min-width:0 !important;
+        background:#fff !important;
+        print-color-adjust:exact;
+        -webkit-print-color-adjust:exact;
+    }
+
+    body{
+        font-family:Arial,Helvetica,sans-serif !important;
+    }
+
+    .header-dashboard-fvo,
+    .menu-dashboard-fvo,
+    .painel-pareto,
+    .acoes-pareto,
+    .overlay-carregamento-pareto,
+    .secao-titulo-pareto{
+        display:none !important;
+    }
+
+    .container-pareto{
+        width:100% !important;
+        max-width:none !important;
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    .cabecalho-pareto{
+        display:none !important;
+    }
+
+    /* Cabeçalho corporativo repetido nas duas páginas. */
+    .cabecalho-pdf-pareto{
+        display:flex !important;
+        align-items:center;
+        justify-content:space-between;
+        gap:10mm;
+        height:19mm;
+        min-height:19mm;
+        margin:0 0 3.5mm;
+        padding:2.6mm 4mm;
+        border:1px solid #ddd4e2;
+        border-left:3px solid #92d050;
+        border-radius:3.2mm;
+        background:linear-gradient(100deg,#fbf9fc 0%,#f3edf7 68%,#f1f7e9 100%);
+        box-sizing:border-box;
+        break-inside:avoid;
+    }
+
+    .cabecalho-pdf-pagina-2{
+        margin-top:0 !important;
+    }
+
+    .pdf-marca-pareto{
+        display:flex;
+        align-items:center;
+        gap:3.5mm;
+        min-width:0;
+    }
+
+    .pdf-marca-pareto img{
+        width:24mm;
+        height:11.5mm;
+        object-fit:contain;
+        padding:1.3mm;
+        border-radius:1.4mm;
+        background:#2d014d;
+        box-sizing:border-box;
+    }
+
+    .pdf-marca-pareto span{
+        display:block;
+        margin-bottom:.7mm;
+        color:#756b79;
+        font-size:6.7pt;
+        font-weight:800;
+        letter-spacing:.25pt;
+    }
+
+    .pdf-marca-pareto strong{
+        display:block;
+        color:#2d014d;
+        font-size:15pt;
+        line-height:1.05;
+    }
+
+    .pdf-meta-pareto{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-end;
+        justify-content:center;
+        gap:.7mm;
+        color:#655b68;
+        font-size:7pt;
+        font-weight:700;
+        line-height:1.15;
+        white-space:nowrap;
+    }
+
+    .pdf-secao-pareto{
+        display:inline-flex !important;
+        align-items:center;
+        justify-content:center;
+        margin-bottom:.5mm;
+        padding:1mm 2.3mm;
+        border-radius:99px;
+        background:#ebe1f1;
+        color:#4a0969 !important;
+        font-size:6.2pt !important;
+        font-weight:900 !important;
+        letter-spacing:.35pt;
+    }
+
+    /* Página 1 - visão executiva */
+    .cards-resumo-pareto{
+        grid-template-columns:1.05fr 1.35fr 1fr 1fr .9fr !important;
+        gap:2.7mm !important;
+        margin:0 0 3.5mm !important;
+    }
+
+    .card-resumo-pareto{
+        min-height:25.5mm !important;
+        padding:2.7mm !important;
+        gap:2.3mm !important;
+        border-radius:3mm !important;
+        box-shadow:none !important;
+        border-width:1px !important;
+        break-inside:avoid;
+    }
+
+    .icone-card-pareto{
+        width:8.7mm !important;
+        height:8.7mm !important;
+        flex-basis:8.7mm !important;
+        border-radius:2.2mm !important;
+    }
+
+    .icone-card-pareto svg{width:4.8mm !important;height:4.8mm !important;}
+    .conteudo-card-pareto span{font-size:6.4pt !important;margin-bottom:.6mm !important;}
+    .conteudo-card-pareto strong{font-size:15.2pt !important;line-height:1.02 !important;}
+    .conteudo-card-pareto strong.texto-card{font-size:9.2pt !important;line-height:1.08 !important;}
+    .conteudo-card-pareto small{font-size:6.1pt !important;margin-top:.7mm !important;}
+
+    .grafico-card-pareto{
+        height:134mm !important;
+        margin:0 !important;
+        padding:3.3mm 4mm 2.4mm !important;
+        border:1px solid #e0d9e4 !important;
+        border-left:2.5px solid #4a076e !important;
+        border-radius:3.2mm !important;
+        box-shadow:none !important;
+        box-sizing:border-box !important;
+        break-inside:avoid;
+        overflow:hidden !important;
+    }
+
+    .grafico-titulo-pareto{
+        min-height:14mm !important;
+        align-items:flex-start !important;
+    }
+
+    .grafico-titulo-pareto h2{font-size:13pt !important;line-height:1.05 !important;}
+    .grafico-titulo-pareto p{font-size:7.2pt !important;margin-top:.8mm !important;}
+    .tag-grafico-pareto{font-size:5.8pt !important;letter-spacing:.6pt !important;}
+    .legenda-pareto{gap:3mm !important;padding-top:1mm !important;}
+    .legenda-pareto span{font-size:7pt !important;}
+
+    .grafico-area{
+        height:105.5mm !important;
+        margin-top:.7mm !important;
+        padding:0 !important;
+    }
+
+    .rodape-grafico-pareto{
+        min-height:6.5mm !important;
+        margin-top:.5mm !important;
+        padding:1.2mm .8mm 0 !important;
+    }
+    .rodape-grafico-pareto span,
+    .rodape-grafico-pareto strong{font-size:6.5pt !important;}
+
+    .bloco-pdf-pagina-1{
+        break-after:page !important;
+        page-break-after:always !important;
+    }
+
+    /* Página 2 - ranking e leitura executiva */
+    .detalhamento-pareto{
+        display:grid !important;
+        grid-template-columns:minmax(0,2.15fr) minmax(0,.85fr) !important;
+        gap:3.5mm !important;
+        height:166mm !important;
+        min-height:166mm !important;
+        margin:0 !important;
+        break-inside:avoid !important;
+        page-break-inside:avoid !important;
+    }
+
+    .ranking-card-pareto,
+    .resumo-executivo-pareto{
+        height:166mm !important;
+        min-height:166mm !important;
+        padding:3.5mm !important;
+        border:1px solid #e0d9e4 !important;
+        border-radius:3.2mm !important;
+        box-shadow:none !important;
+        box-sizing:border-box !important;
+        break-inside:avoid !important;
+        page-break-inside:avoid !important;
+        overflow:hidden !important;
+    }
+
+    .ranking-card-pareto{
+        border-left:2.5px solid #92d050 !important;
+    }
+
+    .resumo-executivo-pareto{
+        border-top:2.5px solid #ee9622 !important;
+        background:linear-gradient(145deg,#f8f3fa 0%,#fff 70%,#fbf6ec 100%) !important;
+    }
+
+    .cabecalho-card-detalhe{
+        min-height:15mm !important;
+        padding-bottom:2mm !important;
+        border-bottom:1px solid #ece6ee !important;
+    }
+    .cabecalho-card-detalhe h2,
+    .resumo-executivo-pareto h2{font-size:12.5pt !important;line-height:1.08 !important;}
+    .cabecalho-card-detalhe p{font-size:7.2pt !important;margin-top:.8mm !important;}
+
+    .tabela-wrap-pareto{
+        margin-top:2.5mm !important;
+        overflow:visible !important;
+    }
+    .tabela-ranking-pareto{
+        table-layout:fixed !important;
+        font-size:7.6pt !important;
+    }
+    .tabela-ranking-pareto th:nth-child(1){width:5%;}
+    .tabela-ranking-pareto th:nth-child(2){width:35%;}
+    .tabela-ranking-pareto th:nth-child(3){width:13%;}
+    .tabela-ranking-pareto th:nth-child(4){width:18%;}
+    .tabela-ranking-pareto th:nth-child(5){width:15%;}
+    .tabela-ranking-pareto th:nth-child(6){width:14%;}
+    .tabela-ranking-pareto thead th{
+        padding:2mm 1.8mm !important;
+        font-size:6.1pt !important;
+        background:#f1eaf5 !important;
+        color:#514659 !important;
+    }
+    .tabela-ranking-pareto tbody td{
+        padding:2.15mm 1.8mm !important;
+        line-height:1.2 !important;
+        vertical-align:middle !important;
+    }
+    .tabela-ranking-pareto tbody tr:nth-child(even) td{
+        background:#fbf9fc !important;
+    }
+    .tabela-ranking-pareto tbody tr:nth-child(1) td{
+        background:#f4eef7 !important;
+    }
+    .posicao-ranking-pareto{
+        width:6mm !important;
+        height:6mm !important;
+        border-radius:1.5mm !important;
+        font-size:7pt !important;
+    }
+    .barra-participacao-pareto{
+        min-width:0 !important;
+        gap:1.5mm !important;
+    }
+    .barra-participacao-pareto i{width:10mm !important;height:1.5mm !important;}
+
+    .cabecalho-resumo-pareto{
+        margin-bottom:3mm !important;
+        padding-bottom:2.5mm !important;
+        border-bottom:1px solid #e7dee9 !important;
+    }
+    .icone-resumo-pareto{
+        width:9.5mm !important;
+        height:9.5mm !important;
+        flex-basis:9.5mm !important;
+        border-radius:2.4mm !important;
+    }
+    .icone-resumo-pareto svg{width:5mm !important;height:5mm !important;}
+    .cabecalho-resumo-pareto span{font-size:5.9pt !important;letter-spacing:.55pt !important;}
+    .resumo-executivo-pareto > p{
+        margin-bottom:3.2mm !important;
+        padding:0 0 3.2mm !important;
+        font-size:8pt !important;
+        line-height:1.5 !important;
+    }
+    .mini-indicadores-pareto{
+        gap:0 !important;
+        border:1px solid #e6dee9;
+        border-radius:2.5mm;
+        overflow:hidden;
+        background:#fff;
+    }
+    .mini-indicadores-pareto > div{
+        min-height:15mm !important;
+        padding:2.5mm 3mm !important;
+        border-bottom:1px solid #ebe5ed !important;
+    }
+    .mini-indicadores-pareto span{font-size:6.7pt !important;}
+    .mini-indicadores-pareto strong{font-size:10.5pt !important;}
+}

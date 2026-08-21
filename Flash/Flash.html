@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Flash Operacional - Britagem FVO
+    </title>
+<!-- LEITURA DE EXCEL -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem/Britagem.css">
+    <link rel="stylesheet" href="Flash.css">
+</head>
+
+
+<body class="pagina-portal britagem-ativa pagina-flash">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="header-portal-fvo">
+
+        <div class="logo logo-portal">
+
+            <img
+                src="../Britagem/Imagens/Logo_CMOC.png"
+                alt="CMOC">
+
+        </div>
+
+
+        <div class="titulo-portal-geral">
+
+            PORTAL FVO
+
+        </div>
+
+
+        <div class="seletor-portais">
+
+            <a
+                href="../Britagem/index.html"
+                class="portal-opcao portal-opcao-ativa">
+
+                <span class="portal-icone">
+                    ◈
+                </span>
+
+                <span>
+                    PORTAL BRITAGEM FVO
+                </span>
+
+            </a>
+
+
+            <a
+                href="../Usina/index.html"
+                class="portal-opcao">
+
+                <span class="portal-icone">
+                    ◫
+                </span>
+
+                <span>
+                    PORTAL USINA FVO
+                </span>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    <nav class="menu-portal menu-britagem menu-flash-simples" aria-label="Navegação do Flash Operacional">
+
+        <ul>
+
+            <li class="menu-secao-ativa">
+                <a href="../Britagem/index.html">
+                    Início
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container-flash">
+
+
+        <!-- =================================================
+             CABEÇALHO DA PÁGINA
+        ================================================== -->
+
+        <section class="cabecalho-flash">
+
+            <div>
+
+                <span class="subtitulo-flash">
+                    ACOMPANHAMENTO OPERACIONAL
+                </span>
+
+                <h1>
+                    Flash Operacional
+                </h1>
+
+                <p>
+                    Acompanhamento da produção, qualidade da pilha,
+                    previsão de conclusão e principais impactos do período.
+                </p>
+
+            </div>
+
+
+            <div class="acoes-flash">
+
+                <button
+                    type="button"
+                    id="btnGerarFlash"
+                    class="btn-gerar-flash">
+                    <span class="icone-botao-flash" aria-hidden="true">▥</span>
+                    Gerar Flash
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnGerarPDFFlash"
+                    class="btn-pdf-flash">
+                    <span class="icone-botao-flash" aria-hidden="true">▤</span>
+                    Gerar PDF
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnEnviarEmailFlash"
+                    class="btn-email-flash">
+                    <span class="icone-botao-flash" aria-hidden="true">✉</span>
+                    Enviar por E-mail
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             01 - PLANILHA
+        ================================================== -->
+
+        <section class="bloco-flash">
+
+            <div class="titulo-bloco-flash">
+
+                <span>01</span>
+
+                <div>
+
+                    <h2>
+                        Controle de Estocagem
+                    </h2>
+
+                    <p>
+                        Carregue a planilha para buscar automaticamente
+                        os teores ponderados da pilha.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="painel-upload-flash">
+
+
+                <div class="campo-upload-flash">
+
+                    <label for="arquivoControleEstocagem">
+
+                        Planilha de Controle de Estocagem
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="arquivoControleEstocagem"
+                        accept=".xlsx,.xls">
+
+
+                    <small id="statusArquivoFlash">
+
+                        Nenhum arquivo carregado.
+
+                    </small>
+
+                </div>
+
+
+                <div class="indicador-arquivo-flash">
+
+                    <span>
+                        STATUS
+                    </span>
+
+                    <strong id="statusLeituraControle">
+                        Aguardando arquivo
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             02 - PILHA
+        ================================================== -->
+
+        <section class="bloco-flash">
+
+            <div class="titulo-bloco-flash">
+
+                <span>02</span>
+
+                <div>
+
+                    <h2>
+                        Pilha em Formação
+                    </h2>
+
+                    <p>
+                        Selecione a pilha para carregar automaticamente
+                        P₂O₅, MgO e Nb₂O₅.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SELEÇÃO -->
+
+            <div class="grid-selecao-pilha-flash grid-selecao-pilha-flash-2">
+
+
+                <div class="campo-flash">
+
+                    <label>
+                        Pilha em formação
+                    </label>
+
+                    <select id="pilhaFlash">
+
+                        <option value="">
+                            Carregue a planilha primeiro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-flash">
+
+                    <label>
+                        Início da pilha
+                    </label>
+
+                    <input
+                        type="text"
+                        id="inicioPilhaFlash"
+                        readonly
+                        placeholder="-">
+
+                </div>
+
+            </div>
+
+
+            <!-- CARDS -->
+
+            <div class="cards-qualidade-flash">
+
+
+                <!-- MASSA MANUAL -->
+
+                <article class="card-massa-manual-flash">
+
+                    <span>
+                        Massa Acumulada
+                    </span>
+
+
+                    <div class="input-massa-flash">
+
+                        <input
+                            type="number"
+                            id="massaAcumuladaManualFlash"
+                            min="0"
+                            step="1"
+                            placeholder="Ex.: 47263">
+
+                        <small>
+                            t
+                        </small>
+
+                    </div>
+
+
+                    <p>
+                        preenchimento manual
+                    </p>
+
+                </article>
+
+
+                <!-- P2O5 -->
+
+                <article>
+
+                    <span>
+                        P₂O₅ Ponderado
+                    </span>
+
+                    <strong id="p2o5Flash">
+                        -
+                    </strong>
+
+                    <small>
+                        %
+                    </small>
+
+                </article>
+
+
+                <!-- MGO -->
+
+                <article>
+
+                    <span>
+                        MgO Ponderado
+                    </span>
+
+                    <strong id="mgoFlash">
+                        -
+                    </strong>
+
+                    <small>
+                        %
+                    </small>
+
+                </article>
+
+
+                <!-- NB2O5 -->
+
+                <article>
+
+                    <span>
+                        Nb₂O₅ Ponderado
+                    </span>
+
+                    <strong id="nb2o5Flash">
+                        -
+                    </strong>
+
+                    <small>
+                        %
+                    </small>
+
+                </article>
+
+            </div>
+
+
+            <!-- =================================================
+                 FRENTES
+            ================================================== -->
+
+            <div class="bloco-frentes-flash">
+
+                <div class="cabecalho-frentes-flash">
+
+                    <div>
+
+                        <span class="titulo-frentes-flash">
+                            Frentes / Origens Utilizadas
+                        </span>
+
+                        <small>
+                            Se forem identificadas na planilha, serão
+                            preenchidas automaticamente. Caso contrário,
+                            informe manualmente.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="campo-frentes-manual-flash">
+
+                    <label>
+                        Frentes utilizadas
+                    </label>
+
+                    <input
+                        type="text"
+                        id="frentesManualFlash"
+                        placeholder="Ex.: M570, M573, M576, Baia, Pulmão">
+
+                    <small>
+                        Separe as frentes por vírgula.
+                    </small>
+
+                </div>
+
+
+                <div
+                    id="listaFrentesFlash"
+                    class="lista-frentes-flash">
+
+                    <span class="tag-frente-vazia">
+                        Nenhuma frente informada
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             03 - TURNO
+        ================================================== -->
+
+        <section class="bloco-flash">
+
+            <div class="titulo-bloco-flash">
+
+                <span>03</span>
+
+                <div>
+
+                    <h2>
+                        Informações do Turno
+                    </h2>
+
+                    <p>
+                        Dados de identificação do Flash.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-campos-flash">
+
+
+                <!-- DATA -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dataFlash">
+
+                </div>
+
+
+                <!-- HORÁRIO -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Horário do Flash
+                    </label>
+
+                    <select id="horarioFlash">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="06:00">
+                            06:00
+                        </option>
+
+                        <option value="12:00">
+                            12:00
+                        </option>
+
+                        <option value="18:00">
+                            18:00
+                        </option>
+
+                        <option value="23:00">
+                            23:00
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TURNO -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Turno
+                    </label>
+
+                    <select id="turnoFlash">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="07:00 - 19:00">
+                            07:00 - 19:00
+                        </option>
+
+                        <option value="19:00 - 07:00">
+                            19:00 - 07:00
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TURMA -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Turma
+                    </label>
+
+                    <select id="turmaFlash">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="A">
+                            A
+                        </option>
+
+                        <option value="B">
+                            B
+                        </option>
+
+                        <option value="C">
+                            C
+                        </option>
+
+                        <option value="D">
+                            D
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- OPERADOR -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Operador
+                    </label>
+
+                    <select id="operadorFlash">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="Marco Antônio">
+                            Marco Antônio
+                        </option>
+
+                        <option value="João Batista">
+                            João Batista
+                        </option>
+
+                        <option value="Guilherme Silveira">
+                            Guilherme Silveira
+                        </option>
+
+                        <option value="Ricardo Sauer">
+                            Ricardo Sauer
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- COORDENADOR -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Coordenador
+                    </label>
+
+                    <select id="coordenadorFlash">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="Gilvan Amorim">
+                            Gilvan Amorim
+                        </option>
+
+                        <option value="Jonathan Santiago">
+                            Jonathan Santiago
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRODUÇÃO -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Produção do período
+                    </label>
+
+                    <div class="input-unidade-flash">
+
+                        <input
+                            type="number"
+                            id="producaoFlash"
+                            min="0"
+                            placeholder="Ex.: 3250">
+
+                        <span>
+                            t
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             04 - PREVISÕES
+        ================================================== -->
+
+        <section class="bloco-flash">
+
+            <div class="titulo-bloco-flash">
+
+                <span>04</span>
+
+                <div>
+
+                    <h2>
+                        Cálculos e Previsões
+                    </h2>
+
+                    <p>
+                        Acompanhamento da formação e estimativa
+                        de conclusão da pilha.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-campos-previsao-flash">
+
+
+                <!-- MASSA PLANEJADA -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Massa planejada
+                    </label>
+
+                    <div class="input-unidade-flash">
+
+                        <input
+                            type="number"
+                            id="massaPlanejadaFlash"
+                            min="0"
+                            placeholder="Ex.: 65000">
+
+                        <span>
+                            t
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- META -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Meta horária
+                    </label>
+
+                    <div class="input-unidade-flash">
+
+                        <input
+                            type="number"
+                            id="metaHorariaFlash"
+                            min="0"
+                            placeholder="Ex.: 900">
+
+                        <span>
+                            t/h
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MÉDIA -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Média horária atual
+                    </label>
+
+                    <div class="input-unidade-flash">
+
+                        <input
+                            type="number"
+                            id="mediaHorariaFlash"
+                            min="0"
+                            placeholder="Ex.: 812">
+
+                        <span>
+                            t/h
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MANUTENÇÃO -->
+
+                <div class="campo-flash">
+
+                    <label>
+                        Manutenção planejada
+                    </label>
+
+                    <div class="input-unidade-flash">
+
+                        <input
+                            type="number"
+                            id="manutencaoPlanejadaFlash"
+                            min="0"
+                            value="0"
+                            step="0.1">
+
+                        <span>
+                            h
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESULTADOS -->
+
+            <div class="cards-calculos-flash">
+
+
+                <article>
+
+                    <span>
+                        Falta Britar
+                    </span>
+
+                    <strong id="faltaBritarFlash">
+                        -
+                    </strong>
+
+                    <small>
+                        t
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Formação Concluída
+                    </span>
+
+                    <strong id="percentualFormacaoFlash">
+                        -
+                    </strong>
+
+                    <small>
+                        %
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Atingimento da Meta
+                    </span>
+
+                    <strong id="atingimentoMetaFlash">
+                        -
+                    </strong>
+
+                    <small>
+                        %
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Horas Restantes
+                    </span>
+
+                    <strong id="horasRestantesFlash">
+                        -
+                    </strong>
+
+                    <small>
+                        h
+                    </small>
+
+                </article>
+
+
+                <article class="card-previsao-conclusao-flash">
+
+                    <span>
+                        Previsão de Conclusão
+                    </span>
+
+                    <strong id="previsaoConclusaoFlash">
+                        -
+                    </strong>
+
+                    <small>
+                        considerando manutenção
+                    </small>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             05 - IMPACTOS
+        ================================================== -->
+
+        <section class="bloco-flash">
+
+            <div class="titulo-bloco-flash">
+
+                <span>05</span>
+
+                <div>
+
+                    <h2>
+                        Principais Impactos no Período
+                    </h2>
+
+                    <p>
+                        Registre os eventos que impactaram a produção.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="listaImpactosFlash"
+                class="lista-impactos-flash">
+            </div>
+
+
+            <button
+                type="button"
+                id="btnAdicionarImpacto"
+                class="btn-adicionar-impacto-flash">
+
+                + Adicionar Impacto
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             06 - OBSERVAÇÕES
+        ================================================== -->
+
+        <section class="bloco-flash">
+
+            <div class="titulo-bloco-flash">
+
+                <span>06</span>
+
+                <div>
+
+                    <h2>
+                        Observações
+                    </h2>
+
+                    <p>
+                        Informações complementares do período.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <textarea
+                id="observacoesFlash"
+                class="observacoes-flash"
+                placeholder="Digite aqui observações importantes do período..."></textarea>
+
+        </section>
+
+
+        <!-- =================================================
+             PRÉVIA
+        ================================================== -->
+
+        <section
+            id="previewFlash"
+            class="preview-flash">
+
+            <div class="preview-flash-vazio">
+
+                Preencha os dados e clique em
+
+                <strong>
+                    Gerar Flash
+                </strong>
+
+                para visualizar a prévia.
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             AÇÕES
+        ================================================== -->
+
+        <div class="acoes-finais-flash">
+
+            <button
+                type="button"
+                id="btnLimparFlash"
+                class="btn-limpar-flash">
+
+                Limpar
+
+            </button>
+
+
+            <button
+                type="button"
+                id="btnGerarFlashFinal"
+                class="btn-gerar-flash-final">
+
+                Gerar Flash
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         JS
+    ====================================================== -->
+    <script src="../Compartilhado/Core.js"></script>
+    <script src="../Britagem/Britagem.js"></script>
+    <script src="Flash.js"></script>
+</body>
+
+</html>

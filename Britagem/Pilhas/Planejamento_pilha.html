@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Planejamento de Pilhas - Britagem FVO
+    </title>
+    <link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="Planejamento_pilha.css">
+</head>
+
+
+<body class="pagina-portal britagem-ativa pagina-planejamento-pilhas">
+
+
+    <!-- =====================================================
+         CABEÇALHO PORTAL
+    ====================================================== -->
+
+    <header class="header-portal-fvo">
+
+        <div class="logo logo-portal">
+
+            <img
+                src="../Imagens/Logo_CMOC.png"
+                alt="CMOC">
+
+        </div>
+
+
+        <div class="titulo-portal-geral">
+
+            PORTAL FVO
+
+        </div>
+
+
+        <div class="seletor-portais">
+
+            <a
+                href="../index.html"
+                class="portal-opcao portal-opcao-ativa">
+
+                <span class="portal-icone">
+                    ◈
+                </span>
+
+                <span>
+                    PORTAL BRITAGEM FVO
+                </span>
+
+            </a>
+
+
+            <a
+                href="../../Usina/index.html"
+                class="portal-opcao">
+
+                <span class="portal-icone">
+                    ◫
+                </span>
+
+                <span>
+                    PORTAL USINA FVO
+                </span>
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    <nav class="menu-portal menu-britagem">
+        <ul>
+            <li class="menu-secao-ativa">
+                <a href="../index.html">Início</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container-planejamento-pilha">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <section class="cabecalho-planejamento-pilha">
+
+            <div>
+
+                <span class="subtitulo-planejamento-pilha">
+                    PLANEJAMENTO OPERACIONAL
+                </span>
+
+                <h1>
+                    Planejamento e Acompanhamento de Pilhas
+                </h1>
+
+                <p>
+                    Acompanhamento da pilha em retomada e simulação
+                    da formação da próxima pilha.
+                </p>
+
+            </div>
+
+
+            <div class="acoes-planejamento-pilha">
+
+                <button
+                    type="button"
+                    id="btnGerarPDFPlanejamento"
+                    class="btn-pdf-planejamento">
+
+                    ▣ Gerar PDF
+
+                </button>
+
+                <button
+                    type="button"
+                    id="btnEnviarEmailPlanejamento"
+                    class="btn-email-planejamento">
+
+                    ✉ Enviar por E-mail
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ABAS DO PLANEJAMENTO
+        ================================================== -->
+
+        <nav class="abas-planejamento-pilha" aria-label="Modos do planejamento">
+
+            <button
+                type="button"
+                id="abaPlanejamentoCompleto"
+                class="aba-planejamento-pilha ativo"
+                aria-selected="true">
+
+                Planejamento Completo
+
+            </button>
+
+
+            <button
+                type="button"
+                id="abaSimuladorPilha"
+                class="aba-planejamento-pilha"
+                aria-selected="false">
+
+                Simulador de Pilha
+
+            </button>
+
+        </nav>
+
+
+        <div id="painelPlanejamentoCompleto" class="planejamento-completo-conteudo">
+
+        <!-- =================================================
+             RESUMO EXCLUSIVO PARA PDF
+        ================================================== -->
+
+        <section
+            id="resumoPDFPlanejamento"
+            class="resumo-pdf-planejamento">
+
+            <div class="cabecalho-resumo-pdf">
+
+                <div>
+
+                    <span>
+                        PLANEJAMENTO OPERACIONAL
+                    </span>
+
+                    <h2>
+                        Planejamento de Pilhas - Britagem FVO
+                    </h2>
+
+                </div>
+
+
+                <div class="data-relatorio-pdf">
+
+                    <span>
+                        PILHA PLANEJADA
+                    </span>
+
+                    <strong id="pdfNomePilha">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-resumo-pdf">
+
+
+                <article>
+
+                    <span>
+                        Pilha em Retomada
+                    </span>
+
+                    <strong id="pdfPilhaRetomada">
+                        -
+                    </strong>
+
+                    <small id="pdfRetomadaDetalhe">
+                        -
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Pilha Planejada
+                    </span>
+
+                    <strong id="pdfPilhaPlanejada">
+                        -
+                    </strong>
+
+                    <small id="pdfPilhaDetalhe">
+                        -
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Massa Planejada
+                    </span>
+
+                    <strong id="pdfMassaPlanejada">
+                        -
+                    </strong>
+
+                    <small>
+                        toneladas
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Massa Possível
+                    </span>
+
+                    <strong id="pdfMassaPossivel">
+                        -
+                    </strong>
+
+                    <small>
+                        toneladas
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Diferença
+                    </span>
+
+                    <strong id="pdfDiferencaMassa">
+                        -
+                    </strong>
+
+                    <small>
+                        toneladas
+                    </small>
+
+                </article>
+
+
+                <article id="pdfCardStatus">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="pdfStatus">
+                        -
+                    </strong>
+
+                    <small id="pdfStatusDetalhe">
+                        -
+                    </small>
+
+                </article>
+
+            </div>
+
+
+            <div class="grid-resumo-tempos-pdf">
+
+
+                <div>
+
+                    <span>
+                        Fim previsto da retomada
+                    </span>
+
+                    <strong id="pdfFimRetomada">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Fim previsto da formação
+                    </span>
+
+                    <strong id="pdfFimFormacao">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Produtividade planejada
+                    </span>
+
+                    <strong id="pdfProdutividade">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Produtividade necessária
+                    </span>
+
+                    <strong id="pdfProdutividadeNecessaria">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             01 - RETOMADA
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento bloco-entrada-planejamento"
+            id="secaoRetomada">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>01</span>
+
+                    <div>
+
+                        <h2>
+                            Acompanhamento da Retomada
+                        </h2>
+
+                        <p>
+                            Situação atual da pilha em consumo pela usina.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-retomada-planejamento">
+
+
+                <article class="card-planejamento">
+
+                    <h3>
+                        Ritmo do Último Turno
+                    </h3>
+
+
+                    <div class="grid-campos-planejamento">
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Horas trabalhadas
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="horasTrabalhadas"
+                                    step="0.1"
+                                    placeholder="Ex.: 11,5">
+
+                                <span>h</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Metros consumidos
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="metrosConsumidos"
+                                    step="0.1"
+                                    placeholder="Ex.: 48">
+
+                                <span>m</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento campo-calculado">
+
+                            <label>
+                                Avanço calculado
+                            </label>
+
+                            <strong id="avancoCalculado">
+                                -
+                            </strong>
+
+                            <small>
+                                m/h
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="divisor-card-planejamento"></div>
+
+
+                    <h3>
+                        Pilha em Retomada
+                    </h3>
+
+
+                    <div class="grid-campos-planejamento">
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Pilha
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pilhaRetomada"
+                                placeholder="Ex.: 53A">
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Lado
+                            </label>
+
+                            <select id="ladoRetomada">
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option value="A">
+                                    A
+                                </option>
+
+                                <option value="B">
+                                    B
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Início da retomada
+                            </label>
+
+                            <input
+                                type="datetime-local"
+                                id="inicioRetomada">
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Metragem total
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="metragemTotalRetomada"
+                                    value="420">
+
+                                <span>m</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Metragem consumida
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="metragemConsumidaRetomada"
+                                    placeholder="Ex.: 150">
+
+                                <span>m</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Ritmo do retomador
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="ritmoRetomador"
+                                    step="0.01"
+                                    placeholder="Ex.: 5,4">
+
+                                <span>m/h</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Manutenção da usina
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="manutencaoUsina"
+                                    value="0"
+                                    step="0.1">
+
+                                <span>h</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="card-resumo-retomada">
+
+                    <span class="titulo-mini-card">
+                        SITUAÇÃO DA RETOMADA
+                    </span>
+
+
+                    <div class="indicador-retomada">
+
+                        <span>
+                            Avanço
+                        </span>
+
+                        <strong id="percentualRetomada">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="indicador-retomada">
+
+                        <span>
+                            Metros restantes
+                        </span>
+
+                        <strong id="metragemRestante">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="indicador-retomada">
+
+                        <span>
+                            Horas restantes
+                        </span>
+
+                        <strong id="horasRestantesRetomada">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="indicador-retomada">
+
+                        <span>
+                            Término previsto
+                        </span>
+
+                        <strong id="fimPrevistoRetomada">
+                            -
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             02 - PILHA PLANEJADA
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento bloco-entrada-planejamento"
+            id="secaoPlanejamento">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>02</span>
+
+                    <div>
+
+                        <h2>
+                            Planejamento da Próxima Pilha
+                        </h2>
+
+                        <p>
+                            Condições previstas para formação da nova pilha.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-planejamento-principal">
+
+
+                <article class="card-planejamento">
+
+                    <div class="grid-campos-planejamento">
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Pilha planejada
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pilhaPlanejada"
+                                placeholder="Ex.: 54B">
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Lado
+                            </label>
+
+                            <select id="ladoPilhaPlanejada">
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option value="A">
+                                    A
+                                </option>
+
+                                <option value="B">
+                                    B
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Início da formação
+                            </label>
+
+                            <input
+                                type="datetime-local"
+                                id="inicioFormacao">
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Massa planejada
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="massaPlanejada"
+                                    placeholder="Ex.: 70000">
+
+                                <span>t</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Produtividade planejada
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="produtividadePlanejada"
+                                    placeholder="Ex.: 900">
+
+                                <span>t/h</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Manutenção da britagem
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="manutencaoBritagem"
+                                    value="0"
+                                    step="0.1">
+
+                                <span>h</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="campo-planejamento">
+
+                            <label>
+                                Comprimento do pátio
+                            </label>
+
+                            <div class="input-unidade">
+
+                                <input
+                                    type="number"
+                                    id="comprimentoPatio"
+                                    value="420">
+
+                                <span>m</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="card-planejamento card-previsao-planejamento">
+
+                    <span class="titulo-mini-card">
+                        PREVISÃO
+                    </span>
+
+
+                    <div class="item-previsao">
+
+                        <span>
+                            Tempo necessário
+                        </span>
+
+                        <strong id="tempoNecessarioFormacao">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="item-previsao">
+
+                        <span>
+                            Fim previsto
+                        </span>
+
+                        <strong id="fimPrevistoFormacao">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="item-previsao">
+
+                        <span>
+                            Janela disponível
+                        </span>
+
+                        <strong id="janelaDisponivel">
+                            -
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             03 - ESTRATÉGIA
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento bloco-entrada-planejamento"
+            id="secaoEstrategia">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>03</span>
+
+                    <div>
+
+                        <h2>
+                            Estratégia de Formação
+                        </h2>
+
+                        <p>
+                            Defina a base e os encabeçamentos necessários.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <article class="etapa-formacao etapa-base">
+
+                <div class="cabecalho-etapa-formacao">
+
+                    <div>
+
+                        <span class="numero-etapa">
+                            BASE
+                        </span>
+
+                        <h3>
+                            Base da Pilha
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="grid-etapa-formacao">
+
+
+                    <div class="campo-planejamento">
+
+                        <label>
+                            Massa
+                        </label>
+
+                        <div class="input-unidade">
+
+                            <input
+                                type="number"
+                                id="massaBase"
+                                placeholder="Ex.: 40000">
+
+                            <span>t</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="campo-planejamento">
+
+                        <label>
+                            Início
+                        </label>
+
+                        <div class="input-unidade">
+
+                            <input
+                                type="number"
+                                id="inicioBase"
+                                value="0">
+
+                            <span>m</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="campo-planejamento">
+
+                        <label>
+                            Fim
+                        </label>
+
+                        <div class="input-unidade">
+
+                            <input
+                                type="number"
+                                id="fimBase"
+                                value="420">
+
+                            <span>m</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="campo-planejamento campo-calculado">
+
+                        <label>
+                            Comprimento
+                        </label>
+
+                        <strong id="comprimentoBase">
+                            -
+                        </strong>
+
+                        <small>m</small>
+
+                    </div>
+
+
+                    <div class="campo-planejamento campo-calculado">
+
+                        <label>
+                            t/m
+                        </label>
+
+                        <strong id="toneladasMetroBase">
+                            -
+                        </strong>
+
+                        <small>t/m</small>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <div
+                id="listaEncabecamentos"
+                class="lista-encabecamentos">
+            </div>
+
+
+            <button
+                type="button"
+                id="btnAdicionarEncabecamento"
+                class="btn-adicionar-encabecamento">
+
+                + Adicionar Encabeçamento
+
+            </button>
+
+
+            <div class="resumo-distribuicao-massa">
+
+
+                <div>
+
+                    <span>
+                        Massa planejada
+                    </span>
+
+                    <strong id="massaPlanejadaResumo">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Massa distribuída
+                    </span>
+
+                    <strong id="massaDistribuida">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Diferença
+                    </span>
+
+                    <strong id="diferencaDistribuicao">
+                        -
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             04 - RESULTADOS
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento"
+            id="secaoResultados">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>04</span>
+
+                    <div>
+
+                        <h2>
+                            Resultado do Planejamento
+                        </h2>
+
+                        <p>
+                            Viabilidade da nova pilha frente ao ritmo de retomada.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="cards-resultado-planejamento">
+
+
+                <article class="card-resultado-planejamento">
+
+                    <span>
+                        Massa Planejada
+                    </span>
+
+                    <strong id="resultadoMassaPlanejada">
+                        -
+                    </strong>
+
+                    <small>t</small>
+
+                </article>
+
+
+                <article class="card-resultado-planejamento">
+
+                    <span>
+                        Massa Possível
+                    </span>
+
+                    <strong id="resultadoMassaPossivel">
+                        -
+                    </strong>
+
+                    <small>t</small>
+
+                </article>
+
+
+                <article class="card-resultado-planejamento">
+
+                    <span>
+                        Diferença
+                    </span>
+
+                    <strong id="resultadoDiferencaMassa">
+                        -
+                    </strong>
+
+                    <small>t</small>
+
+                </article>
+
+
+                <article class="card-resultado-planejamento">
+
+                    <span>
+                        Tempo Necessário
+                    </span>
+
+                    <strong id="resultadoTempoNecessario">
+                        -
+                    </strong>
+
+                    <small>h</small>
+
+                </article>
+
+
+                <article class="card-resultado-planejamento">
+
+                    <span>
+                        Janela Disponível
+                    </span>
+
+                    <strong id="resultadoJanela">
+                        -
+                    </strong>
+
+                    <small>h</small>
+
+                </article>
+
+
+                <article
+                    class="card-resultado-planejamento"
+                    id="cardStatusPlanejamento">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong id="statusPlanejamento">
+                        -
+                    </strong>
+
+                    <small id="detalheStatusPlanejamento">
+                        -
+                    </small>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             05 - VISUAL DO PÁTIO
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento bloco-pdf-principal"
+            id="secaoVisualPatio">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>05</span>
+
+                    <div>
+
+                        <h2>
+                            Situação Visual do Pátio
+                        </h2>
+
+                        <p>
+                            Comparação visual entre formação e retomada.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid-visual-patio">
+
+
+                <!-- FORMAÇÃO -->
+
+                <article class="card-visual-pilha">
+
+                    <div class="cabecalho-visual-pilha">
+
+                        <div>
+
+                            <span>
+                                PILHA EM FORMAÇÃO
+                            </span>
+
+                            <strong id="tituloDesenhoPilha">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                MASSA
+                            </span>
+
+                            <strong id="massaTotalDesenho">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="desenhoPilha"
+                        class="desenho-pilha desenho-pilha-3d">
+
+                        <div class="mensagem-desenho-vazio">
+                            Preencha a estratégia de formação.
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- RETOMADA -->
+
+                <article class="card-visual-pilha">
+
+                    <div class="cabecalho-visual-pilha">
+
+                        <div>
+
+                            <span>
+                                PILHA EM RETOMADA
+                            </span>
+
+                            <strong id="tituloDesenhoRetomada">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                RESTANTE
+                            </span>
+
+                            <strong id="resumoMetrosRestantes">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="desenhoRetomada"
+                        class="desenho-retomada">
+
+                        <div class="mensagem-desenho-vazio">
+                            Informe os dados da pilha em retomada.
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             06 - LINHA DO TEMPO
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento bloco-pdf-secundario"
+            id="secaoLinhaTempo">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>06</span>
+
+                    <div>
+
+                        <h2>
+                            Linha do Tempo
+                        </h2>
+
+                        <p>
+                            Formação versus término da pilha em retomada.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="linha-tempo-planejamento">
+
+
+                <div class="linha-tempo-item">
+
+                    <div class="linha-tempo-label">
+
+                        <strong id="nomeLinhaFormacao">
+                            Formação
+                        </strong>
+
+                        <span id="periodoLinhaFormacao">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="linha-tempo-barra">
+
+                        <div
+                            id="barraLinhaFormacao"
+                            class="barra-tempo barra-formacao">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="linha-tempo-item">
+
+                    <div class="linha-tempo-label">
+
+                        <strong id="nomeLinhaRetomada">
+                            Retomada
+                        </strong>
+
+                        <span id="periodoLinhaRetomada">
+                            -
+                        </span>
+
+                    </div>
+
+
+                    <div class="linha-tempo-barra">
+
+                        <div
+                            id="barraLinhaRetomada"
+                            class="barra-tempo barra-retomada">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             07 - ANÁLISE
+        ================================================== -->
+
+        <section
+            class="bloco-planejamento bloco-pdf-secundario"
+            id="secaoAnalise">
+
+            <div class="titulo-bloco-planejamento">
+
+                <div>
+
+                    <span>07</span>
+
+                    <div>
+
+                        <h2>
+                            Análise do Cenário
+                        </h2>
+
+                        <p>
+                            Necessidade operacional para viabilizar a formação.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="recomendacoes-planejamento">
+
+
+                <article>
+
+                    <span>
+                        Produtividade Necessária
+                    </span>
+
+                    <strong id="produtividadeNecessaria">
+                        -
+                    </strong>
+
+                    <small id="detalheProdutividadeNecessaria">
+                        t/h
+                    </small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Horas Adicionais Necessárias
+                    </span>
+
+                    <strong id="horasAdicionaisNecessarias">
+                        -
+                    </strong>
+
+                    <small>h</small>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        Redução de Manutenção Necessária
+                    </span>
+
+                    <strong id="reducaoManutencaoNecessaria">
+                        -
+                    </strong>
+
+                    <small>h</small>
+
+                </article>
+
+
+                <article class="texto-recomendacao-planejamento">
+
+                    <span>
+                        Recomendação
+                    </span>
+
+                    <strong id="textoRecomendacaoPlanejamento">
+                        Preencha os dados para gerar a análise.
+                    </strong>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             BOTÕES
+        ================================================== -->
+
+        <div class="acoes-finais-planejamento">
+
+            <button
+                type="button"
+                id="btnCalcularPlanejamento"
+                class="btn-calcular-planejamento">
+
+                Calcular Planejamento
+
+            </button>
+
+
+            <button
+                type="button"
+                id="btnLimparPlanejamento"
+                class="btn-limpar-planejamento">
+
+                Limpar
+
+            </button>
+
+        </div>
+
+        </div>
+
+        <!-- =================================================
+             SIMULADOR DE PILHA
+        ================================================== -->
+
+        <section
+            id="painelSimuladorPilha"
+            class="simulador-pilha-conteudo"
+            aria-labelledby="tituloSimuladorPilha">
+
+            <div class="cabecalho-simulador-pilha">
+
+                <div>
+                    <span>SIMULAÇÃO OPERACIONAL</span>
+                    <h2 id="tituloSimuladorPilha">Simulador de Pilha</h2>
+                    <p>
+                        Projete a massa formada e a posição do retomador para qualquer horário.
+                    </p>
+                </div>
+
+                <div class="acoes-simulador-pilha">
+                    <button type="button" id="btnCalcularSimulador" class="btn-primario-simulador">
+                        Calcular simulação
+                    </button>
+                    <button type="button" id="btnPDFSimulador" class="btn-secundario-simulador">
+                        Gerar PDF
+                    </button>
+                </div>
+
+            </div>
+
+
+            <div class="cenarios-simulador-pilha" aria-label="Cenários da simulação">
+                <span>Cenário:</span>
+                <button type="button" class="btn-cenario-simulador" data-cenario="conservador">Conservador</button>
+                <button type="button" class="btn-cenario-simulador ativo" data-cenario="provavel">Provável</button>
+                <button type="button" class="btn-cenario-simulador" data-cenario="otimista">Otimista</button>
+            </div>
+
+
+            <div class="grid-principal-simulador">
+
+                <article class="card-simulador-pilha card-formacao-simulador">
+
+                    <header>
+                        <div class="icone-card-simulador">▲</div>
+                        <div>
+                            <h3>Formação da Pilha</h3>
+                            <p>Projeção de massa conforme produtividade e paradas.</p>
+                        </div>
+                    </header>
+
+                    <div class="corpo-card-simulador">
+
+                        <div class="campos-simulador-pilha">
+
+                            <label>
+                                Pilha
+                                <input type="text" id="simNomePilhaFormacao" placeholder="Ex.: 68A">
+                            </label>
+
+                            <label>
+                                Lado
+                                <select id="simLadoFormacao">
+                                    <option value="A">Lado A</option>
+                                    <option value="B">Lado B</option>
+                                </select>
+                            </label>
+
+                            <label class="campo-largo-simulador">
+                                Medição da massa atual
+                                <input type="datetime-local" id="simDataBaseFormacao">
+                            </label>
+
+                            <label>
+                                Massa atual (t)
+                                <input type="number" id="simMassaAtual" min="0" step="100" value="25000">
+                            </label>
+
+                            <label>
+                                Massa planejada (t)
+                                <input type="number" id="simMassaPlanejada" min="0" step="100" value="65000">
+                            </label>
+
+                            <label>
+                                Produtividade (t/h)
+                                <input type="number" id="simProdutividade" min="0" step="10" value="900">
+                            </label>
+
+                            <label>
+                                Paradas previstas (h)
+                                <input type="number" id="simParadaBritagem" min="0" step="0.5" value="2">
+                            </label>
+
+                            <label class="campo-largo-simulador">
+                                Projetar para
+                                <input type="datetime-local" id="simDataAlvoFormacao">
+                            </label>
+
+                        </div>
+
+                        <div class="resultados-card-simulador">
+                            <div><span>Massa projetada</span><strong id="simMassaProjetada">-</strong><small>t</small></div>
+                            <div><span>Formação</span><strong id="simPercentualFormacao">-</strong><small>%</small></div>
+                            <div><span>Restante</span><strong id="simMassaRestante">-</strong><small>t</small></div>
+                            <div><span>Fim previsto</span><strong id="simFimFormacao">-</strong></div>
+                        </div>
+
+                    </div>
+
+                    <div class="desenho-simulador-pilha desenho-operacional-simulador">
+                        <div class="legenda-equipamento-simulador">
+                            <span><i class="legenda-pilha"></i> Pilha projetada</span>
+                            <span><i class="legenda-equipamento"></i> Empilhadeira de 2 lanças</span>
+                        </div>
+                        <svg viewBox="0 0 760 250" role="img" aria-label="Formação da pilha com empilhadeira de duas lanças">
+                            <style>
+                                .fundo-patio-simulador{fill:#faf8fb;stroke:#ebe4ef;stroke-width:1.2}.linha-solo-simulador{stroke:#6d6570;stroke-width:2}.pilha-fundo-simulador{stroke:#bcb2c2;stroke-width:1.2}.pilha-restante-simulador{stroke:#5e9725;stroke-width:1.2}.pilha-retomada-simulador{fill:#d8d1dc;opacity:.92}.linha-crista-pilha-simulador{fill:none;stroke:#ffffff;stroke-opacity:.75;stroke-width:2}.regua-simulador{stroke:#7c747f;stroke-width:1.5}.marcas-regua-simulador text{fill:#625967;font-size:9px;font-weight:700}.equipamento-base{fill:#34203f;stroke:#210038;stroke-width:1}.equipamento-roda{fill:#fff;stroke:#2d014d;stroke-width:3}.equipamento-torre{fill:#4d1a68;stroke:#2d014d;stroke-width:1}.equipamento-cabine{fill:#92d050;stroke:#5e9725;stroke-width:1}.equipamento-lanca,.equipamento-lanca-retomadora{fill:#57306a;stroke:#2d014d;stroke-width:1.2}.correia-equipamento{stroke:#d9f0bc;stroke-width:2}.ponto-descarga-equipamento{fill:#92d050;stroke:#fff;stroke-width:2}.fluxo-material-simulador{fill:#92d050}.rotulo-equipamento-svg{fill:#2d014d;font-size:10px;font-weight:900}.marcador-formacao-simulador rect{fill:#2d014d}.marcador-formacao-simulador text{fill:#fff;font-size:10px;font-weight:900}.linha-posicao-retomador{stroke:#2d014d;stroke-width:2;stroke-dasharray:5 4}.etiqueta-posicao-retomador{fill:#2d014d}.roda-retomadora{fill:#fff;stroke:#2d014d;stroke-width:4}.dentes-retomadora line{stroke:#2d014d;stroke-width:3;stroke-linecap:round}#simTextoRetomadorSVG{fill:#fff;font-size:10px;font-weight:900}
+                            </style>
+                            <defs>
+                                <linearGradient id="simGradPilhaFormacao" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#9BD94D"></stop>
+                                    <stop offset="100%" stop-color="#5E9725"></stop>
+                                </linearGradient>
+                                <linearGradient id="simGradPilhaFundo" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#EDE7F1"></stop>
+                                    <stop offset="100%" stop-color="#D8CEDF"></stop>
+                                </linearGradient>
+<clipPath id="simClipPilha">
+                                    <path d="M40 185 L85 170 L145 138 L220 112 L310 96 L380 92 L455 98 L545 118 L625 150 L700 185 Z"></path>
+                                </clipPath>
+                            </defs>
+
+                            <rect x="24" y="28" width="712" height="177" rx="18" class="fundo-patio-simulador"></rect>
+                            <line x1="40" y1="190" x2="700" y2="190" class="linha-solo-simulador"></line>
+                            <path class="pilha-fundo-simulador" fill="url(#simGradPilhaFundo)" d="M40 185 L85 170 L145 138 L220 112 L310 96 L380 92 L455 98 L545 118 L625 150 L700 185 Z"></path>
+                            <rect id="simProgressoPilha" class="pilha-progresso-simulador" fill="url(#simGradPilhaFormacao)" x="40" y="82" width="0" height="103" clip-path="url(#simClipPilha)"></rect>
+                            <path d="M85 170 L145 138 L220 112 L310 96 L380 92 L455 98 L545 118 L625 150" class="linha-crista-pilha-simulador"></path>
+
+                            <g id="simEmpilhadeiraDuasLancas" transform="translate(380 0)">
+                                <g class="empilhadeira-duas-lancas-simulador">
+                                    <rect x="-28" y="174" width="56" height="12" rx="5" class="equipamento-base"></rect>
+                                    <circle cx="-18" cy="188" r="6" class="equipamento-roda"></circle>
+                                    <circle cx="18" cy="188" r="6" class="equipamento-roda"></circle>
+                                    <rect x="-8" y="112" width="16" height="64" rx="4" class="equipamento-torre"></rect>
+                                    <rect x="8" y="132" width="24" height="18" rx="4" class="equipamento-cabine"></rect>
+                                    <path d="M-2 120 L-128 85 L-134 94 L-6 132 Z" class="equipamento-lanca"></path>
+                                    <path d="M2 120 L128 85 L134 94 L6 132 Z" class="equipamento-lanca"></path>
+                                    <line x1="-12" y1="119" x2="-124" y2="88" class="correia-equipamento"></line>
+                                    <line x1="12" y1="119" x2="124" y2="88" class="correia-equipamento"></line>
+                                    <circle cx="-130" cy="90" r="5" class="ponto-descarga-equipamento"></circle>
+                                    <circle cx="130" cy="90" r="5" class="ponto-descarga-equipamento"></circle>
+                                    <path d="M-130 98 l-8 14 h16 z" class="fluxo-material-simulador"></path>
+                                    <path d="M130 98 l-8 14 h16 z" class="fluxo-material-simulador"></path>
+                                </g>
+                                <text x="0" y="88" text-anchor="middle" class="rotulo-equipamento-svg">EMPILHADEIRA - 2 LANÇAS</text>
+                            </g>
+
+                            <g class="marcador-formacao-simulador">
+                                <rect x="315" y="42" width="130" height="31" rx="15"></rect>
+                                <text id="simTextoPilhaSVG" x="380" y="63" text-anchor="middle">0% FORMADA</text>
+                            </g>
+
+                            <line x1="40" y1="211" x2="700" y2="211" class="regua-simulador"></line>
+                            <g class="marcas-regua-simulador">
+                                <text x="40" y="234">0</text><text x="196" y="234">100</text>
+                                <text x="352" y="234">200</text><text x="508" y="234">300</text>
+                                <text x="676" y="234">420 m</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                </article>
+
+
+                <article class="card-simulador-pilha card-retomada-simulador">
+
+                    <header>
+                        <div class="icone-card-simulador">◀</div>
+                        <div>
+                            <h3>Retomada da Pilha</h3>
+                            <p>Projeção da posição conforme ritmo do retomador.</p>
+                        </div>
+                    </header>
+
+                    <div class="corpo-card-simulador">
+
+                        <div class="campos-simulador-pilha">
+
+                            <label>
+                                Pilha
+                                <input type="text" id="simNomePilhaRetomada" placeholder="Ex.: 67B">
+                            </label>
+
+                            <label>
+                                Lado
+                                <select id="simLadoRetomada">
+                                    <option value="A">Lado A</option>
+                                    <option value="B" selected>Lado B</option>
+                                </select>
+                            </label>
+
+                            <label class="campo-largo-simulador">
+                                Medição da posição atual
+                                <input type="datetime-local" id="simDataBaseRetomada">
+                            </label>
+
+                            <label>
+                                Posição atual (m)
+                                <input type="number" id="simPosicaoAtual" min="0" step="1" value="100">
+                            </label>
+
+                            <label>
+                                Comprimento total (m)
+                                <input type="number" id="simComprimentoPilha" min="1" step="1" value="420">
+                            </label>
+
+                            <label>
+                                Ritmo (m/h)
+                                <input type="number" id="simRitmoRetomador" min="0" step="0.1" value="3.5">
+                            </label>
+
+                            <label>
+                                Paradas previstas (h)
+                                <input type="number" id="simParadaUsina" min="0" step="0.5" value="0">
+                            </label>
+
+                            <label>
+                                Sentido
+                                <select id="simSentidoRetomada">
+                                    <option value="crescente">0 → 420 m</option>
+                                    <option value="decrescente">420 → 0 m</option>
+                                </select>
+                            </label>
+
+                            <label>
+                                Projetar para
+                                <input type="datetime-local" id="simDataAlvoRetomada">
+                            </label>
+
+                        </div>
+
+                        <div class="resultados-card-simulador">
+                            <div><span>Posição projetada</span><strong id="simPosicaoProjetada">-</strong><small>m</small></div>
+                            <div><span>Retomado</span><strong id="simPercentualRetomado">-</strong><small>%</small></div>
+                            <div><span>Restante</span><strong id="simMetrosRestantes">-</strong><small>m</small></div>
+                            <div><span>Fim previsto</span><strong id="simFimRetomada">-</strong></div>
+                        </div>
+
+                    </div>
+
+                    <div class="desenho-simulador-pilha desenho-operacional-simulador">
+                        <div class="legenda-equipamento-simulador">
+                            <span><i class="legenda-pilha"></i> Material restante</span>
+                            <span><i class="legenda-retomado"></i> Trecho retomado</span>
+                            <span><i class="legenda-equipamento"></i> Retomadora</span>
+                        </div>
+                        <svg viewBox="0 0 760 250" role="img" aria-label="Retomada da pilha com retomadora">
+                            <style>
+                                .fundo-patio-simulador{fill:#faf8fb;stroke:#ebe4ef;stroke-width:1.2}.linha-solo-simulador{stroke:#6d6570;stroke-width:2}.pilha-fundo-simulador{stroke:#bcb2c2;stroke-width:1.2}.pilha-restante-simulador{stroke:#5e9725;stroke-width:1.2}.pilha-retomada-simulador{fill:#d8d1dc;opacity:.92}.linha-crista-pilha-simulador{fill:none;stroke:#ffffff;stroke-opacity:.75;stroke-width:2}.regua-simulador{stroke:#7c747f;stroke-width:1.5}.marcas-regua-simulador text{fill:#625967;font-size:9px;font-weight:700}.equipamento-base{fill:#34203f;stroke:#210038;stroke-width:1}.equipamento-roda{fill:#fff;stroke:#2d014d;stroke-width:3}.equipamento-torre{fill:#4d1a68;stroke:#2d014d;stroke-width:1}.equipamento-cabine{fill:#92d050;stroke:#5e9725;stroke-width:1}.equipamento-lanca,.equipamento-lanca-retomadora{fill:#57306a;stroke:#2d014d;stroke-width:1.2}.correia-equipamento{stroke:#d9f0bc;stroke-width:2}.ponto-descarga-equipamento{fill:#92d050;stroke:#fff;stroke-width:2}.fluxo-material-simulador{fill:#92d050}.rotulo-equipamento-svg{fill:#2d014d;font-size:10px;font-weight:900}.marcador-formacao-simulador rect{fill:#2d014d}.marcador-formacao-simulador text{fill:#fff;font-size:10px;font-weight:900}.linha-posicao-retomador{stroke:#2d014d;stroke-width:2;stroke-dasharray:5 4}.etiqueta-posicao-retomador{fill:#2d014d}.roda-retomadora{fill:#fff;stroke:#2d014d;stroke-width:4}.dentes-retomadora line{stroke:#2d014d;stroke-width:3;stroke-linecap:round}#simTextoRetomadorSVG{fill:#fff;font-size:10px;font-weight:900}
+                            </style>
+                            <defs>
+                                <linearGradient id="simGradRetomadaRestante" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#9BD94D"></stop>
+                                    <stop offset="100%" stop-color="#5E9725"></stop>
+                                </linearGradient>
+                                <clipPath id="simClipRetomada">
+                                    <path d="M40 185 L85 170 L145 138 L220 112 L310 96 L380 92 L455 98 L545 118 L625 150 L700 185 Z"></path>
+                                </clipPath>
+                            </defs>
+
+                            <rect x="24" y="28" width="712" height="177" rx="18" class="fundo-patio-simulador"></rect>
+                            <line x1="40" y1="190" x2="700" y2="190" class="linha-solo-simulador"></line>
+                            <path class="pilha-restante-simulador" fill="url(#simGradRetomadaRestante)" d="M40 185 L85 170 L145 138 L220 112 L310 96 L380 92 L455 98 L545 118 L625 150 L700 185 Z"></path>
+                            <rect id="simTrechoRetomado" class="pilha-retomada-simulador" x="40" y="82" width="0" height="103" clip-path="url(#simClipRetomada)"></rect>
+                            <path d="M85 170 L145 138 L220 112 L310 96 L380 92 L455 98 L545 118 L625 150" class="linha-crista-pilha-simulador"></path>
+
+                            <g id="simMarcadorRetomador" class="marcador-retomador-simulador" transform="translate(40 0)">
+                                <g class="retomadora-svg" transform="translate(0 0)">
+                                    <rect x="-34" y="174" width="68" height="12" rx="5" class="equipamento-base"></rect>
+                                    <circle cx="-24" cy="188" r="6" class="equipamento-roda"></circle>
+                                    <circle cx="24" cy="188" r="6" class="equipamento-roda"></circle>
+                                    <rect x="-7" y="121" width="14" height="54" rx="4" class="equipamento-torre"></rect>
+                                    <path d="M-2 126 L72 98 L77 107 L4 140 Z" class="equipamento-lanca-retomadora"></path>
+                                    <circle cx="76" cy="103" r="16" class="roda-retomadora"></circle>
+                                    <g class="dentes-retomadora">
+                                        <line x1="76" y1="83" x2="76" y2="91"></line>
+                                        <line x1="76" y1="115" x2="76" y2="123"></line>
+                                        <line x1="56" y1="103" x2="64" y2="103"></line>
+                                        <line x1="88" y1="103" x2="96" y2="103"></line>
+                                    </g>
+                                </g>
+                                <line x1="0" y1="72" x2="0" y2="176" class="linha-posicao-retomador"></line>
+                                <rect x="-48" y="42" width="96" height="27" rx="13" class="etiqueta-posicao-retomador"></rect>
+                                <text id="simTextoRetomadorSVG" x="0" y="60" text-anchor="middle">0 m</text>
+                                <text x="0" y="30" text-anchor="middle" class="rotulo-equipamento-svg">RETOMADORA</text>
+                            </g>
+
+                            <line x1="40" y1="211" x2="700" y2="211" class="regua-simulador"></line>
+                            <g class="marcas-regua-simulador">
+                                <text x="40" y="234">0</text><text x="196" y="234">100</text>
+                                <text x="352" y="234">200</text><text x="508" y="234">300</text>
+                                <text x="676" y="234">420 m</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <section class="bloco-projecoes-simulador">
+
+                <header>
+                    <div>
+                        <span>PROJEÇÕES OPERACIONAIS</span>
+                        <h3>Projeções por Horário</h3>
+                    </div>
+
+                    <div class="adicionar-horario-simulador">
+                        <input type="datetime-local" id="simNovoHorario">
+                        <button type="button" id="btnAdicionarHorarioSimulador">+ Adicionar horário</button>
+                    </div>
+                </header>
+
+                <div class="tabela-responsiva-simulador">
+                    <table class="tabela-simulador-pilha">
+                        <thead>
+                            <tr>
+                                <th>Data e horário</th>
+                                <th>Massa formada</th>
+                                <th>Formação</th>
+                                <th>Posição do retomador</th>
+                                <th>Restante</th>
+                                <th>Situação</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="simTabelaProjecoes"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+
+            <section class="bloco-fila-simulador">
+
+                <header>
+                    <div>
+                        <span>SEQUÊNCIA DO PÁTIO</span>
+                        <h3>Fila das Próximas Pilhas</h3>
+                        <p>Simule a formação sequencial das próximas pilhas dos lados A e B.</p>
+                    </div>
+                </header>
+
+                <div class="formulario-fila-simulador">
+
+                    <label>
+                        Pilha
+                        <input type="text" id="filaNomePilha" placeholder="Ex.: 69B">
+                    </label>
+
+                    <label>
+                        Lado
+                        <select id="filaLadoPilha">
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        Massa planejada (t)
+                        <input type="number" id="filaMassaPilha" min="0" step="100" value="65000">
+                    </label>
+
+                    <label>
+                        Produtividade (t/h)
+                        <input type="number" id="filaProdutividadePilha" min="1" step="10" value="900">
+                    </label>
+
+                    <label>
+                        Manutenção (h)
+                        <input type="number" id="filaManutencaoPilha" min="0" step="0.5" value="0">
+                    </label>
+
+                    <label>
+                        Início da fila
+                        <input type="datetime-local" id="filaInicioPilha">
+                    </label>
+
+                    <button type="button" id="btnAdicionarPilhaFila" class="btn-primario-simulador">
+                        + Adicionar pilha
+                    </button>
+
+                </div>
+
+                <div class="tabela-responsiva-simulador">
+                    <table class="tabela-simulador-pilha tabela-fila-pilhas">
+                        <thead>
+                            <tr>
+                                <th>Ordem</th>
+                                <th>Pilha</th>
+                                <th>Lado</th>
+                                <th>Massa planejada</th>
+                                <th>Produtividade</th>
+                                <th>Início previsto</th>
+                                <th>Fim previsto</th>
+                                <th>Situação</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="simTabelaFilaPilhas"></tbody>
+                    </table>
+                </div>
+
+                <div id="simResumoFila" class="resumo-fila-simulador">
+                    Adicione pilhas para iniciar a simulação da sequência do pátio.
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../Britagem.js"></script>
+    <script src="Planejamento_pilha.js"></script>
+    <script src="Simulador.js"></script>
+</body>
+
+</html>
