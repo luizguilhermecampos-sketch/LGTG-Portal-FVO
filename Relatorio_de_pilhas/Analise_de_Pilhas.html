@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Relatório de Pilhas
+    </title>
+<!-- EXCEL -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js">
+    </script>
+
+    <!-- GRÁFICOS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+<link rel="stylesheet" href="../../Compartilhado/Base.css">
+    <link rel="stylesheet" href="../Britagem.css">
+    <link rel="stylesheet" href="AnalisePilhas.css">
+</head>
+
+
+<body class="pagina-portal britagem-ativa pagina-relatorio-pilhas">
+
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
+
+    <header class="header-portal-fvo">
+
+        <div class="logo logo-portal">
+            <img src="../Imagens/Logo_CMOC.png" alt="CMOC">
+        </div>
+
+        <div class="titulo-portal-geral">PORTAL FVO</div>
+
+        <div class="seletor-portais">
+            <a href="../index.html" class="portal-opcao portal-opcao-ativa">
+                <span class="portal-icone">◈</span>
+                <span>PORTAL BRITAGEM FVO</span>
+            </a>
+
+            <a href="../../Usina/index.html" class="portal-opcao">
+                <span class="portal-icone">◫</span>
+                <span>PORTAL USINA FVO</span>
+            </a>
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    <nav class="menu-portal menu-britagem">
+        <ul>
+            <li><a href="../index.html">Início</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="container-pilhas-novo">
+
+
+        <!-- =================================================
+             TÍTULO
+        ================================================== -->
+
+        <section class="cabecalho-pilhas cabecalho-pilhas-acoes">
+
+            <div class="cabecalho-pilhas-texto">
+                <span class="subtitulo-pilhas">CONTROLE DE QUALIDADE • HOMOGENEIZAÇÃO</span>
+
+                <h1>Relatório de Pilhas</h1>
+
+                <p>
+                    Visão integrada da formação da pilha na britagem e da alimentação
+                    da usina, com comparação química MPU × AMG e histórico recente.
+                </p>
+            </div>
+
+            <div class="cabecalho-pilhas-lateral">
+                <div class="acoes-relatorio-pilha">
+                    <button type="button" id="btnGerarPDF" class="btn-acao-relatorio btn-pdf-relatorio">
+                        <svg class="icone-botao-pilhas" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 3h8l4 4v14H7z"/>
+                            <path d="M15 3v5h5M10 14h6M10 18h4"/>
+                        </svg>
+                        <span>Gerar PDF</span>
+                    </button>
+
+                    <button type="button" id="btnEnviarEmail" class="btn-acao-relatorio btn-email-relatorio">
+                        <svg class="icone-botao-pilhas" viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="3" y="5" width="18" height="14" rx="2"/>
+                            <path d="m4 7 8 6 8-6"/>
+                        </svg>
+                        <span>Enviar por E-mail</span>
+                    </button>
+                </div>
+
+                <div class="atualizacao-pilhas">
+                    <span>Última atualização</span>
+                    <strong id="ultimaAtualizacaoPilha">-</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             UPLOAD DAS DUAS PLANILHAS
+        ================================================== -->
+
+        <section class="painel-upload-pilhas painel-upload-duplo">
+
+
+            <!-- MPU -->
+
+            <div class="campo-upload-pilha">
+
+                <label for="arquivoPilha">
+                    Planilha MPU / Britagem
+                </label>
+
+                <input
+                    type="file"
+                    id="arquivoPilha"
+                    accept=".xlsx,.xls,.xlsm">
+
+            </div>
+
+
+            <!-- AMG -->
+
+            <div class="campo-upload-pilha">
+
+                <label for="arquivoAMG">
+                    Planilha AMG / Usina
+                </label>
+
+                <input
+                    type="file"
+                    id="arquivoAMG"
+                    accept=".xlsx,.xls,.xlsm">
+
+            </div>
+
+
+            <!-- BOTÃO -->
+
+            <button
+                type="button"
+                id="btnCarregar"
+                class="btn-carregar-pilhas">
+
+                <svg class="icone-botao-pilhas" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 3v12"/>
+                    <path d="m7 10 5 5 5-5"/>
+                    <path d="M5 20h14"/>
+                </svg>
+                <span>Carregar Dados</span>
+
+            </button>
+
+            <div class="status-base-pilhas">
+                <span>BASE</span>
+                <strong id="statusBasePilhas">Aguardando planilhas</strong>
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CARDS PRINCIPAIS
+        ================================================== -->
+
+        <section class="cards-destaque-pilha">
+
+
+            <!-- PILHA -->
+
+            <div class="card-destaque-pilha card-pilha-selecionada">
+
+                <div class="icone-destaque-pilha">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M6 18l2-10h8l2 10M9 8l3-4 3 4"/></svg>
+                </div>
+
+                <div>
+
+                    <span>
+                        PILHA SELECIONADA
+                    </span>
+
+                    <strong id="pilhaSelecionada">
+                        -
+                    </strong>
+
+                    <small>
+                        Número da pilha
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- MASSA -->
+
+            <div class="card-destaque-pilha card-pilha-massa">
+
+                <div class="icone-destaque-pilha">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 7h12M7 7l-3 6h6L7 7Zm10 0-3 6h6l-3-6Z"/><path d="M8 20h8"/></svg>
+                </div>
+
+                <div>
+
+                    <span>
+                        MASSA DA PILHA
+                    </span>
+
+                    <strong id="massaSelecionada">
+                        -
+                    </strong>
+
+                    <small>
+                        Toneladas
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- PERÍODO -->
+
+            <div class="card-destaque-pilha card-pilha-periodo">
+
+                <div class="icone-destaque-pilha">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+                </div>
+
+                <div>
+
+                    <span>
+                        PERÍODO DE FORMAÇÃO
+                    </span>
+
+                    <strong
+                        id="periodoFormacao"
+                        class="periodo-destaque-pilha">
+
+                        -
+
+                    </strong>
+
+                    <small id="duracaoFormacao">
+                        -
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GRÁFICO HISTÓRICO
+        ================================================== -->
+
+        <section class="grafico-pilhas-card">
+
+            <div class="titulo-bloco-pilhas">
+
+                <div>
+
+                    <h2>
+                        Evolução da Massa das Pilhas
+                    </h2>
+
+                    <span>
+                        Comparativo histórico da massa formada
+                        por pilha
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="canvas-pilhas">
+
+                <canvas id="graficoPilhas"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <div class="cabecalho-pagina-impressao cabecalho-pagina-impressao-2">
+            <div>
+                <span>PORTAL FVO • BRITAGEM</span>
+                <strong>Qualidade da Pilha - MPU × AMG</strong>
+            </div>
+            <div class="pagina-impressao-indice">2 / 3</div>
+        </div>
+
+        <!-- =================================================
+             CONSULTA + MPU + AMG
+        ================================================== -->
+
+        <section class="painel-mpu-amg">
+
+
+            <!-- =============================================
+                 CONSULTA
+            ============================================== -->
+
+            <aside class="consulta-pilha-comparativa">
+
+                <h2>
+                    Consulta Individual da Pilha
+                </h2>
+
+                <p>
+                    Informe o número da pilha para visualizar
+                    os dados.
+                </p>
+
+
+                <div class="campo-consulta-comparativa">
+
+                    <input
+                        type="number"
+                        id="numeroPilha"
+                        placeholder="Ex.: 55">
+
+                    <button
+                        type="button"
+                        id="btnConsultarPilha">
+
+                        CONSULTAR
+
+                    </button>
+
+                </div>
+
+
+                <div class="info-pilha-consulta">
+
+                    <div>
+
+                        <span>
+                            Pilha selecionada
+                        </span>
+
+                        <strong id="consultaNumeroPilha">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Data de Início
+                        </span>
+
+                        <strong id="consultaDataInicio">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Data de Fim
+                        </span>
+
+                        <strong id="consultaDataFim">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =============================================
+                 MPU - BRITAGEM
+            ============================================== -->
+
+            <section class="painel-qualidade-comparativo">
+
+                <div class="titulo-fonte-qualidade">
+
+                    <h2 class="titulo-fonte-com-icone">
+                        <span class="icone-fonte-quimica icone-fonte-mpu" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3 19h18"/>
+                                <path d="M5 19 8.2 10l3.1 4 3.1-7 4.6 12"/>
+                                <circle cx="8.6" cy="8" r="1.4"/>
+                            </svg>
+                        </span>
+                        <span>MPU - BRITAGEM</span>
+                    </h2>
+
+                    <span>
+                        Material caracterizado na britagem
+                    </span>
+
+                </div>
+
+
+                <!-- QUALIDADE -->
+
+                <div class="grupo-comparativo grupo-quimica">
+
+                    <h3 class="titulo-grupo-comparativo titulo-qualidade-quimica">
+                        <span class="icone-grupo-quimico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>
+                                <path d="M7.5 16h9"/>
+                            </svg>
+                        </span>
+                        <span>Qualidade Química</span>
+                    </h3>
+
+
+                    <div class="grid-comparativo-quimica">
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="P">
+
+                            <span>P2O5 (%)</span>
+
+                            <strong id="mpuP205">
+                                -
+                            </strong>
+
+                            <small>Fosfato</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Mg">
+
+                            <span>MgO (%)</span>
+
+                            <strong id="mpuMgO">
+                                -
+                            </strong>
+
+                            <small>Óxido de Magnésio</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Nb">
+
+                            <span>Nb2O5 (%)</span>
+
+                            <strong id="mpuNb">
+                                -
+                            </strong>
+
+                            <small>Óxido de Nióbio</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Ca/P">
+
+                            <span>CaO/P2O5</span>
+
+                            <strong id="mpuCaP">
+                                -
+                            </strong>
+
+                            <small>Relação</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTAMINANTES -->
+
+                <div class="grupo-comparativo grupo-impurezas">
+
+                    <h3 class="titulo-grupo-comparativo titulo-contaminantes">
+                        <span class="icone-grupo-quimico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3 5 6v5c0 4.7 3 8.1 7 10 4-1.9 7-5.3 7-10V6Z"/>
+                                <path d="M12 8v5M12 16h.01"/>
+                            </svg>
+                        </span>
+                        <span>Contaminantes</span>
+                    </h3>
+
+
+                    <div class="grid-comparativo-quimica">
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Fe">
+
+                            <span>Fe2O3 (%)</span>
+
+                            <strong id="mpuFe">
+                                -
+                            </strong>
+
+                            <small>Óxido de Ferro</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Si">
+
+                            <span>SiO2 (%)</span>
+
+                            <strong id="mpuSi">
+                                -
+                            </strong>
+
+                            <small>Dióxido de Silício</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Al">
+
+                            <span>Al2O3 (%)</span>
+
+                            <strong id="mpuAl">
+                                -
+                            </strong>
+
+                            <small>Óxido de Alumínio</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Ti">
+
+                            <span>TiO2 (%)</span>
+
+                            <strong id="mpuTi">
+                                -
+                            </strong>
+
+                            <small>Dióxido de Titânio</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =============================================
+                 AMG - USINA
+            ============================================== -->
+
+            <section class="painel-qualidade-comparativo">
+
+                <div class="titulo-fonte-qualidade">
+
+                    <h2 class="titulo-fonte-com-icone">
+                        <span class="icone-fonte-quimica icone-fonte-amg" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M4 20V9h4v4l5-4v4l5-4v11H4Z"/>
+                                <path d="M16 4h3v8M7 20v-4h3v4"/>
+                            </svg>
+                        </span>
+                        <span>AMG - USINA</span>
+                    </h2>
+
+                    <span>
+                        Alimentação da usina após moagem
+                    </span>
+
+                </div>
+
+
+                <!-- QUALIDADE -->
+
+                <div class="grupo-comparativo grupo-quimica">
+
+                    <h3 class="titulo-grupo-comparativo titulo-qualidade-quimica">
+                        <span class="icone-grupo-quimico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"/>
+                                <path d="M7.5 16h9"/>
+                            </svg>
+                        </span>
+                        <span>Qualidade Química</span>
+                    </h3>
+
+
+                    <div class="grid-comparativo-quimica">
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="P">
+
+                            <span>P2O5 (%)</span>
+
+                            <strong id="amgP205">
+                                -
+                            </strong>
+
+                            <small>Fosfato</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Mg">
+
+                            <span>MgO (%)</span>
+
+                            <strong id="amgMgO">
+                                -
+                            </strong>
+
+                            <small>Óxido de Magnésio</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Nb">
+
+                            <span>Nb2O5 (%)</span>
+
+                            <strong id="amgNb">
+                                -
+                            </strong>
+
+                            <small>Óxido de Nióbio</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Ca/P">
+
+                            <span>CaO/P2O5</span>
+
+                            <strong id="amgCaP">
+                                -
+                            </strong>
+
+                            <small>Relação</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTAMINANTES -->
+
+                <div class="grupo-comparativo grupo-impurezas">
+
+                    <h3 class="titulo-grupo-comparativo titulo-contaminantes">
+                        <span class="icone-grupo-quimico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 3 5 6v5c0 4.7 3 8.1 7 10 4-1.9 7-5.3 7-10V6Z"/>
+                                <path d="M12 8v5M12 16h.01"/>
+                            </svg>
+                        </span>
+                        <span>Contaminantes</span>
+                    </h3>
+
+
+                    <div class="grid-comparativo-quimica">
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Fe">
+
+                            <span>Fe2O3 (%)</span>
+
+                            <strong id="amgFe">
+                                -
+                            </strong>
+
+                            <small>Óxido de Ferro</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Si">
+
+                            <span>SiO2 (%)</span>
+
+                            <strong id="amgSi">
+                                -
+                            </strong>
+
+                            <small>Dióxido de Silício</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Al">
+
+                            <span>Al2O3 (%)</span>
+
+                            <strong id="amgAl">
+                                -
+                            </strong>
+
+                            <small>Óxido de Alumínio</small>
+
+                        </div>
+
+
+                        <div class="card-quimico-comparativo" data-simbolo="Ti">
+
+                            <span>TiO2 (%)</span>
+
+                            <strong id="amgTi">
+                                -
+                            </strong>
+
+                            <small>Dióxido de Titânio</small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ORIGEM DOS DADOS AMG -->
+
+                <div class="card-origem-amg" id="cardOrigemAMG">
+
+                    <div class="origem-amg-cabecalho">
+
+                        <div class="origem-amg-titulo">
+
+                            <span class="icone-origem-amg" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M7 4h10v4H7z"/>
+                                    <path d="M5 12h5v5H5zM14 12h5v5h-5z"/>
+                                    <path d="M12 8v2M7.5 10h9M7.5 10v2M16.5 10v2"/>
+                                </svg>
+                            </span>
+
+                            <div>
+                                <h3>Origem dos dados AMG</h3>
+                                <p>Rastreabilidade da composição usada no cálculo.</p>
+                            </div>
+
+                        </div>
+
+                        <span class="badge-origem-amg" id="amgTipoComposicao">
+                            Aguardando consulta
+                        </span>
+
+                    </div>
+
+
+                    <div class="origem-amg-resumo">
+
+                        <div class="origem-amg-item">
+                            <span>Pilha consultada</span>
+                            <strong id="amgPilhaConsultada">-</strong>
+                        </div>
+
+                        <div class="origem-amg-item origem-amg-item-fontes">
+                            <span>Identificações consideradas</span>
+                            <strong id="amgFontesConsideradas">-</strong>
+                        </div>
+
+                    </div>
+
+
+                    <p class="origem-amg-criterio" id="amgCriterioTexto">
+                        Consulte uma pilha para visualizar como os valores AMG foram compostos.
+                    </p>
+
+
+                    <div class="origem-amg-contagens" aria-label="Quantidade de registros AMG válidos por parâmetro">
+                        <span>P2O5 <strong id="amgQtdP205">0</strong></span>
+                        <span>MgO <strong id="amgQtdMgO">0</strong></span>
+                        <span>Nb2O5 <strong id="amgQtdNb">0</strong></span>
+                        <span>CaO/P2O5 <strong id="amgQtdCaP">0</strong></span>
+                        <span>Fe2O3 <strong id="amgQtdFe">0</strong></span>
+                        <span>SiO2 <strong id="amgQtdSi">0</strong></span>
+                        <span>Al2O3 <strong id="amgQtdAl">0</strong></span>
+                        <span>TiO2 <strong id="amgQtdTi">0</strong></span>
+                    </div>
+
+                    <small class="origem-amg-nota">
+                        Quantidades = número de resultados AMG válidos utilizados na média de cada parâmetro.
+                    </small>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <!-- =================================================
+             COMPARAÇÃO MPU × AMG
+        ================================================== -->
+
+        <section class="linha-comparacao-mpu-amg">
+
+
+            <!-- TABELA -->
+
+            <div class="comparacao-mpu-amg">
+
+                <div class="titulo-bloco-pilhas">
+
+                    <div>
+
+                        <h2>
+                            Comparação MPU (Britagem) × AMG (Usina)
+                        </h2>
+
+                        <span>
+                            Diferença dos teores entre britagem
+                            e alimentação da usina
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tabela-comparacao-scroll">
+
+                    <table class="tabela-mpu-amg">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Parâmetro</th>
+
+                                <th>
+                                    MPU
+                                    <small>Britagem</small>
+                                </th>
+
+                                <th>
+                                    AMG
+                                    <small>Usina</small>
+                                </th>
+
+                                <th>
+                                    Diferença
+                                    <small>AMG - MPU</small>
+                                </th>
+
+                                <th>
+                                    Variação (%)
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="corpoTabelaMpuAmg">
+
+                            <tr>
+
+                                <td colspan="5">
+
+                                    Consulte uma pilha para
+                                    gerar a comparação.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 RESUMO RÁPIDO
+            ============================================== -->
+
+            <aside class="resumo-comparacao-amg">
+
+                <h2>
+                    Resumo Rápido
+                </h2>
+
+
+                <div
+                    class="item-resumo-comparacao"
+                    id="resumoComparacao1">
+
+                    <span class="icone-resumo-comparacao" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M6 18 12 6l6 12H6Z"/><path d="M9 15h6"/></svg>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            P2O5
+                        </strong>
+
+                        <p>
+                            Consulte uma pilha.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="item-resumo-comparacao"
+                    id="resumoComparacao2">
+
+                    <span class="icone-resumo-comparacao" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 3c3.5 4.4 6 7.4 6 11a6 6 0 0 1-12 0c0-3.6 2.5-6.6 6-11Z"/></svg>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            MgO
+                        </strong>
+
+                        <p>
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="item-resumo-comparacao"
+                    id="resumoComparacao3">
+
+                    <span class="icone-resumo-comparacao" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4"/></svg>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            CaO/P2O5
+                        </strong>
+
+                        <p>
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="item-resumo-comparacao"
+                    id="resumoComparacao4">
+
+                    <span class="icone-resumo-comparacao icone-resumo-alerta" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 3 8.1 7 10 4-1.9 7-5.3 7-10V6Z"/><path d="M12 8v5M12 16h.01"/></svg>
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Contaminantes
+                        </strong>
+
+                        <p>
+                            -
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <div class="cabecalho-pagina-impressao cabecalho-pagina-impressao-3">
+            <div>
+                <span>PORTAL FVO • BRITAGEM</span>
+                <strong>Histórico e Interpretação</strong>
+            </div>
+            <div class="pagina-impressao-indice">3 / 3</div>
+        </div>
+
+        <!-- =================================================
+             ÚLTIMAS 5 + INTERPRETAÇÃO
+        ================================================== -->
+
+        <section class="painel-comparacao-final">
+
+
+            <!-- =============================================
+                 ÚLTIMAS 5
+            ============================================== -->
+
+            <div class="comparacao-historica-mpu-amg">
+
+                <div class="titulo-bloco-pilhas">
+
+                    <div>
+
+                        <h2>
+                            Comparação das Últimas 5 Pilhas
+                        </h2>
+
+                        <span>
+                            Histórico recente MPU × AMG
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="tabela-comparacao-scroll">
+
+                    <table class="tabela-historica-amg">
+
+                        <thead>
+
+                            <tr>
+
+                                <th rowspan="2">
+                                    Pilha
+                                </th>
+
+                                <th colspan="3">
+                                    P2O5 (%)
+                                </th>
+
+                                <th colspan="3">
+                                    MgO (%)
+                                </th>
+
+                                <th colspan="3">
+                                    Fe2O3 (%)
+                                </th>
+
+                                <th colspan="3">
+                                    SiO2 (%)
+                                </th>
+
+                            </tr>
+
+                            <tr>
+
+                                <th>MPU</th>
+                                <th>AMG</th>
+                                <th>Dif.</th>
+
+                                <th>MPU</th>
+                                <th>AMG</th>
+                                <th>Dif.</th>
+
+                                <th>MPU</th>
+                                <th>AMG</th>
+                                <th>Dif.</th>
+
+                                <th>MPU</th>
+                                <th>AMG</th>
+                                <th>Dif.</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="corpoHistoricoAmg">
+
+                            <tr>
+
+                                <td colspan="13">
+
+                                    Consulte uma pilha para
+                                    gerar o histórico.
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+                 INTERPRETAÇÃO
+            ============================================== -->
+
+            <aside class="interpretacao-pilha interpretacao-amg">
+
+                <h2>
+                    Interpretação Rápida
+                </h2>
+
+
+                <div
+                    class="item-interpretacao"
+                    id="interpretacaoAMG1">
+
+                    <span class="icone-interpretacao">
+                        ●
+                    </span>
+
+                    <p>
+                        Consulte uma pilha.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="item-interpretacao"
+                    id="interpretacaoAMG2">
+
+                    <span class="icone-interpretacao">
+                        ●
+                    </span>
+
+                    <p>
+                        -
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="item-interpretacao"
+                    id="interpretacaoAMG3">
+
+                    <span class="icone-interpretacao">
+                        ●
+                    </span>
+
+                    <p>
+                        -
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- =================================================
+             RODAPÉ
+        ================================================== -->
+
+        <div class="rodape-relatorio-pilhas">
+
+            <span>
+                MPU = Material Britado / Empilhado
+            </span>
+
+            <span>
+                AMG = Alimentação da Usina
+            </span>
+
+            <span>
+                Fonte: Planilhas MPU e Indicadores da Usina
+            </span>
+
+        </div>
+
+
+    </main>
+    <script src="../../Compartilhado/Core.js"></script>
+    <script src="../Britagem.js"></script>
+    <script src="../../Compartilhado/ChartTheme.js"></script>
+    <script src="AnalisePilhas.js"></script>
+</body>
+
+</html>
